@@ -1,10 +1,7 @@
 package tn.esprit.entities;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -16,7 +13,6 @@ public class Subscription implements Serializable {
     private String title;
     private float price;
     private String description ;
-
 
 
     public Subscription(int id_sub, String title, float price, String description) {
