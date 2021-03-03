@@ -4,24 +4,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
 import java.time.Instant;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Utilisateur {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Utilisateur implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long utilisateurId;
+    private Long utilisateurId;
 
     @NotBlank(message = "LastName is required")
     private String lastName;
@@ -34,6 +33,7 @@ public class Utilisateur {
     private String email;
     private Instant created;
     private boolean enabled;
+    private UserType userType;
 
 
 }
