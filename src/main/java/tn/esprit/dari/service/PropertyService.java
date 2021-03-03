@@ -15,10 +15,10 @@ import java.util.List;
 public class PropertyService implements IProperty {
 
     @Autowired
-   private PropertyRepository PropRep ;
+   private PropertyRepository propRep ;
 
     @Override
-    public void addProperty() {
+    public void addProperty(Property prop) {
 
 
 
@@ -32,7 +32,7 @@ public class PropertyService implements IProperty {
 
     @Override
     public void deleteProperty(int id) {
-
+        propRep.deleteById(id);
     }
 
     @Override
