@@ -12,18 +12,18 @@ import java.util.List;
 
 
 @Entity
-
 public class Customer extends Utilisateur implements Serializable {
 
-    private List<Subscribe> subscribes ;
 
 
     @OneToMany(mappedBy = "Customer")
-    public List<Subscribe> getSubscribes() {
-        return subscribes;
-    }
+    private List<Subscribe> subscribes ;
 
-    public void setSubscribes(List<Subscribe> subscribes) {
-        this.subscribes = subscribes;
-    }
+
+    @OneToMany(mappedBy = "owner")
+    List<Appointment> ownerAppointments;
+    @OneToMany(mappedBy = "customer")
+    List<Appointment> customerAppointments;
+
+
 }

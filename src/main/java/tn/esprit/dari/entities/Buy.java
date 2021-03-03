@@ -7,9 +7,7 @@ import java.util.Objects;
 @Entity
 public class Buy extends Property implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_buy;
+
     private int id_client;
     private float price;
     @ManyToOne
@@ -19,8 +17,7 @@ public class Buy extends Property implements Serializable {
     public Buy() {
     }
 
-    public Buy(int id_buy, int id_client, float price) {
-        this.id_buy = id_buy;
+    public Buy(int id_client, float price) {
         this.id_client = id_client;
         this.price = price;
     }
@@ -33,13 +30,7 @@ public class Buy extends Property implements Serializable {
         this.user = user;
     }
 
-    public int getId_buy() {
-        return id_buy;
-    }
 
-    public void setId_buy(int id_buy) {
-        this.id_buy = id_buy;
-    }
 
     public int getId_client() {
         return id_client;
@@ -62,18 +53,18 @@ public class Buy extends Property implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Buy buy = (Buy) o;
-        return id_buy == buy.id_buy && id_client == buy.id_client && Float.compare(buy.price, price) == 0 ;
+        return  id_client == buy.id_client && Float.compare(buy.price, price) == 0 ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_buy, id_client, price);
+        return Objects.hash( id_client, price);
     }
 
     @Override
     public String toString() {
         return "Buy{" +
-                "id_buy=" + id_buy +
+
                 ", id_client=" + id_client +
                 ", price=" + price +
                 '}';

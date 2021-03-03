@@ -17,6 +17,7 @@ public class Subscription implements Serializable {
     private String description ;
 
 
+    @OneToMany(mappedBy = "subscription")
     private List<Subscribe> subscribes ;
 
 
@@ -28,6 +29,8 @@ public class Subscription implements Serializable {
         this.description = description;
 
     }
+
+
 
     public Subscription() {
 
@@ -66,7 +69,7 @@ public class Subscription implements Serializable {
         this.description = description;
     }
 
-    @OneToMany(mappedBy = "subscription")
+
     public List<Subscribe> getSubscribes() {
         return subscribes;
     }

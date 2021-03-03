@@ -12,9 +12,15 @@ public class Subscribe implements Serializable {
 
 
 
+
+    @ManyToOne
+    @JoinColumn(name = "id_sub", referencedColumnName = "id_sub", insertable = false, nullable = false)
     private Subscription subscription;
 
 
+
+    @ManyToOne
+    @JoinColumn(name = "utilisateurId", referencedColumnName = "utilisateurId", insertable = false, nullable = false)
 
     private Customer customer ;
 
@@ -24,8 +30,6 @@ public class Subscribe implements Serializable {
     private Long id;
 
 
-    @ManyToOne
-    @JoinColumn(name = "id_sub", referencedColumnName = "id_sub", insertable = false, nullable = false)
     public Subscription getSubscription() {
         return subscription;
     }
@@ -34,9 +38,7 @@ public class Subscribe implements Serializable {
         this.subscription = subscription;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "utilisateurId", referencedColumnName = "utilisateurId", insertable = false, nullable = false)
-    public Customer getCustomer() {
+     public Customer getCustomer() {
         return customer;
     }
 

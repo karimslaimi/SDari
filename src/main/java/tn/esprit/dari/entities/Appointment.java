@@ -24,7 +24,17 @@ public class Appointment implements Serializable {
     private Date appointmentDate;
     private String address;
 
+    @ManyToOne
+    @JoinColumn(name = "ownerId")
+    private Customer owner;
 
+    @ManyToOne
+    @JoinColumn(name = "customerId")
+    private Customer customer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "agentId")
+    private Agent agent;
 
 
 }

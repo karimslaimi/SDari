@@ -7,9 +7,6 @@ import java.util.Objects;
 @Entity
 public class Rent extends Property implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_rent;
     @ManyToOne
     private Utilisateur user;
     private float pricePerDay;
@@ -19,7 +16,6 @@ public class Rent extends Property implements Serializable {
     }
 
     public Rent(int id_rent,  float pricePerDay, float pricePerMonth) {
-        this.id_rent = id_rent;
 
         this.pricePerDay = pricePerDay;
         this.pricePerMonth = pricePerMonth;
@@ -33,13 +29,6 @@ public class Rent extends Property implements Serializable {
         this.user = user;
     }
 
-    public int getId_rent() {
-        return id_rent;
-    }
-
-    public void setId_rent(int id_rent) {
-        this.id_rent = id_rent;
-    }
 
     public float getPricePerDay() {
         return pricePerDay;
@@ -62,18 +51,18 @@ public class Rent extends Property implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rent rent = (Rent) o;
-        return id_rent == rent.id_rent && Float.compare(rent.pricePerDay, pricePerDay) == 0 && Float.compare(rent.pricePerMonth, pricePerMonth) == 0 ;
+        return  Float.compare(rent.pricePerDay, pricePerDay) == 0 && Float.compare(rent.pricePerMonth, pricePerMonth) == 0 ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_rent, pricePerDay, pricePerMonth);
+        return Objects.hash(pricePerDay, pricePerMonth);
     }
 
     @Override
     public String toString() {
         return "Rent{" +
-                "id_rent=" + id_rent +
+
                 ", pricePerDay=" + pricePerDay +
                 ", pricePerMonth=" + pricePerMonth +
                 '}';
