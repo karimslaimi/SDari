@@ -1,6 +1,6 @@
-package tn.esprit.Service;
+package tn.esprit.dari.service;
 
-import tn.esprit.entities.Reclamation;
+import tn.esprit.dari.entities.Reclamation;
 
 import java.time.LocalDateTime;
 import java.util.List;

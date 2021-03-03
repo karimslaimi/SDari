@@ -1,12 +1,13 @@
-package tn.esprit.Service;
+package tn.esprit.dari.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import tn.esprit.Repository.ReclamationRepository;
-import tn.esprit.entities.Reclamation;
-import tn.esprit.entities.Utilisateur;
+import tn.esprit.dari.entities.Reclamation;
+import tn.esprit.dari.entities.Utilisateur;
+import tn.esprit.dari.repositories.ReclamationRepository;
+
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;

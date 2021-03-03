@@ -2,16 +2,15 @@ package tn.esprit.dari.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.dari.dto.RegisterRequest;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 import tn.esprit.dari.repositories.VerificationTokenRepository;
-import tn.esprit.entities.NotificationEmail;
-import tn.esprit.entities.Utilisateur;
-import tn.esprit.entities.VerificationToken;
+import tn.esprit.dari.entities.NotificationEmail;
+import tn.esprit.dari.entities.Utilisateur;
+import tn.esprit.dari.entities.VerificationToken;
 
 import java.time.Instant;
 import java.util.UUID;

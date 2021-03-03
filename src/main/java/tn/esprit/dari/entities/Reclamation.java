@@ -1,11 +1,10 @@
-package tn.esprit.entities;
+package tn.esprit.dari.entities;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @SpringBootApplication
 @Entity

@@ -1,10 +1,10 @@
-package tn.esprit.Service;
+package tn.esprit.dari.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.Repository.MessageRepository;
-import tn.esprit.entities.Message;
-import tn.esprit.entities.Utilisateur;
+import tn.esprit.dari.entities.Message;
+import tn.esprit.dari.repositories.MessageRepository;
+import tn.esprit.dari.entities.Utilisateur;
 
 import java.util.List;
 

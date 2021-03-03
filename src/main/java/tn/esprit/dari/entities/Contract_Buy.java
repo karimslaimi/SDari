@@ -1,4 +1,4 @@
-package tn.esprit.entities;
+package tn.esprit.dari.entities;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
