@@ -15,15 +15,9 @@ import java.util.List;
 
 public class Customer extends Utilisateur implements Serializable {
 
-    private List<Subscribe> subscribes ;
 
 
     @OneToMany(mappedBy = "Customer")
-    public List<Subscribe> getSubscribes() {
-        return subscribes;
-    }
+    private List<Subscribe> subscribes ;
 
-    public void setSubscribes(List<Subscribe> subscribes) {
-        this.subscribes = subscribes;
-    }
 }
