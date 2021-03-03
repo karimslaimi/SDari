@@ -20,16 +20,25 @@ public class Contract_Rent implements Serializable {
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date dateFin;
     private String details;
-
+    private boolean rented;
     public Contract_Rent() {
     }
 
-    public Contract_Rent(int id_Rent, int id_Client, Date dateDebut, Date dateFin, String details) {
+    public Contract_Rent(int id_Rent, int id_Client, Date dateDebut, Date dateFin, String details, boolean rented) {
         this.id_Rent = id_Rent;
         this.id_Client = id_Client;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.details = details;
+        this.rented = rented;
+    }
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
     }
 
     public int getId_Rent() {
