@@ -1,4 +1,4 @@
-package tn.esprit.Respository;
+package tn.esprit.Repository;
 
 import org.springframework.data.repository.CrudRepository;
 import tn.esprit.entities.Subscription;

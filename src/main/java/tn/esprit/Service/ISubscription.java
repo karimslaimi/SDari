@@ -1,4 +1,4 @@
-package tn.esprit.Services;
+package tn.esprit.Service;
 
 
 import tn.esprit.entities.Subscribe;
