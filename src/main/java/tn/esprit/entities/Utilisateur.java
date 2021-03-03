@@ -28,12 +28,15 @@ public class Utilisateur implements Serializable {
     private String firstName;
     @NotBlank(message = "Password is required")
     private String password;
+    private String picture;
+    private String phone;
+    private Region Region;
     @Email
     @NotEmpty(message = "Email is required")
     private String email;
     private Instant created;
     private boolean enabled;
-    private UserType userType;
+
 
 
 }

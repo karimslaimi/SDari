@@ -3,7 +3,6 @@ package tn.esprit.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.Repository.SubscriptionRepository;
-import tn.esprit.entities.Subscribe;
 import tn.esprit.entities.Subscription;
 
 import java.util.List;
