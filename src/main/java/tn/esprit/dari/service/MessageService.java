@@ -21,7 +21,7 @@ public class MessageService implements IMessageService {
         Utilisateur sentTo=new Utilisateur();
         Utilisateur sentBy=new Utilisateur();
         message.setSentBy(sentBy);
-        message.setSentBy(sentBy);
+        message.setSentTo(sentTo);
 
 
     }
