@@ -9,7 +9,6 @@ import java.util.Date;
 
 @SpringBootApplication
 @Entity
-@Table(name = "Reclamation")
 public class Reclamation implements Serializable {
 
     @Id
@@ -86,5 +85,21 @@ public class Reclamation implements Serializable {
 
     public void setUser(Utilisateur user) {
         this.user = user;
+    }
+
+    public String getTreatement() {
+        return treatement;
+    }
+
+    public void setTreatement(String treatement) {
+        this.treatement = treatement;
+    }
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
     }
 }
