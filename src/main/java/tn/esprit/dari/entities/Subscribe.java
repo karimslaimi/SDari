@@ -1,5 +1,8 @@
 package tn.esprit.dari.entities;
 
+import tn.esprit.entities.Customer;
+
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,8 +16,8 @@ public class Subscribe implements Serializable {
     private Subscription subscription;
 
 
-    @Enumerated(EnumType.ORDINAL)
-    private UserType Customer ;
+
+    //private Customer Customer ;
 
     private Date DateD;
     private Date DateF ;
@@ -32,16 +35,10 @@ public class Subscribe implements Serializable {
         this.subscription = subscription;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "utilisateurId", referencedColumnName = "utilisateurId", insertable = false, nullable = false)
+   // @ManyToOne
+    //@JoinColumn(name = "utilisateurId", referencedColumnName = "utilisateurId", insertable = false, nullable = false)
 
-    public UserType getCustomer() {
-        return Customer;
-    }
 
-    public void setCustomer(UserType customer) {
-        Customer = customer;
-    }
 
 
 
