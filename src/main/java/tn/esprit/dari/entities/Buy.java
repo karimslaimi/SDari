@@ -1,20 +1,20 @@
 package tn.esprit.dari.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Buy implements Serializable {
+public class Buy extends Property implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_buy;
     private int id_client;
     private float price;
+    @ManyToOne
+    @JoinColumn(name = "utilisateurId")
+    private Utilisateur user;
 
     public Buy() {
     }
@@ -23,6 +23,14 @@ public class Buy implements Serializable {
         this.id_buy = id_buy;
         this.id_client = id_client;
         this.price = price;
+    }
+
+    public Utilisateur getUser() {
+        return user;
+    }
+
+    public void setUser(Utilisateur user) {
+        this.user = user;
     }
 
     public int getId_buy() {
