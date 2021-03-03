@@ -1,4 +1,4 @@
-package tn.esprit.entities;
+package tn.esprit.dari.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

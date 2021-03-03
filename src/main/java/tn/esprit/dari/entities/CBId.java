@@ -1,6 +1,5 @@
-package tn.esprit.entities;
+package tn.esprit.dari.entities;
 
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 //Contract Buy Id ( cle composé)

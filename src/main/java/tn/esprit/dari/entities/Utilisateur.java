@@ -1,4 +1,4 @@
-package tn.esprit.entities;
+package tn.esprit.dari.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +36,7 @@ public class Utilisateur implements Serializable {
     private String email;
     private Instant created;
     private boolean enabled;
+
 
 
 

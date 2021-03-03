@@ -1,9 +1,9 @@
-package tn.esprit.Service;
+package tn.esprit.dari.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.Repository.SubscriptionRepository;
-import tn.esprit.entities.Subscription;
+import tn.esprit.dari.repositories.SubscriptionRepository;
+import tn.esprit.dari.entities.Subscription;
 
 import java.util.List;
 import java.util.Optional;

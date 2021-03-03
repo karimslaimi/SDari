@@ -2,14 +2,15 @@ package tn.esprit.dari.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.dari.dto.RegisterRequest;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 import tn.esprit.dari.repositories.VerificationTokenRepository;
-import tn.esprit.entities.*;
+import tn.esprit.dari.entities.NotificationEmail;
+import tn.esprit.dari.entities.Utilisateur;
+import tn.esprit.dari.entities.VerificationToken;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -25,33 +26,9 @@ public class AuthService {
 
 
     @Transactional
-    public void signUpUser( RegisterRequest registerRequest){
+    public void signUp( RegisterRequest registerRequest){
         Utilisateur user = new Utilisateur();
-        user.setEmail(registerRequest.getEmail());
-        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        user.setCreated(Instant.now());
-        user.setEnabled(true);
-
-        utilisateurRepository.save(user);
-
-    }
-    @Transactional
-    public void signUpAgent( RegisterRequest registerRequest){
-        Agent user = new Agent();
-        user.setEmail(registerRequest.getEmail());
-        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        user.setCreated(Instant.now());
-        user.setEnabled(false);
-
-        utilisateurRepository.save(user);
-        String token =        generateVerificationToken(user);
-        mailService.sendEmail(new NotificationEmail("Please Activate your Account ", user.getEmail(),"Thank you for signing up to Dari.tn "
-                + "please click on this link to activate your account, " + "http://localhost:8081/Blog/auth/accountVerification/"+ token));
-
-    }
-    @Transactional
-    public void signUpCustomer( RegisterRequest registerRequest){
-        Customer user = new Customer();
+        //user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setCreated(Instant.now());

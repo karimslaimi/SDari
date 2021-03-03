@@ -1,4 +1,4 @@
-package tn.esprit.entities;
+package tn.esprit.dari.entities;
 
 import java.io.Serializable;
 import java.util.Objects;

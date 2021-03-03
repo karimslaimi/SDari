@@ -1,13 +1,10 @@
-package tn.esprit.entities;
-
-import org.springframework.format.annotation.DateTimeFormat;
+package tn.esprit.dari.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
