@@ -31,7 +31,6 @@ public class Reclamation implements Serializable {
         this.type=type;
         this.explication=explication;
         this.title=title;
-
         this.dateTime=dateTime;
     }
 
