@@ -27,7 +27,6 @@ public interface RentRepository extends CrudRepository<Rent,Integer> {
     List<Buy> findBetweenPricePerDay(@Param("lower")float p1, @Param("higher") float p2);
     @Query("select b from Buy b where b.price>=:lower and b.price<=:higher")
     List<Buy> findBetweenPricePerMonth(@Param("lower")float p1, @Param("higher") float p2);
-    float differenceBetwenPerDayAndMonth(float pricePerMonth,float pricePerDay);
     @Modifying
     @Query("update Contract_Rent cr set cr.rented = false where cr.dateFin < :date")
     void setAvailable(@Param("date") LocalDate date);

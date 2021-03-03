@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -38,6 +39,12 @@ public  class Utilisateur implements Serializable {
     private boolean enabled;
 
 
+    @OneToMany
+    private List<Reclamation> reclamations;
 
+    @OneToMany(mappedBy ="sentTo")
+    private List<Message> sentMessages;
+    @OneToMany(mappedBy = "sentBy")
+    private List<Message> ReceivedMessages;
 
 }
