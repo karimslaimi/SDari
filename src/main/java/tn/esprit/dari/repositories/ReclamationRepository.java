@@ -24,6 +24,6 @@ public interface ReclamationRepository extends JpaRepository<Reclamation,Integer
     @Query("select r from Reclamation r where r.dateTime>=:start and r.dateTime<=:end")
     public List<Reclamation> findBetweenDate(@Param("start")LocalDateTime start,@Param("end") LocalDateTime end);
 
-    @Query("select r from Reclamation r where r.type like %:filter% ")
+    @Query("select r from Reclamation r where r.type like %:type% ")
     public List<Reclamation> findByType(@Param("type") String type);
 }
