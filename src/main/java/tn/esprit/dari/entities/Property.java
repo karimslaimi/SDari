@@ -13,7 +13,7 @@ public class Property implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_prop;
-
+    private PropertyType type;
     private int nbrooms;
     private float surface;
     private float superficie;
@@ -23,21 +23,30 @@ public class Property implements Serializable {
 
    @ManyToOne
    @JoinColumn(name = "id")
-   private Client client;
+   private Customer customer;
 
 
     public Property() {
     }
 
-    public Property(int id_prop, int nbrooms, float surface, float superficie, String image, String video, float loyer, Client client) {
+    public Property(int id_prop, PropertyType type, int nbrooms, float surface, float superficie, String image, String video, float loyer, Customer customer) {
         this.id_prop = id_prop;
+        this.type = type;
         this.nbrooms = nbrooms;
         this.surface = surface;
         this.superficie = superficie;
         this.image = image;
         this.video = video;
         this.loyer = loyer;
-        this.client = client;
+        this.customer = customer;
+    }
+
+    public PropertyType getType() {
+        return type;
+    }
+
+    public void setType(PropertyType type) {
+        this.type = type;
     }
 
     public int getId_prop() {
@@ -48,12 +57,12 @@ public class Property implements Serializable {
         this.id_prop = id_prop;
     }
 
-    public Client getClient() {
-        return client;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public int getNbrooms() {
@@ -109,13 +118,14 @@ public class Property implements Serializable {
     public String toString() {
         return "Property{" +
                 "id_prop=" + id_prop +
+                ", type=" + type +
                 ", nbrooms=" + nbrooms +
                 ", surface=" + surface +
                 ", superficie=" + superficie +
                 ", image='" + image + '\'' +
                 ", video='" + video + '\'' +
                 ", loyer=" + loyer +
-                ", client=" + client +
+                ", customer=" + customer +
                 '}';
     }
 }
