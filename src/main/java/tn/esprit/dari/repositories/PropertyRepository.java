@@ -14,9 +14,6 @@ import java.util.List;
 @Repository
 public interface PropertyRepository extends JpaRepository<Property,Integer > {
 
-   //find prop by id
-    @Query("select  p from Property p where p.id=:id")
-    public List<Property> findOne(@Param("id")int id);
 
 
 
