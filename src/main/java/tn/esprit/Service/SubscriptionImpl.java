@@ -7,6 +7,7 @@ import tn.esprit.entities.Subscribe;
 import tn.esprit.entities.Subscription;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -29,17 +30,27 @@ public class SubscriptionImpl implements ISubscription {
     }
 
     @Override
-    public Subscribe Add(Subscription S) {
-        return null;
+    public Optional<Subscription> getSub(String id) {
+        return SubRep.findById(Long.parseLong(id));
+    }
+
+    @Override
+    public Optional<Subscription> getSubT(String title) {
+        return SubRep.findById(Long.parseLong(title));
+    }
+
+    @Override
+    public Subscription Add(Subscription S) {
+        return SubRep.save(S);
     }
 
     @Override
     public Subscription Modify(Subscription S) {
-        return null;
+        return SubRep.save(S);
     }
 
     @Override
-    public void DeleteSub(Long id) {
-
+    public void DeleteSub(String  id) {
+        SubRep.deleteById(Long.parseLong(id));
     }
 }
