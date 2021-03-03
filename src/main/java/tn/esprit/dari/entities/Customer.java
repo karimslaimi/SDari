@@ -18,12 +18,6 @@ import java.util.List;
 @Data
 public class Customer extends Utilisateur implements Serializable {
 
-
-
-    @OneToMany(mappedBy = "customer")
-    public List<Subscribe> getSubscribes() {
-        return subscribes;
-    }
     @OneToMany(mappedBy = "customer")
     private List<Subscribe> subscribes ;
 
