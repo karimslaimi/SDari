@@ -16,7 +16,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Utilisateur implements Serializable {
+public  class Utilisateur implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
