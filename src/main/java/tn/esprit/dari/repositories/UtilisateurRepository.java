@@ -1,19 +1,14 @@
 package tn.esprit.dari.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import tn.esprit.dari.entities.Utilisateur;
 
 import java.util.Optional;
 
 @Repository
-public interface UtilisateurRepository extends JpaRepository<Utilisateur,Integer> {
-
-
-    @Query("select  u from Utilisateur u where u.utilisateurId=:id")
-    public Utilisateur find(@Param("id") long id);
+public interface UtilisateurRepository extends CrudRepository<Utilisateur,Long> {
 
 
 }

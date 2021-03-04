@@ -10,6 +10,7 @@ import tn.esprit.dari.repositories.BuyRepository;
 import java.util.List;
 
 @RestController
+@RequestMapping("/buy")
 public class BuyController {
 
     @Autowired
@@ -20,7 +21,7 @@ public class BuyController {
         return surface/price;
     }
 
-    @GetMapping("/buy")
+    @GetMapping("/get")
     public List<Buy> All() {
         return br.findAll();
     }
