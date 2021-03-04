@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Data
-@DiscriminatorValue("Ag")
+@DiscriminatorValue("B")// B stands for broker
 public class Agent extends Utilisateur implements Serializable {
 
 @OneToMany(mappedBy = "agent")
