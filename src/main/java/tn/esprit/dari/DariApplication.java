@@ -9,15 +9,20 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import sun.tools.jar.CommandLine;
 import tn.esprit.dari.entities.Appointment;
 import tn.esprit.dari.entities.Customer;
+import tn.esprit.dari.entities.Region;
 import tn.esprit.dari.entities.Utilisateur;
+import tn.esprit.dari.repositories.CustomerRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 
 @SpringBootApplication
 
 public class DariApplication {
 
+    @Autowired
+    private CustomerRepository customerRepository;
     public static void main(String[] args) {
 
         SpringApplication.run(DariApplication.class, args);
@@ -35,4 +40,31 @@ public class DariApplication {
 
         return secondaryTemplateResolver;
     }
+
+
+
+    @Bean
+    public CommandLineRunner  init(){
+        return (args -> {
+            Customer user=new Customer();
+            user.setEmail("user1@user.com");
+            user.setEnabled(true);
+            user.setFirstName("user1");
+            user.setLastName("user11");
+            user.setPassword("user1");
+            user.setPhone("51887898");
+            user.setPicture("whatever.jpg");
+            user.setRegion(Region.Bizerte);
+
+
+
+
+
+            customerRepository.save(user);
+
+        });
+
+    }
+
+
 }
