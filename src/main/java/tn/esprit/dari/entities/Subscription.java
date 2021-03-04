@@ -31,7 +31,6 @@ public class Subscription implements Serializable {
     }
 
 
-
     public Subscription() {
 
     }

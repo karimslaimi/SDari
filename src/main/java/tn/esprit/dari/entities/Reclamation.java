@@ -33,6 +33,15 @@ public class Reclamation implements Serializable {
         this.title=title;
         this.dateTime=dateTime;
     }
+    public Reclamation(String type, String title,String explication) {
+        this.type=type;
+        this.explication=explication;
+        this.title=title;
+
+        this.treatement="";
+        this.state=false;
+        this.dateTime= LocalDateTime.now();
+    }
 
     public Reclamation() {
     }

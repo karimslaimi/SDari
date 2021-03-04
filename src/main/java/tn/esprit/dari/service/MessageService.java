@@ -20,8 +20,8 @@ public class MessageService implements IMessageService {
     @Override
     public Boolean AddMessage(Message message, int by, int to) {
 
-        Utilisateur sentTo=userRepository.findById((long)to).orElse(null);
-        Utilisateur sentBy=userRepository.findById((long)by).orElse(null);
+        Utilisateur sentTo=userRepository.findById(to).orElse(null);
+        Utilisateur sentBy=userRepository.findById(by).orElse(null);
         if(sentBy==null || sentTo==null){
             return false;
         }
