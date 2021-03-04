@@ -19,11 +19,11 @@ public class Message implements Serializable{
         private LocalDateTime dateTime;
 
         @ManyToOne
-        @JoinColumn(name="SentBy", nullable = false,referencedColumnName = "utilisateurId", insertable = false, updatable = false)
+        @JoinColumn(name="SentByID")
         private Utilisateur sentBy;
 
         @ManyToOne
-        @JoinColumn(name="sentTo", nullable = false,referencedColumnName = "utilisateurId", insertable = false, updatable = false)
+        @JoinColumn(name="sentToID")
 
         private Utilisateur sentTo;
 
