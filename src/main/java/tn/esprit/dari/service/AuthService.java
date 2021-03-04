@@ -41,6 +41,8 @@ public class AuthService {
     public void signUpAgent( RegisterRequest registerRequest){
         Agent user = new Agent();
         //user.setUsername(registerRequest.getUsername());
+        user.setFirstName(registerRequest.getFirstName());
+        user.setLastName(registerRequest.getLastName());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setCreated(Instant.now());
