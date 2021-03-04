@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.dari.entities.Reclamation;
 import tn.esprit.dari.entities.Utilisateur;
 import tn.esprit.dari.repositories.ReclamationRepository;
+import tn.esprit.dari.repositories.UtilisateurRepository;
 
 
 import javax.validation.Valid;
@@ -18,6 +19,8 @@ public class ReclamationService implements IReclamationService {
 
     @Autowired
     private ReclamationRepository reclamationRepository;
+    @Autowired
+    private UtilisateurRepository userRepo;
 
 
 
@@ -26,8 +29,8 @@ public class ReclamationService implements IReclamationService {
     public Boolean Create(@Valid Reclamation reclamation, int userid) {
 
         if(userid!=0 && reclamation!=null ){
-            Utilisateur user=new Utilisateur();
-            //user=userRepository.findOne(userid).get();
+           // long id=(long)userid;
+            Utilisateur user=userRepo.findById(userid).get();
             reclamation.setUser(user);
             reclamationRepository.save(reclamation);
             return true;
