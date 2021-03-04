@@ -21,7 +21,7 @@ public class ReclamationController {
 
 
     @PostMapping("/add/{id}")
-    public ResponseEntity<?> AddReclam(@RequestBody Reclamation reclamation, @PathVariable int id){
+    public ResponseEntity<?> AddReclam(@RequestBody Reclamation reclamation, @PathVariable Long id){
 
         if(!reclamationService.Create(reclamation,id)){
             return new ResponseEntity<>("could not create the claim", HttpStatus.BAD_REQUEST);

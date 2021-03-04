@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IReclamationService {
 
-    public Boolean Create(Reclamation reclamation,int userId);
+    public Boolean Create(Reclamation reclamation,Long userId);
     public void Delete(int id);
     public void treat(int id, String treatement);
     public Reclamation getOne(int id);

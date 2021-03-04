@@ -26,7 +26,7 @@ public class ReclamationService implements IReclamationService {
 
 
     @Override
-    public Boolean Create(@Valid Reclamation reclamation, int userid) {
+    public Boolean Create(@Valid Reclamation reclamation, Long userid) {
 
         if(userid!=0 && reclamation!=null ){
            // long id=(long)userid;
