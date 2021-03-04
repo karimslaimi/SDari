@@ -26,7 +26,7 @@ public class MailService {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("beheddine5@gmail.com");
             messageHelper.setTo(notificationEmail.getRecipient());
-            messageHelper.setText(mailContentBuilder.build(notificationEmail.getBody()));
+          //  messageHelper.setText(mailContentBuilder.build(notificationEmail.getBody()));
 
         };
         try {
