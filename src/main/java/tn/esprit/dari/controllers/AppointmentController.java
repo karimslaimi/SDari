@@ -47,4 +47,6 @@ public class AppointmentController {
         return new ResponseEntity<>("Customer Registration succeed", HttpStatus.OK);
 
     }
+
+
 }
