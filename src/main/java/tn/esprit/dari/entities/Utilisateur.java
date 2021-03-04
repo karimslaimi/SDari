@@ -39,12 +39,12 @@ public  class Utilisateur implements Serializable {
     private boolean enabled;
 
 
-    @OneToMany
-    private List<Reclamation> reclamations;
+
 
     @OneToMany(mappedBy ="sentTo")
     private List<Message> sentMessages;
     @OneToMany(mappedBy = "sentBy")
     private List<Message> ReceivedMessages;
+
 
 }

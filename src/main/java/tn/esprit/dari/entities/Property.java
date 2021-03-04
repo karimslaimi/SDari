@@ -5,6 +5,7 @@ import ch.qos.logback.core.net.server.Client;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Property implements Serializable {
@@ -127,5 +128,18 @@ public class Property implements Serializable {
                 ", loyer=" + loyer +
                 ", customer=" + customer +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Property property = (Property) o;
+        return id_prop == property.id_prop && nbrooms == property.nbrooms && Float.compare(property.surface, surface) == 0 && Float.compare(property.superficie, superficie) == 0 && Float.compare(property.loyer, loyer) == 0 && type == property.type && image.equals(property.image) && video.equals(property.video) && customer.equals(property.customer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_prop, type, nbrooms, surface, superficie, image, video, loyer, customer);
     }
 }

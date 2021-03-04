@@ -23,7 +23,7 @@ public class Reclamation implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "utilisateurId")
+    @JoinColumn(name = "userid")
     private Utilisateur user;
 
 

@@ -29,13 +29,8 @@ public class SubscriptionImpl implements ISubscription {
     }
 
     @Override
-    public Optional<Subscription> getSub(String id) {
-        return SubRep.findById(Long.parseLong(id));
-    }
-
-    @Override
-    public Optional<Subscription> getSubT(String title) {
-        return SubRep.findById(Long.parseLong(title));
+    public Optional<Subscription> getSub(int id) {
+        return SubRep.findById(id);
     }
 
     @Override
@@ -43,13 +38,20 @@ public class SubscriptionImpl implements ISubscription {
         return SubRep.save(S);
     }
 
+
+   /* @Override
+    public Subscription Add(Subscription S) {
+        return SubRep.save(S);
+    }*/
+
     @Override
     public Subscription Modify(Subscription S) {
+
         return SubRep.save(S);
     }
 
     @Override
-    public void DeleteSub(String  id) {
-        SubRep.deleteById(Long.parseLong(id));
+    public void DeleteSub(int  id) {
+        SubRep.deleteById(id);
     }
 }
