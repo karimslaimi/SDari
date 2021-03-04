@@ -9,7 +9,7 @@ import tn.esprit.dari.repositories.BuyRepository;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class BuyController {
 
     @Autowired
@@ -20,12 +20,10 @@ public class BuyController {
         return surface/price;
     }
 
-
     @GetMapping("/buy")
     public List<Buy> All() {
         return br.findAll();
     }
-
 
     @PostMapping("/AddBuy")
     public void newBuy(@RequestBody Buy newBuy)
@@ -33,11 +31,9 @@ public class BuyController {
         br.save(newBuy);
     }
 
-
     @GetMapping("/buy/{id}")
     public Buy getBuy(@PathVariable int id) {
         return br.getOne(id);
-
     }
 
     @DeleteMapping("/buy/{id}")

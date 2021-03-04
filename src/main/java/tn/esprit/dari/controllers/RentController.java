@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@Controller
+@RestController
 public class RentController {
 
     @Autowired
@@ -28,18 +28,15 @@ public class RentController {
         return rr.findAll();
     }
 
-
     @PostMapping("/AddRent")
     public void newRent(@RequestBody Rent newRent)
     {
         rr.save(newRent);
     }
 
-
     @GetMapping("/rent/{id}")
     public Rent getRent(@PathVariable int id) {
         return rr.getOne(id);
-
     }
 
     @DeleteMapping("/rent/{id}")
