@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Buy extends Property implements Serializable {
 
 
-    private int id_client;
+
     private float price;
     @ManyToOne
     @JoinColumn(name = "utilisateurId")
@@ -17,8 +17,8 @@ public class Buy extends Property implements Serializable {
     public Buy() {
     }
 
-    public Buy(int id_client, float price) {
-        this.id_client = id_client;
+    public Buy( float price) {
+
         this.price = price;
     }
 
@@ -30,15 +30,6 @@ public class Buy extends Property implements Serializable {
         this.user = user;
     }
 
-
-
-    public int getId_client() {
-        return id_client;
-    }
-
-    public void setId_client(int id_client) {
-        this.id_client = id_client;
-    }
 
     public float getPrice() {
         return price;
@@ -53,19 +44,17 @@ public class Buy extends Property implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Buy buy = (Buy) o;
-        return  id_client == buy.id_client && Float.compare(buy.price, price) == 0 ;
+        return  Float.compare(buy.price, price) == 0 ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash( id_client, price);
+        return Objects.hash(  price);
     }
 
     @Override
     public String toString() {
         return "Buy{" +
-
-                ", id_client=" + id_client +
                 ", price=" + price +
                 '}';
     }

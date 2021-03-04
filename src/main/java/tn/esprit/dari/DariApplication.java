@@ -11,7 +11,7 @@ import tn.esprit.dari.entities.Customer;
 import tn.esprit.dari.entities.Utilisateur;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication
 
 public class DariApplication {
 
