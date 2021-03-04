@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.dto.RegisterRequest;
-import tn.esprit.dari.service.AuthService;
 
 import java.util.List;
 
@@ -13,6 +12,7 @@ import java.util.List;
 @RequestMapping("/User/auth")
 @AllArgsConstructor
 public class AuthController {
+
     private final AuthService authService;
 
     @PostMapping("/signup")
