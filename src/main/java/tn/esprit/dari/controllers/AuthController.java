@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.dto.RegisterRequest;
 import tn.esprit.dari.service.AuthService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/User/auth")
 @AllArgsConstructor
@@ -29,9 +31,11 @@ public class AuthController {
         return new ResponseEntity<>("Agent Registration succeed", HttpStatus.OK);
 
     }
+    List<String> list;
     @GetMapping("/hello")
-    public String hello(){
-        return "hello";
+    public List<String> hello(){
+        list.add("test");
+        return list;
     }
 
     @PostMapping("/signupCustomer")
