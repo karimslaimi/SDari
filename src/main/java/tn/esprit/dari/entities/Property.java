@@ -21,6 +21,7 @@ public class Property implements Serializable {
     private String image;
     private String video;
     private float loyer;
+    private float prix;
 
    @ManyToOne
    @JoinColumn(name = "id")
@@ -114,6 +115,13 @@ public class Property implements Serializable {
         this.loyer = loyer;
     }
 
+    public float getPrix() {
+        return prix;
+    }
+
+    public void setPrix(float prix) {
+        this.prix = prix;
+    }
 
     @Override
     public String toString() {
