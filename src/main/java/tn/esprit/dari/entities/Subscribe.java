@@ -14,13 +14,13 @@ public class Subscribe implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "id_sub", referencedColumnName = "id_sub", insertable = false, nullable = false)
+    @JoinColumn(name = "id_sub", insertable = false, nullable = false)
     private Subscription subscription;
 
 
 
     @ManyToOne
-    @JoinColumn(name = "utilisateurId", referencedColumnName = "utilisateurId", insertable = false, nullable = false)
+    @JoinColumn(name = "utilisateurId",  insertable = false, nullable = false)
 
     private Customer customer ;
 

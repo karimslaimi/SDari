@@ -11,7 +11,7 @@ public class Subscription implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_sub;
+    private int id_sub;
     private String title;
     private float price;
     private String description ;
@@ -22,8 +22,8 @@ public class Subscription implements Serializable {
 
 
 
-    public Subscription(Long id_sub, String title, float price, String description) {
-        this.id_sub = id_sub;
+    public Subscription( String title, float price, String description) {
+
         this.title = title;
         this.price = price;
         this.description = description;
@@ -37,11 +37,11 @@ public class Subscription implements Serializable {
     }
 
 
-    public Long getId_sub() {
+    public int getId_sub() {
         return id_sub;
     }
 
-    public void setId_sub(Long id_sub) {
+    public void setId_sub(int id_sub) {
         this.id_sub = id_sub;
     }
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tn.esprit.dari.service.State;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,7 +23,10 @@ public class Appointment implements Serializable {
 
     @Temporal(TemporalType.DATE)
     private Date appointmentDate;
+
     private String address;
+
+    private State state;
 
     @ManyToOne
     @JoinColumn(name = "ownerId")
