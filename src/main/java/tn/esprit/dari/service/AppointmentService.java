@@ -35,7 +35,7 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public void modifyAppointment(Long id,Appointment appointment) {
-ar.save(appointment);
+     ar.save(appointment);
 
     }
 
