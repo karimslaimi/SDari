@@ -22,6 +22,7 @@ public class AppointmentController {
 
     @Autowired
     private AppointmentService app_service;
+
     @PostMapping("/add")
     @ResponseBody
     public ResponseEntity<String> requestAppointment(@RequestBody Appointment appointment){
@@ -37,5 +38,16 @@ public class AppointmentController {
 
           return  app_service.ownerAppointments(id);
     }
+
+    @GetMapping("/cancelApp/{id}")
+    @ResponseBody
+    public ResponseEntity<String> cancelAppointments(@PathVariable("id") int id){
+
+        app_service.cancelAppointment(id);
+        return new ResponseEntity<>("Customer Registration succeed", HttpStatus.OK);
+
+
+    }
+
 
 }
