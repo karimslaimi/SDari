@@ -47,9 +47,9 @@ public class AuthService {
         user.setEnabled(false);
 
        utilisateurRepository.save(user);
-      //  String token =        generateVerificationToken(user);
-      //  mailService.sendEmail(new NotificationEmail("Please Activate your Account ", user.getEmail(),"Thank you for signing up to Dari.tn "
-           //     + "please click on this link to activate your account, " + "http://localhost:8081/Blog/auth/accountVerification/"+ token));
+        String token =        generateVerificationToken(user);
+        mailService.sendEmail(new NotificationEmail("Please Activate your Account ", user.getEmail(),"Thank you for signing up to Dari.tn "
+                + "please click on this link to activate your account, " + "http://localhost:8081/User/auth/accountVerification/"+ token));
 
     }
     @Transactional
