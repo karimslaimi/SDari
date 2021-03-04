@@ -46,10 +46,10 @@ public class AuthService {
         user.setCreated(Instant.now());
         user.setEnabled(false);
 
-        utilisateurRepository.save(user);
-        String token =        generateVerificationToken(user);
-        mailService.sendEmail(new NotificationEmail("Please Activate your Account ", user.getEmail(),"Thank you for signing up to Dari.tn "
-                + "please click on this link to activate your account, " + "http://localhost:8081/Blog/auth/accountVerification/"+ token));
+       utilisateurRepository.save(user);
+      //  String token =        generateVerificationToken(user);
+      //  mailService.sendEmail(new NotificationEmail("Please Activate your Account ", user.getEmail(),"Thank you for signing up to Dari.tn "
+           //     + "please click on this link to activate your account, " + "http://localhost:8081/Blog/auth/accountVerification/"+ token));
 
     }
     @Transactional
@@ -61,10 +61,10 @@ public class AuthService {
         user.setCreated(Instant.now());
         user.setEnabled(false);
 
-        utilisateurRepository.save(user);
-        String token =        generateVerificationToken(user);
-        mailService.sendEmail(new NotificationEmail("Please Activate your Account ", user.getEmail(),"Thank you for signing up to Dari.tn "
-                + "please click on this link to activate your account, " + "http://localhost:8081/Blog/auth/accountVerification/"+ token));
+       utilisateurRepository.save(user);
+      //  String token =        generateVerificationToken(user);
+      //  mailService.sendEmail(new NotificationEmail("Please Activate your Account ", user.getEmail(),"Thank you for signing up to Dari.tn "
+         //       + "please click on this link to activate your account, " + "http://localhost:8081/Blog/auth/accountVerification/"+ token));
 
     }
     private String generateVerificationToken(Utilisateur user) {
@@ -88,7 +88,6 @@ public class AuthService {
                         verificationToken.getUser().getLastName()));
         user.setEnabled(true);
         utilisateurRepository.save(user);
-
-
     }
+
 }
