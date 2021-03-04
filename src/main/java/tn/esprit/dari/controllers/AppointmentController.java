@@ -8,6 +8,7 @@ import tn.esprit.dari.dto.RegisterRequest;
 import tn.esprit.dari.entities.Agent;
 import tn.esprit.dari.entities.Appointment;
 import tn.esprit.dari.entities.Customer;
+import tn.esprit.dari.entities.Subscription;
 import tn.esprit.dari.repositories.AppointmentRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 import tn.esprit.dari.service.AppointmentService;
@@ -47,6 +48,15 @@ public class AppointmentController {
         return new ResponseEntity<>("Customer Registration succeed", HttpStatus.OK);
 
 
+    }
+
+
+    @PostMapping ("/Modify/{id}")
+    @ResponseBody
+    public ResponseEntity<String> modify( @PathVariable("id")  int id , @RequestBody Appointment su){
+
+         app_service.modifyAppointment(id, su );
+         return new ResponseEntity<>("Appointment modified", HttpStatus.OK);
     }
 
 
