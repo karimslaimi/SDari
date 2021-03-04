@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-
+@Data
 
 public class Agent extends Utilisateur implements Serializable {
 

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.entities.Buy;
 import tn.esprit.dari.entities.Contract_Rent;
 import tn.esprit.dari.entities.Rent;
+import tn.esprit.dari.repositories.PropertyRepository;
 import tn.esprit.dari.repositories.RentRepository;
 
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@RequestMapping("/rent")
 public class RentController {
 
     @Autowired
@@ -23,7 +25,7 @@ public class RentController {
         return pricePerDay-(pricePerMonth/30);
     }
 
-    @GetMapping("/rent")
+    @GetMapping("/get")
     public List<Rent> All() {
         return rr.findAll();
     }
@@ -34,12 +36,12 @@ public class RentController {
         rr.save(newRent);
     }
 
-    @GetMapping("/rent/{id}")
+    @GetMapping("/getone/{id}")
     public Rent getRent(@PathVariable int id) {
-        return rr.getOne(id);
+        return rr.findById(id).get();
     }
 
-    @DeleteMapping("/rent/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteRent(@PathVariable int id) {
         rr.deleteById(id);
     }

@@ -32,21 +32,22 @@ public class SubscriptionController {
 
     @PostMapping("/addsub")
     @ResponseBody
-    public Subscription Add(@RequestBody Subscription s){
+    public ResponseEntity<?> Add(@RequestBody Subscription s){
         Subscription sub = subscription.Add(s);
-        return (sub) ;
+        return new ResponseEntity<>( " Subscription added. ",  HttpStatus.OK);
 
     }
 
-    @DeleteMapping("/delete/{id]")
+    @GetMapping("/delete/{id}")
     @ResponseBody
     public void DeleteSub(@PathVariable("id") int id){
         subscription.DeleteSub(id);
     }
 
-    @PutMapping("/Modify")
+    @PostMapping ("/Modify")
     @ResponseBody
     public Subscription modify(@RequestBody Subscription su){
+
         return subscription.Modify(su);
     }
 
