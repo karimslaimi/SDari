@@ -46,6 +46,7 @@ public class AppointmentController {
         app_service.cancelAppointment(id);
         return new ResponseEntity<>("Customer Registration succeed", HttpStatus.OK);
 
+
     }
 
 
