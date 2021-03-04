@@ -47,7 +47,12 @@ public class SubscriptionImpl implements ISubscription {
     @Override
     public Subscription Modify(Subscription S) {
 
-        return SubRep.save(S);
+
+        Subscription sub =SubRep.findById(S.getId_sub()).orElse(null);
+        sub.setTitle(S.getTitle());
+        sub.setPrice(S.getPrice());
+        sub.setDescription(S.getDescription());
+        return SubRep.save(sub);
     }
 
     @Override
