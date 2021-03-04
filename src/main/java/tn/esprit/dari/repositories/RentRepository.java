@@ -15,14 +15,14 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface RentRepository extends CrudRepository<Rent,Integer> {
+public interface RentRepository extends JpaRepository<Rent,Integer> {
 
-    List<Buy> findByPricePerMonthAndNbrooms(float price, int nbr);
-    List<Buy> findBySuperficieAndPricePerMonth(float superficie,float price);
-    List<Buy> findByNbroomsAndPricePerMonth(int nbr,float price);
-    List<Buy> findByPricePerDayAndNbrooms(float price, int nbr);
-    List<Buy> findBySuperficieAndPricePerDay(float superficie,float price);
-    List<Buy> findByNbroomsAndPricePerDay(int nbr,float price);
+    List<Rent> findByPricePerMonthAndNbrooms(float price, int nbr);
+    List<Rent> findBySuperficieAndPricePerMonth(float superficie,float price);
+    List<Rent> findByNbroomsAndPricePerMonth(int nbr,float price);
+    List<Rent> findByPricePerDayAndNbrooms(float price, int nbr);
+    List<Rent> findBySuperficieAndPricePerDay(float superficie,float price);
+    List<Rent> findByNbroomsAndPricePerDay(int nbr,float price);
     @Query("select b from Buy b where b.price>=:lower and b.price<=:higher")
     List<Buy> findBetweenPricePerDay(@Param("lower")float p1, @Param("higher") float p2);
     @Query("select b from Buy b where b.price>=:lower and b.price<=:higher")

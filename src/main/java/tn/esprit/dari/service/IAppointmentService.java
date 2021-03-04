@@ -10,11 +10,11 @@ import java.util.List;
 public interface IAppointmentService {
 
     void requestAppointment(Appointment appointment);
-    void acceptAppointment(Long id,Date date);
-    void cancelAppointment(Long id);
-    void modifyAppointment(Long id,Appointment appointment);
-    List<Appointment> ownerAppointments(Customer owner);
-    List<Appointment> customerAppointments(Customer customer);
+    void acceptAppointment(int id,Date date);
+    void cancelAppointment(int id);
+    void modifyAppointment(int id,Appointment appointment);
+    List<Appointment> ownerAppointments(Long id);
+    List<Appointment> customerAppointments(Long id);
 
 
 }

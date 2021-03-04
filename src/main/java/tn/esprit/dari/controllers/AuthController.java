@@ -5,7 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.dto.RegisterRequest;
-//import tn.esprit.dari.service.AuthService;
+import tn.esprit.dari.entities.Utilisateur;
+import tn.esprit.dari.service.AuthService;
 
 import java.util.List;
 
@@ -13,11 +14,12 @@ import java.util.List;
 @RequestMapping("/User/auth")
 @AllArgsConstructor
 public class AuthController {
-    /*
+
     private final AuthService authService;
 
+
     @PostMapping("/signup")
-    @ResponseBody
+
     public ResponseEntity<String> signUp(@RequestBody RegisterRequest registerRequest){
         authService.signUp(registerRequest);
 
@@ -25,13 +27,14 @@ public class AuthController {
 
     }
     @PostMapping("/signupAgent")
-    @ResponseBody
+
     public ResponseEntity<String> signUpAgent(@RequestBody RegisterRequest registerRequest){
         authService.signUpAgent(registerRequest);
 
         return new ResponseEntity<>("Agent Registration succeed", HttpStatus.OK);
 
     }
+
     List<String> list;
     @GetMapping("/hello")
     public List<String> hello(){
@@ -53,6 +56,4 @@ public class AuthController {
         return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
 
     }
-
-     */
 }

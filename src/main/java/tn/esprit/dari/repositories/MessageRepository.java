@@ -15,7 +15,7 @@ public interface MessageRepository extends JpaRepository<Message,Integer> {
     @Query("select m.sentBy, m.sentTo from Message m where m.sentTo.utilisateurId=:id or m.sentBy.utilisateurId=:id")
     public List<Utilisateur> getUsers(@Param("id")int id);
 
-    @Query("select m from Message m where m.sentBy.utilisateurId=:sentBy or m.sentTo.utilisateurId=:sentTo or m.sentBy.utilisateurId=:sentTo or m.sentBy.utilisateurId=:sentBy ")
+    @Query("select m from Message m where  (m.sentBy.utilisateurId=:sentBy AND  m.sentTo.utilisateurId=:sentTo) OR (m.sentBy.utilisateurId=:sentTo AND  m.sentTo.utilisateurId=:sentBy) ")
     public List<Message> getMessages(@Param("sentBy")int sentBy, @Param("sentTo") int sentTo);
 
 }

@@ -11,7 +11,7 @@ public interface IProperty {
    public void updateProperty(Property prop);
    public void deleteProperty(int id);
    public List<Property> Allproperties();
-   Optional<Property> getprop(String id);
+   public Property getprop(int id);
 
 
 
