@@ -22,7 +22,7 @@ public class Property implements Serializable {
     private String video;
     private float loyer;
     private float prix;
-
+    private Status status;
    @ManyToOne
    @JoinColumn(name = "id")
    private Customer customer;
@@ -31,7 +31,7 @@ public class Property implements Serializable {
     public Property() {
     }
 
-    public Property(int id_prop, PropertyType type, int nbrooms, float surface, float superficie, String image, String video, float loyer, Customer customer) {
+    public Property(int id_prop, PropertyType type, int nbrooms, float surface, float superficie, String image, String video, float loyer, float prix, Status status, Customer customer) {
         this.id_prop = id_prop;
         this.type = type;
         this.nbrooms = nbrooms;
@@ -40,7 +40,17 @@ public class Property implements Serializable {
         this.image = image;
         this.video = video;
         this.loyer = loyer;
+        this.prix = prix;
+        this.status = status;
         this.customer = customer;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public PropertyType getType() {
@@ -134,6 +144,8 @@ public class Property implements Serializable {
                 ", image='" + image + '\'' +
                 ", video='" + video + '\'' +
                 ", loyer=" + loyer +
+                ", prix=" + prix +
+                ", status=" + status +
                 ", customer=" + customer +
                 '}';
     }
@@ -143,7 +155,7 @@ public class Property implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Property property = (Property) o;
-        return id_prop == property.id_prop && nbrooms == property.nbrooms && Float.compare(property.surface, surface) == 0 && Float.compare(property.superficie, superficie) == 0 && Float.compare(property.loyer, loyer) == 0 && type == property.type && image.equals(property.image) && video.equals(property.video) && customer.equals(property.customer);
+        return id_prop == property.id_prop && nbrooms == property.nbrooms && Float.compare(property.surface, surface) == 0 && Float.compare(property.superficie, superficie) == 0 && Float.compare(property.loyer, loyer) == 0 && Float.compare(property.prix, prix) == 0 && type == property.type && image.equals(property.image) && video.equals(property.video) && status == property.status && customer.equals(property.customer);
     }
 
     @Override
