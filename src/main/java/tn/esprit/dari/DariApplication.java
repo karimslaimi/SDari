@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import sun.tools.jar.CommandLine;
+//import sun.tools.jar.CommandLine;
 import tn.esprit.dari.entities.Appointment;
 import tn.esprit.dari.entities.Customer;
 import tn.esprit.dari.entities.Region;
@@ -43,7 +43,7 @@ public class DariApplication {
 
 
 
-    @Bean
+ /*   @Bean
     public CommandLineRunner  init(){
         return (args -> {
             Customer user=new Customer();
@@ -62,9 +62,9 @@ public class DariApplication {
 
             customerRepository.save(user);
 
-        });
+        });*/
 
-    }
+
 
 
 }

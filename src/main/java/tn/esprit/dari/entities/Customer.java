@@ -5,21 +5,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import tn.esprit.dari.entities.Utilisateur;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 
 @Entity
 @DiscriminatorValue("C")
+@Data
 public class Customer extends Utilisateur implements Serializable {
 
-
+    String username;
 
     @OneToMany(mappedBy = "customer")
     private List<Subscribe> subscribes ;
+
+    @ManyToMany()
+    @JoinTable(name = "Favorites", joinColumns = @JoinColumn(name = "utilisateurId")
+            , inverseJoinColumns = @JoinColumn(name = "id_prop"))
+    List<Property> favorites;
+
 
 
     @OneToMany(mappedBy = "owner")
