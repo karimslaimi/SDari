@@ -51,10 +51,16 @@ public class CustomerService implements ICustomerService {
         c.setLastName(customer.getLastName());
         c.setUsername(customer.getUsername());
         c.setPhone(customer.getPhone());
-        c.setPicture(customer.getPicture());
         c.setRegion(customer.getRegion());
 
         customerRepository.save(c);
+    }
+    @Override
+    public void updateProfilePicture(Customer customer){
+        Customer c = customerRepository.findById(customer.getUtilisateurId()).get();
+        c.setPicture(customer.getPicture());
+        customerRepository.save(c);
+
     }
 
 }

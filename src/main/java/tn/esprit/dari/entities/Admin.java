@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.io.Serializable;
 
 @Entity
@@ -13,6 +15,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @DiscriminatorValue("A")
-public class Admin extends Utilisateur implements Serializable {
+public class Admin extends Utilisateur implements Serializable{
+    @Enumerated(EnumType.STRING)
     private AdminType adminType;
 }

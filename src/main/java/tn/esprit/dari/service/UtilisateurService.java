@@ -2,9 +2,7 @@ package tn.esprit.dari.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.dari.entities.Agent;
-import tn.esprit.dari.entities.Customer;
-import tn.esprit.dari.entities.Utilisateur;
+import tn.esprit.dari.entities.*;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 
 import java.util.List;
@@ -21,6 +19,7 @@ public class UtilisateurService implements IUtilisateurService {
         return  user.get();
     }
 
+
     @Override
     public List<Utilisateur> getallUsers() {
         return null;
@@ -36,8 +35,16 @@ public class UtilisateurService implements IUtilisateurService {
         return null;
     }
 
-    @Override
-    public void addFave(int propId) {
-
+    public void addModerateur(Admin admin){
+        admin.setAdminType(AdminType.MODERATEUR);
+        admin.setEmail(admin.getEmail());
+        utilisateurRepository.save(admin);
     }
+    void deleteModerateur(Admin admin){
+        utilisateurRepository.delete(admin);
+    }
+    void deleteCustomer(Customer customer){
+        utilisateurRepository.delete(customer);
+    }
+
 }

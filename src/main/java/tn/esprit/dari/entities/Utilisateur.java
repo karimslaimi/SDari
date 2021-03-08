@@ -38,6 +38,8 @@ public  class Utilisateur implements Serializable {
     private String email;
     private Instant created;
     private boolean enabled;
+    @Enumerated(EnumType.STRING)
+    private AuthenticationProvider authenticationProvider;
 
 
 
@@ -46,6 +48,7 @@ public  class Utilisateur implements Serializable {
     private List<Message> sentMessages;
     @OneToMany(mappedBy = "sentBy")
     private List<Message> ReceivedMessages;
+
 
 
 }

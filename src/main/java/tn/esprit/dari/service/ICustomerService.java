@@ -9,4 +9,5 @@ public interface ICustomerService {
     void addFave(int propId, Long customerId);
     void deleteFave(int propId, Long customerId);
     void updateProfile(Customer customer);
+    void updateProfilePicture(Customer customer);
 }

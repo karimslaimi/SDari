@@ -57,7 +57,9 @@ public class AuthService {
     @Transactional
     public void signUpCustomer( RegisterRequest registerRequest){
         Customer user = new Customer();
-        //user.setUsername(registerRequest.getUsername());
+        user.setUsername(registerRequest.getUsername());
+        user.setFirstName(registerRequest.getFirstName());
+        user.setLastName(registerRequest.getLastName());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setCreated(Instant.now());
