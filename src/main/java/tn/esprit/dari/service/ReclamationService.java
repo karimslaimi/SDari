@@ -30,7 +30,7 @@ public class ReclamationService implements IReclamationService {
 
         if(userid!=0 && reclamation!=null ){
            // long id=(long)userid;
-            Utilisateur user=userRepo.findById(userid).get();
+            Utilisateur user=userRepo.findById((long)userid).get();
             reclamation.setUser(user);
             reclamationRepository.save(reclamation);
             return true;

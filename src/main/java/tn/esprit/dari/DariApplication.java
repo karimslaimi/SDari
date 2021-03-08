@@ -25,7 +25,7 @@ public class DariApplication {
 
     }
 
-/*    @Bean
+    @Bean
     public CommandLineRunner init() {
 
         return (args -> {
@@ -50,5 +50,5 @@ public class DariApplication {
             user1.setPicture("whatever.jpg");
             user1.setRegion(null);
             userRepo.save(user1);
-        });}*/
+        });}
 }
