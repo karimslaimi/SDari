@@ -35,4 +35,9 @@ public class UtilisateurService implements IUtilisateurService {
     public List<Customer> getAllCustomers() {
         return null;
     }
+
+    @Override
+    public void addFave(int propId) {
+
+    }
 }

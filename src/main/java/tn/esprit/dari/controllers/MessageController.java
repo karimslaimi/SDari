@@ -16,7 +16,7 @@ public class MessageController {
     private IMessageService messageService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> Create(@RequestBody Message message, @RequestBody int by, @RequestBody int to){
+    public ResponseEntity<?> Create(@RequestBody Message message, @RequestBody Long by, @RequestBody Long to){
 
         if(messageService.AddMessage(message,by,to)){
             return new ResponseEntity<>("sent", HttpStatus.OK);

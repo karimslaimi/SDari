@@ -17,19 +17,32 @@ import tn.esprit.dari.repositories.UtilisateurRepository;
 public class DariApplication {
 
     @Autowired
-    private UtilisateurRepository userRepo;
-
+    private CustomerRepository customerRepository;
     public static void main(String[] args) {
 
         SpringApplication.run(DariApplication.class, args);
 
     }
-
     @Bean
+    public ClassLoaderTemplateResolver secondaryTemplateResolver() {
+        ClassLoaderTemplateResolver secondaryTemplateResolver = new ClassLoaderTemplateResolver();
+        secondaryTemplateResolver.setPrefix("templates-2/");
+        secondaryTemplateResolver.setSuffix(".html");
+        secondaryTemplateResolver.setTemplateMode(TemplateMode.HTML);
+        secondaryTemplateResolver.setCharacterEncoding("UTF-8");
+        secondaryTemplateResolver.setOrder(1);
+        secondaryTemplateResolver.setCheckExistence(true);
+
+        return secondaryTemplateResolver;
+    }
+
+
+
+/*    @Bean
     public CommandLineRunner init() {
 
         return (args -> {
-            Utilisateur user=new Utilisateur();
+            Customer user=new Customer();
             user.setEmail("user1@user.com");
             user.setEnabled(true);
             user.setFirstName("user1");
@@ -37,8 +50,8 @@ public class DariApplication {
             user.setPassword("user1");
             user.setPhone("51887898");
             user.setPicture("whatever.jpg");
-            user.setRegion(null);
-            userRepo.save(user);
+            user.setRegion(Region.Bizerte);
+
 
             Utilisateur user1=new Utilisateur();
             user1.setEmail("user2@user.com");
@@ -50,5 +63,5 @@ public class DariApplication {
             user1.setPicture("whatever.jpg");
             user1.setRegion(null);
             userRepo.save(user1);
-        });}
+        });}*/
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IMessageService {
 
-    public Boolean AddMessage(Message message, int by, int to);
+    public Boolean AddMessage(Message message, Long by, Long to);
     public List<Message> GetMessage(int sentBy, int sentTo);
     public List<Utilisateur> getUsers(int id);
 }

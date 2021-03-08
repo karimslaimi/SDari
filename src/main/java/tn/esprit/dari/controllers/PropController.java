@@ -30,17 +30,24 @@ public class PropController {
     }
 
 //une prop
-    @GetMapping("/properties/{id}")
-    public Property getprop(@PathVariable int id) {
+    @GetMapping("/propget/{id}")
+    public Property getprop(@PathVariable("id") int id) {
         return propS.getprop(id);
 
     }
 //supp
 
-    @DeleteMapping("/properties/{id}")
-    public void deleteProperty(@PathVariable int id) {
+    @DeleteMapping("/propsupp/{id}")
+    public void deleteProperty(@PathVariable("id") int id) {
         propS.deleteProperty(id);
     }
 
+//update
+    @PostMapping("/propmodif")
+    @ResponseBody
+    public void modify(@RequestBody Property prop)
+    {
+        propS.updateProperty(prop);
+    }
 
 }

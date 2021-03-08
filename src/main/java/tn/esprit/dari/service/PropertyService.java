@@ -3,12 +3,9 @@ package tn.esprit.dari.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.dari.entities.Property;
-
 import tn.esprit.dari.repositories.PropertyRepository;
-
 import javax.el.PropertyNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -26,9 +23,12 @@ public class PropertyService implements IProperty {
     public void updateProperty(Property prop) {
         Property p= proprep.findById(prop.getId_prop()).get();
         p.setImage(prop.getImage());
-
-
-
+        p.setLoyer(prop.getLoyer());
+        p.setNbrooms(prop.getNbrooms());
+        p.setVideo(prop.getVideo());
+        p.setSuperficie(prop.getSuperficie());
+        p.setSurface(prop.getSurface());
+        p.setType(prop.getType());
         proprep.save(prop);
     }
 
