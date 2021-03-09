@@ -4,6 +4,7 @@ package tn.esprit.dari.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import tn.esprit.dari.entities.Priority;
 import tn.esprit.dari.entities.Reclamation;
 import tn.esprit.dari.entities.Utilisateur;
 import tn.esprit.dari.repositories.ReclamationRepository;
@@ -30,6 +31,8 @@ public class ReclamationService implements IReclamationService {
 
         if(userid!=0 && reclamation!=null ){
            reclamation.setDateTime(LocalDateTime.now());
+           reclamation.setPriority(Priority.normal);
+           reclamation.setState(false);
             Utilisateur user=userRepo.findById((long)userid).get();
             reclamation.setUser(user);
             reclamationRepository.save(reclamation);
@@ -47,12 +50,15 @@ public class ReclamationService implements IReclamationService {
     }
 
     @Override
-    public void treat(int id, String treatement) {
+    public boolean treat(int id, String treatement) {
         Reclamation reclamation=reclamationRepository.findById(id).orElse(null);
         if (reclamation != null && !reclamation.getState()) {
             reclamation.setTreatement(treatement);
             reclamation.setState(true);
             reclamationRepository.save(reclamation);
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -73,7 +79,7 @@ public class ReclamationService implements IReclamationService {
 
     @Override
     public List<Reclamation> findMyReclam(int id) {
-        return reclamationRepository.findMyReclams(id);
+        return reclamationRepository.findMyReclams((long)id);
     }
 
     @Override

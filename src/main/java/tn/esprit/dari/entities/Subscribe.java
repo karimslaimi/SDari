@@ -17,12 +17,12 @@ public class Subscribe implements Serializable {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id_sub", insertable = false, nullable = false)
+    @JoinColumn(name = "id_sub",  nullable = false)
     private Subscription subscription;
 
 
     @ManyToOne
-    @JoinColumn(name = "UtilisateurId",  insertable = false, nullable = false)
+    @JoinColumn(name = "UtilisateurId",   nullable = false)
     private Customer customers ;
 
     private Date DateD;
