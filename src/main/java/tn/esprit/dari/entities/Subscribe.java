@@ -19,12 +19,6 @@ public class Subscribe implements Serializable {
     private Subscription subscription;
 
 
-    @Transient
-    private int id_sub;
-
-    @Transient
-    private Long utilisateurId ;
-
     @ManyToOne
     @JoinColumn(name = "UtilisateurId",  insertable = false, nullable = false)
     private Customer customers ;
@@ -36,21 +30,9 @@ public class Subscribe implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public int getId_sub() {
-        return id_sub;
-    }
 
-    public void setId_sub(int id_sub) {
-        this.id_sub = id_sub;
-    }
 
-    public Long getUtilisateurId() {
-        return utilisateurId;
-    }
 
-    public void setUtilisateurId(Long utilisateurId) {
-        this.utilisateurId = utilisateurId;
-    }
 
     public Subscription getSubscription() {
         return subscription;

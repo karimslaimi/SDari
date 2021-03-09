@@ -21,7 +21,7 @@ import java.util.List;
 public  class Utilisateur implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long utilisateurId;
 
     @NotBlank(message = "LastName is required")

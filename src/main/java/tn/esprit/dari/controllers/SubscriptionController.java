@@ -48,7 +48,7 @@ public class SubscriptionController {
     @PostMapping("/addsubscribe")
     @ResponseBody
     public ResponseEntity<?> AddS(@RequestBody Subscribe s){
-        Subscribe su = subscription.AddSubToo(s.getId_sub(),s.getUtilisateurId(),s.getDateD(),s.getDateF());
+        Subscribe su = subscription.AddSubToo(s.getSubscription().getId_sub(),s.getCustomers().getUtilisateurId(),s.getDateD(),s.getDateF());
         return new ResponseEntity<>("subscribe added too",HttpStatus.OK);
 
     }

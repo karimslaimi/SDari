@@ -9,11 +9,10 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import tn.esprit.dari.entities.Appointment;
-import tn.esprit.dari.entities.Customer;
-import tn.esprit.dari.entities.Region;
-import tn.esprit.dari.entities.Utilisateur;
+import tn.esprit.dari.entities.*;
 import tn.esprit.dari.repositories.CustomerRepository;
+import tn.esprit.dari.repositories.SubscribeRepository;
+import tn.esprit.dari.repositories.SubscriptionRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 
 @SpringBootApplication
@@ -22,6 +21,13 @@ public class DariApplication {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private SubscribeRepository subRepo;
+
+     @Autowired
+    private SubscriptionRepository subsRepo;
+
     public static void main(String[] args) {
 
         SpringApplication.run(DariApplication.class, args);
@@ -42,11 +48,11 @@ public class DariApplication {
 
 
 
-    /* @Bean
+     @Bean
     public CommandLineRunner init() {
 
         return (args -> {
-            Customer user=new Customer();
+   /*         Customer user=new Customer();
             user.setEmail("user1@user.com");
             user.setEnabled(true);
             user.setFirstName("user1");
@@ -66,6 +72,18 @@ public class DariApplication {
             user1.setPhone("51887898");
             user1.setPicture("whatever.jpg");
             user1.setRegion(Region.Bizerte);
-            customerRepository.save(user1);
-        });}*/
+            customerRepository.save(user1);*/
+            Subscribe sub = new Subscribe();
+            sub.setDateD(null);
+            Subscription su = subsRepo.findById(1).get();
+            Customer cu = customerRepository.findById((long)1).get();
+
+            sub.setSubscription(su);
+            sub.setCustomers(cu);
+            cu.getSubscribes().add(sub);
+            customerRepository.save(cu);
+            su.getSubscribes().add(sub);
+            subsRepo.save(su);
+            subRepo.save(sub);
+        });}
 }

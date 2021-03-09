@@ -83,8 +83,11 @@ public class SubscriptionImpl implements ISubscription {
         Subscribe s = new Subscribe();
         s.setDateD(new Date());
         s.setDateF(new Date());
-        s.setCustomers(customerRepository.getOne(idC));
-        s.setSubscription(SubRep.getOne(idS));
+        Customer cu = customerRepository.findById(idC).get();
+
+        s.setCustomers(cu);
+        Subscription su = SubRep.findById(idS).get();
+        s.setSubscription(su);
         return subscribeRepository.save(s);
     }
 }
