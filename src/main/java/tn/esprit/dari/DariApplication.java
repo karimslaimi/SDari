@@ -14,7 +14,11 @@ import tn.esprit.dari.repositories.CustomerRepository;
 import tn.esprit.dari.repositories.SubscribeRepository;
 import tn.esprit.dari.repositories.SubscriptionRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
+import tn.esprit.dari.service.SubscriptionImpl;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -31,6 +35,9 @@ public class DariApplication {
 
      @Autowired
     private SubscriptionRepository subsRepo;
+     @Autowired
+     private SubscriptionImpl subscription;
+
 
     public static void main(String[] args) {
 
@@ -49,7 +56,6 @@ public class DariApplication {
 
         return secondaryTemplateResolver;
     }
-
 
 
      @Bean
@@ -87,7 +93,7 @@ public class DariApplication {
 
 
 
-            Subscribe sub = new Subscribe();
+            /*Subscribe sub = new Subscribe();
             sub.setDateD(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             sub.setDateF(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
 
@@ -97,8 +103,9 @@ public class DariApplication {
             sub.setSubscription(su);
             sub.setCustomers(cu);
 
+            subscription.insertWithQuery(sub);*/
 
-            subRepo.save(sub);
+
 
 
         });}

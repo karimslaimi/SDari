@@ -10,6 +10,9 @@ import tn.esprit.dari.repositories.SubscribeRepository;
 import tn.esprit.dari.repositories.SubscriptionRepository;
 import tn.esprit.dari.entities.Subscription;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +30,8 @@ public class SubscriptionImpl implements ISubscription {
 
     @Autowired
     CustomerRepository customerRepository ;
-
+    @PersistenceContext
+    private EntityManager entityManager;
 
 
     @Override
@@ -90,4 +94,16 @@ public class SubscriptionImpl implements ISubscription {
         s.setSubscription(su);
         return subscribeRepository.save(s);
     }
+
+    @Transactional
+    public void insertWithQuery(Subscribe sub) {
+        entityManager.createNativeQuery("INSERT INTO Subscribe (dated,datef,utilisateur_id,id_sub) VALUES (?,?,?,?)")
+                .setParameter(1, sub.getDateD())
+                .setParameter(2, sub.getDateF())
+                .setParameter(3, sub.getCustomers().getUtilisateurId())
+                .setParameter(4,sub.getSubscription().getId_sub())
+                .executeUpdate();
+    }
+
+
 }
