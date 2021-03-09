@@ -11,6 +11,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import tn.esprit.dari.entities.Appointment;
 import tn.esprit.dari.entities.Customer;
+import tn.esprit.dari.entities.Region;
 import tn.esprit.dari.entities.Utilisateur;
 import tn.esprit.dari.repositories.CustomerRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
@@ -41,7 +42,7 @@ public class DariApplication {
 
 
 
-/*    @Bean
+    /* @Bean
     public CommandLineRunner init() {
 
         return (args -> {
@@ -54,9 +55,9 @@ public class DariApplication {
             user.setPhone("51887898");
             user.setPicture("whatever.jpg");
             user.setRegion(Region.Bizerte);
+            customerRepository.save(user);
 
-
-            Utilisateur user1=new Utilisateur();
+            Customer user1=new Customer();
             user1.setEmail("user2@user.com");
             user1.setEnabled(true);
             user1.setFirstName("user2");
@@ -64,7 +65,7 @@ public class DariApplication {
             user1.setPassword("user2");
             user1.setPhone("51887898");
             user1.setPicture("whatever.jpg");
-            user1.setRegion(null);
-            userRepo.save(user1);
+            user1.setRegion(Region.Bizerte);
+            customerRepository.save(user1);
         });}*/
 }

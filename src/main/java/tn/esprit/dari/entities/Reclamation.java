@@ -3,10 +3,12 @@ package tn.esprit.dari.entities;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@SpringBootApplication
+
 @Entity
 public class Reclamation implements Serializable {
 
@@ -14,12 +16,18 @@ public class Reclamation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty @NotBlank
     private String type;
+    @NotEmpty @NotBlank
     private String title;
+    @NotEmpty @NotBlank
     private String explication;
     private LocalDateTime dateTime;
     private String treatement;
     private Boolean state;//by default false when it will be treated it will be true
+
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
 
 
     @ManyToOne
@@ -108,5 +116,13 @@ public class Reclamation implements Serializable {
 
     public void setState(Boolean state) {
         this.state = state;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }
