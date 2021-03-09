@@ -17,19 +17,15 @@ public class Message implements Serializable{
         private LocalDateTime dateTime;
 
         @ManyToOne
-        @JoinColumn(name="SentByID")
-        private Utilisateur sentBy;
+        @JoinColumn(name="chatroom")
+        private ChatRoom chatRoom;
 
-        @ManyToOne
-        @JoinColumn(name="sentToID")
 
-        private Utilisateur sentTo;
 
-        public Message(String content,Utilisateur sentBy, Utilisateur sentTo) {
+        public Message(String content) {
             this.content=content;
             this.dateTime=LocalDateTime.now();
-            this.sentBy=sentBy;
-            this.sentTo=sentTo;
+
         }
 
         public Message() {
@@ -59,20 +55,5 @@ public class Message implements Serializable{
             this.dateTime = dateTime;
         }
 
-        public Utilisateur getSentBy() {
-            return sentBy;
-        }
-
-        public void setSentBy(Utilisateur sentBy) {
-            this.sentBy = sentBy;
-        }
-
-        public Utilisateur getSentTo() {
-            return sentTo;
-        }
-
-        public void setSentTo(Utilisateur sentTo) {
-            this.sentTo = sentTo;
-        }
 
     }

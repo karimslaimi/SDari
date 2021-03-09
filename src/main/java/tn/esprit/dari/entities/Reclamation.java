@@ -1,5 +1,6 @@
 package tn.esprit.dari.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.persistence.*;
@@ -29,7 +30,7 @@ public class Reclamation implements Serializable {
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "userid")
     private Utilisateur user;
