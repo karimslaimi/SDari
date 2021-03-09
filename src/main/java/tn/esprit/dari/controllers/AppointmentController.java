@@ -24,17 +24,17 @@ public class AppointmentController {
 
          app_service.requestAppointment(appointment);
 
-        return new ResponseEntity<>("Request added", HttpStatus.OK);
+        return new ResponseEntity<>("Request sent", HttpStatus.OK);
 
     }
 
 
     @PostMapping("/accept/{id}")
     @ResponseBody
-    public ResponseEntity<String> acceptAppointment(@PathVariable("id") int id,@RequestParam String date){
+    public ResponseEntity<String> acceptAppointment(@PathVariable("id") int id,@RequestParam String date,@RequestParam int apptype){
 
         try {
-            app_service.acceptAppointment(id,date);
+            app_service.acceptAppointment(id,date,apptype);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -42,12 +42,16 @@ public class AppointmentController {
         return new ResponseEntity<>("Appointment accepted", HttpStatus.OK);
 
     }
-    @GetMapping("/listApp/{id}")
+    @GetMapping("/listAppOwner/{id}")
     public List<Appointment> ownerAppointments(@PathVariable("id") Long id){
 
           return  app_service.ownerAppointments(id);
     }
+    @GetMapping("/listAppCustomer/{id}")
+    public List<Appointment> customerAppointments(@PathVariable("id") Long id){
 
+        return  app_service.customerAppointments(id);
+    }
     @GetMapping("/cancelApp/{id}")
     @ResponseBody
     public ResponseEntity<String> cancelAppointments(@PathVariable("id") int id){

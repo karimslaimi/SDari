@@ -56,7 +56,7 @@ public class DariApplication {
     public CommandLineRunner init() {
 
         return (args -> {
-            /*Customer user=new Customer();
+        /*    Customer user=new Customer();
             user.setEmail("user1@user.com");
             user.setEnabled(true);
             user.setFirstName("user1");
@@ -77,13 +77,13 @@ public class DariApplication {
             user1.setPicture("whatever.jpg");
             user1.setRegion(Region.Bizerte);
             customerRepository.save(user1);
-
-
+*/
+/*
             Subscription su = new Subscription();
             su.setTitle("normal");
             su.setPrice(200);
             su.setDescription("ich fick dish mann");
-            subsRepo.save(su);*/
+            subsRepo.save(su);
 
 
 
@@ -100,6 +100,6 @@ public class DariApplication {
 
             subRepo.save(sub);
 
-
+*/
         });}
 }
