@@ -15,6 +15,10 @@ import tn.esprit.dari.repositories.SubscribeRepository;
 import tn.esprit.dari.repositories.SubscriptionRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 @SpringBootApplication
 
 public class DariApplication {
@@ -52,7 +56,7 @@ public class DariApplication {
     public CommandLineRunner init() {
 
         return (args -> {
-   /*         Customer user=new Customer();
+            /*Customer user=new Customer();
             user.setEmail("user1@user.com");
             user.setEnabled(true);
             user.setFirstName("user1");
@@ -72,18 +76,30 @@ public class DariApplication {
             user1.setPhone("51887898");
             user1.setPicture("whatever.jpg");
             user1.setRegion(Region.Bizerte);
-            customerRepository.save(user1);*/
+            customerRepository.save(user1);
+
+
+            Subscription su = new Subscription();
+            su.setTitle("normal");
+            su.setPrice(200);
+            su.setDescription("ich fick dish mann");
+            subsRepo.save(su);*/
+
+
+
             Subscribe sub = new Subscribe();
-            sub.setDateD(null);
-            Subscription su = subsRepo.findById(1).get();
-            Customer cu = customerRepository.findById((long)1).get();
+            sub.setDateD(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            sub.setDateF(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+
+            Subscription su=subsRepo.findById(1).get();
+            Customer cu=customerRepository.findById((long)1).get();
 
             sub.setSubscription(su);
             sub.setCustomers(cu);
-            cu.getSubscribes().add(sub);
-            customerRepository.save(cu);
-            su.getSubscribes().add(sub);
-            subsRepo.save(su);
+
+
             subRepo.save(sub);
+
+
         });}
 }

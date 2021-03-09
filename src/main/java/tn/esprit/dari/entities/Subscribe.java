@@ -12,7 +12,9 @@ import java.util.List;
 public class Subscribe implements Serializable {
 
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "id_sub", insertable = false, nullable = false)
@@ -26,9 +28,7 @@ public class Subscribe implements Serializable {
     private Date DateD;
     private Date DateF ;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
 
 
 
@@ -66,11 +66,11 @@ public class Subscribe implements Serializable {
         DateF = dateF;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 }

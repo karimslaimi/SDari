@@ -10,7 +10,7 @@ import java.util.List;
 public class Subscription implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_sub;
     private String title;
     private float price;
