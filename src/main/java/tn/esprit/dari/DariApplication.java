@@ -11,6 +11,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import tn.esprit.dari.entities.Appointment;
 import tn.esprit.dari.entities.Customer;
+import tn.esprit.dari.entities.Region;
 import tn.esprit.dari.entities.Utilisateur;
 import tn.esprit.dari.repositories.CustomerRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
@@ -21,6 +22,10 @@ public class DariApplication {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private UtilisateurRepository userRepo ;
+
     public static void main(String[] args) {
 
         SpringApplication.run(DariApplication.class, args);
@@ -40,8 +45,8 @@ public class DariApplication {
     }
 
 
-
-/*    @Bean
+/*
+   @Bean
     public CommandLineRunner init() {
 
         return (args -> {

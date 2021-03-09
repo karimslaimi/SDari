@@ -17,7 +17,7 @@ public class Customer extends Utilisateur implements Serializable {
 
     String username;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customers")
     private List<Subscribe> subscribes ;
 
     @ManyToMany()

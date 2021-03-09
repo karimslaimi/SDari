@@ -5,6 +5,7 @@ package tn.esprit.dari.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -18,17 +19,38 @@ public class Subscribe implements Serializable {
     private Subscription subscription;
 
 
+    @Transient
+    private int id_sub;
+
+    @Transient
+    private Long utilisateurId ;
 
     @ManyToOne
-    @JoinColumn(name = "utilisateurId",  insertable = false, nullable = false)
-
-    private Customer customer ;
+    @JoinColumn(name = "UtilisateurId",  insertable = false, nullable = false)
+    private Customer customers ;
 
     private Date DateD;
     private Date DateF ;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public int getId_sub() {
+        return id_sub;
+    }
+
+    public void setId_sub(int id_sub) {
+        this.id_sub = id_sub;
+    }
+
+    public Long getUtilisateurId() {
+        return utilisateurId;
+    }
+
+    public void setUtilisateurId(Long utilisateurId) {
+        this.utilisateurId = utilisateurId;
+    }
 
     public Subscription getSubscription() {
         return subscription;
@@ -38,12 +60,12 @@ public class Subscribe implements Serializable {
         this.subscription = subscription;
     }
 
-     public Customer getCustomer() {
-        return customer;
+    public Customer getCustomers() {
+        return customers;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomers(Customer customers) {
+        this.customers = customers;
     }
 
     public Date getDateD() {

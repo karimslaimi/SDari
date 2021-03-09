@@ -6,8 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.dari.entities.Subscribe;
 import tn.esprit.dari.entities.Subscription;
 import tn.esprit.dari.service.ISubscription;
+
+import java.util.Date;
 
 @Controller
 @RequestMapping("/Subscription")
@@ -40,6 +43,13 @@ public class SubscriptionController {
     public ResponseEntity<?> Add(@RequestBody Subscription s){
         Subscription sub = subscription.Add(s);
         return new ResponseEntity<>( " Subscription added. ",  HttpStatus.OK);
+
+    }
+    @PostMapping("/addsubscribe")
+    @ResponseBody
+    public ResponseEntity<?> AddS(@RequestBody Subscribe s){
+        Subscribe su = subscription.AddSubToo(s.getId_sub(),s.getUtilisateurId(),s.getDateD(),s.getDateF());
+        return new ResponseEntity<>("subscribe added too",HttpStatus.OK);
 
     }
 

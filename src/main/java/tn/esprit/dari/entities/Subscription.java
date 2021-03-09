@@ -30,6 +30,11 @@ public class Subscription implements Serializable {
 
     }
 
+
+    public Subscription() {
+
+    }
+
     public Subscription(int id_sub, String title, float price, String description, List<Subscribe> subscribes) {
         this.id_sub = id_sub;
         this.title = title;
@@ -38,10 +43,13 @@ public class Subscription implements Serializable {
         this.subscribes = subscribes;
     }
 
-    public Subscription() {
-
+    public List<Subscribe> getSubscribes() {
+        return subscribes;
     }
 
+    public void setSubscribes(List<Subscribe> subscribes) {
+        this.subscribes = subscribes;
+    }
 
     public int getId_sub() {
         return id_sub;
@@ -76,11 +84,4 @@ public class Subscription implements Serializable {
     }
 
 
-    public List<Subscribe> getSubscribes() {
-        return subscribes;
-    }
-
-    public void setSubscribes(List<Subscribe> subscribes) {
-        this.subscribes = subscribes;
-    }
 }
