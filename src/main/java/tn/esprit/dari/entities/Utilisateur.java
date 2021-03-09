@@ -47,5 +47,7 @@ public  class Utilisateur implements Serializable {
     @OneToMany(mappedBy = "sentBy")
     private List<Message> ReceivedMessages;
 
+    @OneToMany(mappedBy = "customer")
+    private List<Notification> notifications;
 
 }
