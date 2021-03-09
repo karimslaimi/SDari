@@ -1,11 +1,9 @@
 package tn.esprit.dari.entities;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-@SpringBootApplication
 @Entity
 @Table(name = "Message")
 public class Message implements Serializable{
@@ -27,9 +25,9 @@ public class Message implements Serializable{
 
         private Utilisateur sentTo;
 
-        public Message(String content, LocalDateTime dateTime,Utilisateur sentBy, Utilisateur sentTo) {
+        public Message(String content,Utilisateur sentBy, Utilisateur sentTo) {
             this.content=content;
-            this.dateTime=dateTime;
+            this.dateTime=LocalDateTime.now();
             this.sentBy=sentBy;
             this.sentTo=sentTo;
         }

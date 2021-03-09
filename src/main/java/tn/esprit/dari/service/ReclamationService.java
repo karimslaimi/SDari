@@ -29,7 +29,7 @@ public class ReclamationService implements IReclamationService {
     public Boolean Create(@Valid Reclamation reclamation, Long userid) {
 
         if(userid!=0 && reclamation!=null ){
-           // long id=(long)userid;
+           reclamation.setDateTime(LocalDateTime.now());
             Utilisateur user=userRepo.findById((long)userid).get();
             reclamation.setUser(user);
             reclamationRepository.save(reclamation);
