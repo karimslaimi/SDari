@@ -27,8 +27,8 @@ public class Property implements Serializable {
    @JoinColumn(name = "id")
    private Customer customer;
 
-  @ManyToMany(mappedBy = "properties")
-  List<Customer> customers;
+  /*@ManyToMany(mappedBy = "properties")
+  List<Customer> customers;*/
 
 
     public Property() {

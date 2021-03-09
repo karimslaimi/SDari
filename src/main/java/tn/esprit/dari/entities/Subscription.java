@@ -30,6 +30,13 @@ public class Subscription implements Serializable {
 
     }
 
+    public Subscription(int id_sub, String title, float price, String description, List<Subscribe> subscribes) {
+        this.id_sub = id_sub;
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.subscribes = subscribes;
+    }
 
     public Subscription() {
 

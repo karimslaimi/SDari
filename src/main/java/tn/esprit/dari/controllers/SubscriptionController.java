@@ -29,6 +29,11 @@ public class SubscriptionController {
         return new ResponseEntity<>( subscription.getSub(id), HttpStatus.OK);
     }
 
+    @GetMapping("/getSubByTitle/{title}")
+    public ResponseEntity<?> SubByTitle(@PathVariable String title){
+
+        return new ResponseEntity<>( subscription.getSubT(title), HttpStatus.OK);
+    }
 
     @PostMapping("/addsub")
     @ResponseBody

@@ -34,15 +34,18 @@ public class SubscriptionImpl implements ISubscription {
     }
 
     @Override
+    public List<Subscription> getSubT(String title) {
+
+        return SubRep.findSubscriptionByTitle(title);
+    }
+
+    @Override
     public Subscription Add(Subscription S) {
         return SubRep.save(S);
     }
 
 
-   /* @Override
-    public Subscription Add(Subscription S) {
-        return SubRep.save(S);
-    }*/
+
 
     @Override
     public Subscription Modify(Subscription S) {
