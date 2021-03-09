@@ -2,10 +2,7 @@ package tn.esprit.dari.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import tn.esprit.dari.service.State;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,9 +21,10 @@ public class Appointment implements Serializable {
     private Date appointmentDate;
 
     private String address;
-
+    @Enumerated(EnumType.STRING)
     private State state;
-
+    @Enumerated(EnumType.STRING)
+    private AppointmentType appointmentType;
 
     @Transient
     private Long ownerId;
@@ -34,7 +32,6 @@ public class Appointment implements Serializable {
     private Long customerId;
     @Transient
     private Long agentId;
-
 
     @ManyToOne
     @JoinColumn(name = "ownerId")
@@ -142,5 +139,13 @@ public class Appointment implements Serializable {
                 ", customer=" + customer +
                 ", agent=" + agent +
                 '}';
+    }
+
+    public AppointmentType getAppointmentType() {
+        return appointmentType;
+    }
+
+    public void setAppointmentType(AppointmentType appointmentType) {
+        this.appointmentType = appointmentType;
     }
 }

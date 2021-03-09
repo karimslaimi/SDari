@@ -4,16 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.dari.dto.RegisterRequest;
-import tn.esprit.dari.entities.Agent;
 import tn.esprit.dari.entities.Appointment;
-import tn.esprit.dari.entities.Customer;
-import tn.esprit.dari.entities.Subscription;
-import tn.esprit.dari.repositories.AppointmentRepository;
-import tn.esprit.dari.repositories.UtilisateurRepository;
 import tn.esprit.dari.service.AppointmentService;
-import tn.esprit.dari.service.State;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -30,10 +24,24 @@ public class AppointmentController {
 
          app_service.requestAppointment(appointment);
 
-        return new ResponseEntity<>("Customer Registration succeed", HttpStatus.OK);
+        return new ResponseEntity<>("Request added", HttpStatus.OK);
 
     }
 
+
+    @PostMapping("/accept/{id}")
+    @ResponseBody
+    public ResponseEntity<String> acceptAppointment(@PathVariable("id") int id,@RequestParam String date){
+
+        try {
+            app_service.acceptAppointment(id,date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<>("Appointment accepted", HttpStatus.OK);
+
+    }
     @GetMapping("/listApp/{id}")
     public List<Appointment> ownerAppointments(@PathVariable("id") Long id){
 
@@ -45,8 +53,7 @@ public class AppointmentController {
     public ResponseEntity<String> cancelAppointments(@PathVariable("id") int id){
 
         app_service.cancelAppointment(id);
-        return new ResponseEntity<>("Customer Registration succeed", HttpStatus.OK);
-
+        return new ResponseEntity<>("Appointment canceled", HttpStatus.OK);
 
     }
 
