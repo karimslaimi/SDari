@@ -12,9 +12,8 @@ public class Buy extends Property implements Serializable {
 
     private float price;
     @ManyToOne
-    @JoinColumn(name = "utilisateurId")
+    @JoinColumn
     private Utilisateur user;
-
     public Buy() {
     }
 
@@ -35,6 +34,7 @@ public class Buy extends Property implements Serializable {
     public float getPrice() {
         return price;
     }
+
 
     public void setPrice(float price) {
         this.price = price;
