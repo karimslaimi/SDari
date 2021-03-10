@@ -1,10 +1,8 @@
 package tn.esprit.dari.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 public class Orders implements Serializable {
@@ -14,6 +12,12 @@ public class Orders implements Serializable {
     private int id_o;
     private int nb_o;
     private float total_price;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Customer custo;
+
+
 
     public Orders() {
     }
@@ -47,5 +51,29 @@ public class Orders implements Serializable {
 
     public void setTotal_price(float total_price) {
         this.total_price = total_price;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "id_o=" + id_o +
+                ", nb_o=" + nb_o +
+                ", total_price=" + total_price +
+                ", custo=" + custo +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Orders orders = (Orders) o;
+        return id_o == orders.id_o && nb_o == orders.nb_o && Float.compare(orders.total_price, total_price) == 0 && custo.equals(orders.custo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_o, nb_o, total_price, custo);
     }
 }

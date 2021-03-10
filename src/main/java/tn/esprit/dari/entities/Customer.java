@@ -37,6 +37,13 @@ public class Customer extends Utilisateur implements Serializable {
     @OneToMany(mappedBy="customer" )
     List<Property> props;
 
+
+    @OneToMany(mappedBy="custo" )
+    List<Orders> ords;
+
+
+
+
     public String getUsername() {
         return username;
     }
