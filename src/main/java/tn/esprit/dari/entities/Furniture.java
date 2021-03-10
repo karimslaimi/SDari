@@ -14,6 +14,7 @@ public class Furniture  implements Serializable {
    private String dimentions;
    private String description;
    private String picture;
+
     @ManyToOne
     @JoinColumn(name = "id")
     private Customer cust;
