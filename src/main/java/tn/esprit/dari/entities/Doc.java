@@ -1,15 +1,12 @@
 package tn.esprit.dari.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
-
+@Entity
 public class Doc {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     private String docName;
     private String docType;
@@ -26,11 +23,11 @@ public class Doc {
         this.data = data;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
