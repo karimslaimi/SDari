@@ -3,6 +3,8 @@ package tn.esprit.dari.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.dari.entities.*;
+import tn.esprit.dari.repositories.AgentRepository;
+import tn.esprit.dari.repositories.CustomerRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 
 import java.util.List;
@@ -12,7 +14,10 @@ import java.util.Optional;
 public class UtilisateurService implements IUtilisateurService {
     @Autowired
     UtilisateurRepository utilisateurRepository;
-
+    @Autowired
+    CustomerRepository customerRepository;
+    @Autowired
+    AgentRepository agentRepository;
 
     public Utilisateur getuserbyId(Long id) {
         Optional<Utilisateur> user = utilisateurRepository.findById(id);
@@ -27,23 +32,31 @@ public class UtilisateurService implements IUtilisateurService {
 
     @Override
     public List<Agent> getAllAgents() {
-        return null;
+        return agentRepository.findAll();
+    }
+    @Override
+    public void updateAgent(Agent agent) {
+        Agent a= agentRepository.findById(agent.getUtilisateurId()).get();
+        a.setPicture(agent.getPicture());
+        a.setFirstName(agent.getFirstName());
+        a.setLastName(agent.getLastName());
+
+        agentRepository.save(a);
     }
 
-    @Override
-    public List<Customer> getAllCustomers() {
-        return null;
-    }
+
 
     public void addModerateur(Admin admin){
         admin.setAdminType(AdminType.MODERATEUR);
         admin.setEmail(admin.getEmail());
+        admin.setEnabled(true);
         utilisateurRepository.save(admin);
     }
-    void deleteModerateur(Admin admin){
+
+    public void deleteModerateur(Admin admin){
         utilisateurRepository.delete(admin);
     }
-    void deleteCustomer(Customer customer){
+    public void deleteCustomer(Customer customer){
         utilisateurRepository.delete(customer);
     }
 
