@@ -22,7 +22,7 @@ public class AppointmentService implements IAppointmentService {
     private CustomerRepository ut;
 
     @Autowired
-    private NotificationRepository nr;
+    private INotificationService nr;
 
     @Override
     public void requestAppointment(Appointment appointment) {
@@ -32,12 +32,7 @@ public class AppointmentService implements IAppointmentService {
         appointment.setCustomer(ut.getOne(appointment.getCustomerId()));
         ar.save(appointment);
         //notification sending
-        Notification notif =new Notification();
-        notif.setTitle("Appointment request");
-        notif.setBody("You have a new appointment request! Check your appointments for more informations.");
-        notif.setNotificationDate(new Date());
-        notif.setCustomer(ut.getOne(appointment.getOwner().getUtilisateurId()));
-        nr.save(notif);
+        nr.Notify(ut.getOne(appointment.getOwner().getUtilisateurId()),new Date(),"Appointment request","You have a new appointment request! Check your appointments for more information.");
     }
 
     @Override
@@ -53,12 +48,7 @@ public class AppointmentService implements IAppointmentService {
 
         ar.save(appointment);
         //notification control
-        Notification notif =new Notification();
-        notif.setTitle("Appointment accepted");
-        notif.setBody("Your appointment has been accepted");
-        notif.setNotificationDate(new Date());
-        notif.setCustomer(ut.getOne(appointment.getCustomer().getUtilisateurId()));
-        nr.save(notif);
+        nr.Notify(ut.getOne(appointment.getCustomer().getUtilisateurId()),new Date(),"Appointment accepted","Your appointment has been accepted");
 
     }
 
