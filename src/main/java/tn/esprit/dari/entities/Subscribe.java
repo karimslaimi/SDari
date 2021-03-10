@@ -5,29 +5,33 @@ package tn.esprit.dari.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
 public class Subscribe implements Serializable {
 
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id_sub", insertable = false, nullable = false)
+    @JoinColumn(name = "id_sub",  nullable = false)
     private Subscription subscription;
 
 
-
     @ManyToOne
-    @JoinColumn(name = "utilisateurId",  insertable = false, nullable = false)
-
-    private Customer customer ;
+    @JoinColumn(name = "UtilisateurId",   nullable = false)
+    private Customer customers ;
 
     private Date DateD;
     private Date DateF ;
-    @Id
-    private Long id;
+
+
+
+
+
 
 
     public Subscription getSubscription() {
@@ -38,12 +42,12 @@ public class Subscribe implements Serializable {
         this.subscription = subscription;
     }
 
-     public Customer getCustomer() {
-        return customer;
+    public Customer getCustomers() {
+        return customers;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomers(Customer customers) {
+        this.customers = customers;
     }
 
     public Date getDateD() {
@@ -62,11 +66,11 @@ public class Subscribe implements Serializable {
         DateF = dateF;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 }

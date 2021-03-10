@@ -1,5 +1,6 @@
 package tn.esprit.dari.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.List;
 public  class Utilisateur implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long utilisateurId;
 
     @NotBlank(message = "LastName is required")
@@ -42,10 +43,16 @@ public  class Utilisateur implements Serializable {
 
 
 
-    @OneToMany(mappedBy ="sentTo")
-    private List<Message> sentMessages;
-    @OneToMany(mappedBy = "sentBy")
-    private List<Message> ReceivedMessages;
+    @OneToMany(mappedBy ="first")
+    private List<ChatRoom> sent;
+    @OneToMany(mappedBy = "second")
+    private List<ChatRoom> received;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Reclamation> reclamations;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Notification> notifications;
 
 }

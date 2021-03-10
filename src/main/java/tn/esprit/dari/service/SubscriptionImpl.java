@@ -2,9 +2,18 @@ package tn.esprit.dari.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.dari.entities.Customer;
+import tn.esprit.dari.entities.Subscribe;
+import tn.esprit.dari.entities.Utilisateur;
+import tn.esprit.dari.repositories.CustomerRepository;
+import tn.esprit.dari.repositories.SubscribeRepository;
 import tn.esprit.dari.repositories.SubscriptionRepository;
 import tn.esprit.dari.entities.Subscription;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +24,14 @@ public class SubscriptionImpl implements ISubscription {
     @Autowired
     SubscriptionRepository SubRep ;
 
+    @Autowired
+    SubscribeRepository subscribeRepository ;
+
+
+    @Autowired
+    CustomerRepository customerRepository ;
+    @PersistenceContext
+    private EntityManager entityManager;
 
 
     @Override
@@ -34,15 +51,19 @@ public class SubscriptionImpl implements ISubscription {
     }
 
     @Override
+    public List<Subscription> getSubT(String title) {
+
+        return SubRep.findSubscriptionByTitle(title);
+    }
+
+    @Override
     public Subscription Add(Subscription S) {
+
         return SubRep.save(S);
     }
 
 
-   /* @Override
-    public Subscription Add(Subscription S) {
-        return SubRep.save(S);
-    }*/
+
 
     @Override
     public Subscription Modify(Subscription S) {
@@ -59,4 +80,30 @@ public class SubscriptionImpl implements ISubscription {
     public void DeleteSub(int  id) {
         SubRep.deleteById(id);
     }
+
+    @Override
+    public Subscribe AddSubToo(int idS, Long idC, Date dateD, Date dateF) {
+
+        Subscribe s = new Subscribe();
+        s.setDateD(new Date());
+        s.setDateF(new Date());
+        Customer cu = customerRepository.findById(idC).get();
+
+        s.setCustomers(cu);
+        Subscription su = SubRep.findById(idS).get();
+        s.setSubscription(su);
+        return subscribeRepository.save(s);
+    }
+
+    @Transactional
+    public void insertWithQuery(Subscribe sub) {
+        entityManager.createNativeQuery("INSERT INTO Subscribe (dated,datef,utilisateur_id,id_sub) VALUES (?,?,?,?)")
+                .setParameter(1, sub.getDateD())
+                .setParameter(2, sub.getDateF())
+                .setParameter(3, sub.getCustomers().getUtilisateurId())
+                .setParameter(4,sub.getSubscription().getId_sub())
+                .executeUpdate();
+    }
+
+
 }

@@ -2,12 +2,16 @@ package tn.esprit.dari.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.dari.entities.Agent;
 import tn.esprit.dari.entities.Appointment;
 import tn.esprit.dari.entities.Customer;
+import tn.esprit.dari.entities.Notification;
+import tn.esprit.dari.entities.State;
 import tn.esprit.dari.repositories.AppointmentRepository;
 import tn.esprit.dari.repositories.CustomerRepository;
-import tn.esprit.dari.repositories.UtilisateurRepository;
+import tn.esprit.dari.repositories.NotificationRepository;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +24,9 @@ public class AppointmentService implements IAppointmentService {
     @Autowired
     private CustomerRepository ut;
 
+    @Autowired
+    private NotificationRepository nr;
+
     @Override
     public void requestAppointment(Appointment appointment) {
         appointment.setState(State.ON_HOLD);
@@ -27,13 +34,20 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public void acceptAppointment(int id, Date date) {
+    public void acceptAppointment(int id, String date) throws ParseException {
 
         Appointment appointment= ar.getOne(id);
-        appointment.setAppointmentDate(date);
+        appointment.setAppointmentDate(new SimpleDateFormat("dd/MM/yyyy").parse(date));
         appointment.setState(State.ACCEPTED);
         ar.save(appointment);
         //notification control
+        Notification notif =new Notification();
+        notif.setTitle("Appointment accepted");
+        notif.setBody("Your appointment has been accepted");
+        notif.setNotificationDate(new Date());
+        notif.setCustomer(ut.getOne(appointment.getCustomer().getUtilisateurId()));
+        nr.save(notif);
+
     }
 
     @Override

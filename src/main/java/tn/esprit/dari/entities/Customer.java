@@ -1,7 +1,11 @@
 package tn.esprit.dari.entities;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import tn.esprit.dari.entities.Utilisateur;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,10 +14,16 @@ import java.util.List;
 @DiscriminatorValue("C")
 public class Customer extends Utilisateur implements Serializable {
 
+    String username;
 
-
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customers")
     private List<Subscribe> subscribes ;
+
+    @ManyToMany
+    @JoinTable(name = "Favorites", joinColumns = @JoinColumn(name = "utilisateurId")
+            , inverseJoinColumns = @JoinColumn(name = "id_prop"))
+    List<Property> favorites;
+
 
 
     @OneToMany(mappedBy = "owner")
@@ -21,9 +31,44 @@ public class Customer extends Utilisateur implements Serializable {
     @OneToMany(mappedBy = "customer")
     List<Appointment> customerAppointments;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Property> props ;
-    @OneToMany(mappedBy = "cust")
-    private List<Furniture> furs ;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public List<Subscribe> getSubscribes() {
+        return subscribes;
+    }
+
+    public void setSubscribes(List<Subscribe> subscribes) {
+        this.subscribes = subscribes;
+    }
+
+    public List<Property> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<Property> favorites) {
+        this.favorites = favorites;
+    }
+
+    public List<Appointment> getOwnerAppointments() {
+        return ownerAppointments;
+    }
+
+    public void setOwnerAppointments(List<Appointment> ownerAppointments) {
+        this.ownerAppointments = ownerAppointments;
+    }
+
+    public List<Appointment> getCustomerAppointments() {
+        return customerAppointments;
+    }
+
+    public void setCustomerAppointments(List<Appointment> customerAppointments) {
+        this.customerAppointments = customerAppointments;
+    }
 }

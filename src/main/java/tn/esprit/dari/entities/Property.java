@@ -12,7 +12,7 @@ public class Property implements Serializable {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_prop;
     private PropertyType type;
     private int nbrooms;
@@ -26,6 +26,9 @@ public class Property implements Serializable {
    @ManyToOne
    @JoinColumn(name = "id")
    private Customer customer;
+
+  /*@ManyToMany(mappedBy = "properties")
+  List<Customer> customers;*/
 
 
     public Property() {
