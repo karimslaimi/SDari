@@ -66,8 +66,8 @@ public class AppointmentController {
     @ResponseBody
     public ResponseEntity<String> modify( @PathVariable("id")  int id , @RequestBody Appointment su){
 
-         app_service.modifyAppointment(id, su );
-         return new ResponseEntity<>("Appointment modified", HttpStatus.OK);
+        app_service.modifyAppointment(id, su );
+        return new ResponseEntity<>("Appointment modified", HttpStatus.OK);
     }
 
 

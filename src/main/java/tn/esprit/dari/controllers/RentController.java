@@ -20,11 +20,6 @@ public class RentController {
     @Autowired
     private RentRepository rr;
 
-    public float DifferenceBetwenPerDayAndMonth(float pricePerMonth,float pricePerDay)
-    {
-        return pricePerDay-(pricePerMonth/30);
-    }
-
     @GetMapping("/get")
     public List<Rent> All() {
         return rr.findAll();
