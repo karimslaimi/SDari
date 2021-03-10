@@ -17,8 +17,6 @@ public class Furniture  implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id")
     private Customer cust;
-
-
     public Furniture() {
     }
 

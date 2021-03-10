@@ -23,12 +23,14 @@ public class Property implements Serializable {
     private float loyer;
     private float prix;
     private Status status;
+
    @ManyToOne
    @JoinColumn(name = "id")
    private Customer customer;
 
-  /*@ManyToMany(mappedBy = "properties")
+ /* @ManyToMany(mappedBy = "properties")
   List<Customer> customers;*/
+
 
 
     public Property() {
