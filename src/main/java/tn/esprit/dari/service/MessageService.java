@@ -25,8 +25,6 @@ public class MessageService implements IMessageService {
         if(sentBy==null || sentTo==null){
             return false;
         }
-        message.setSentBy(sentBy);
-        message.setSentTo(sentTo);
         return true;
 
     }

@@ -4,6 +4,7 @@ package tn.esprit.dari.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import tn.esprit.dari.Config.OpenNLP;
 import tn.esprit.dari.entities.Priority;
 import tn.esprit.dari.entities.Reclamation;
 import tn.esprit.dari.entities.Utilisateur;
@@ -29,12 +30,16 @@ public class ReclamationService implements IReclamationService {
     @Override
     public Boolean Create(@Valid Reclamation reclamation, Long userid) {
 
+
         if(userid!=0 && reclamation!=null ){
            reclamation.setDateTime(LocalDateTime.now());
-           reclamation.setPriority(Priority.normal);
+
            reclamation.setState(false);
             Utilisateur user=userRepo.findById((long)userid).get();
             reclamation.setUser(user);
+            OpenNLP model=new OpenNLP();
+            //PreTrained Recrusive Neural Networl to return the sentimet based on text
+            reclamation.setPriority(model.findSentiment(reclamation.getExplication()));
             reclamationRepository.save(reclamation);
             return true;
 

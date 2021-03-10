@@ -12,10 +12,10 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository<Message,Integer> {
 
-    @Query("select m.sentBy, m.sentTo from Message m where m.sentTo.utilisateurId=:id or m.sentBy.utilisateurId=:id")
+     @Query("select m.chatRoom.first from Message m ")
     public List<Utilisateur> getUsers(@Param("id")int id);
 
-    @Query("select m from Message m where  (m.sentBy.utilisateurId=:sentBy AND  m.sentTo.utilisateurId=:sentTo) OR (m.sentBy.utilisateurId=:sentTo AND  m.sentTo.utilisateurId=:sentBy) ")
+    @Query("select m from Message m  ")
     public List<Message> getMessages(@Param("sentBy")int sentBy, @Param("sentTo") int sentTo);
 
 }

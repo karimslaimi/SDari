@@ -17,7 +17,7 @@ public class Message implements Serializable{
         private LocalDateTime dateTime;
 
         @ManyToOne
-        @JoinColumn(name="chatroom")
+        @JoinColumn(name="chatid")
         private ChatRoom chatRoom;
 
 
