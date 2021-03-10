@@ -2,13 +2,13 @@ package tn.esprit.dari.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.dari.entities.Customer;
-import tn.esprit.dari.entities.Subscribe;
-import tn.esprit.dari.entities.Utilisateur;
-import tn.esprit.dari.repositories.CustomerRepository;
-import tn.esprit.dari.repositories.SubscribeRepository;
 import tn.esprit.dari.repositories.SubscriptionRepository;
 import tn.esprit.dari.entities.Subscription;
+
+import tn.esprit.dari.entities.Customer;
+import tn.esprit.dari.entities.Subscribe;
+import tn.esprit.dari.repositories.CustomerRepository;
+import tn.esprit.dari.repositories.SubscribeRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -104,6 +104,4 @@ public class SubscriptionImpl implements ISubscription {
                 .setParameter(4,sub.getSubscription().getId_sub())
                 .executeUpdate();
     }
-
-
 }

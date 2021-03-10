@@ -11,7 +11,7 @@ import java.util.List;
 public interface IAppointmentService {
 
     void requestAppointment(Appointment appointment);
-    void acceptAppointment(int id,String date) throws ParseException;
+    void acceptAppointment(int id,String date,int appType) throws ParseException;
     void cancelAppointment(int id);
     void modifyAppointment(int id,Appointment appointment);
     List<Appointment> ownerAppointments(Long id);

@@ -52,7 +52,7 @@ public  class Utilisateur implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<Reclamation> reclamations;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "user")
     private List<Notification> notifications;
 
 }

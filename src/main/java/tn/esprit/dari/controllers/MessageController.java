@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.entities.Message;
+import tn.esprit.dari.service.ChatBot;
 import tn.esprit.dari.service.IMessageService;
 
 @RestController
@@ -40,10 +41,12 @@ public class MessageController {
     }
 
     @PostMapping("chatbot")
-    public ResponseEntity<?> chatBot(@RequestBody String input,Bot bot){
+    public ResponseEntity<?> chatBot(@RequestBody String input){
 
 
-        Chat chatSession = new Chat(bot);
+        ChatBot chatBot=new ChatBot();
+
+        Chat chatSession = new Chat(chatBot.alice());
         String answer = chatSession.multisentenceRespond(input);
         return new ResponseEntity<>(answer,HttpStatus.OK);
 

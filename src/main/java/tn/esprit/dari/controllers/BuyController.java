@@ -3,9 +3,11 @@ package tn.esprit.dari.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.dari.entities.Buy;
 import tn.esprit.dari.entities.Property;
 import tn.esprit.dari.repositories.BuyRepository;
+import tn.esprit.dari.repositories.DocRepository;
 
 import java.util.List;
 
@@ -15,11 +17,8 @@ public class BuyController {
 
     @Autowired
     private BuyRepository br;
-
-    public float pricePerMeter(float price, float surface)
-    {
-        return surface/price;
-    }
+    @Autowired
+    private DocRepository dr;
 
     @GetMapping("/get")
     public List<Buy> All() {
@@ -41,6 +40,7 @@ public class BuyController {
     public void deleteBuy(@PathVariable int id) {
         br.deleteById(id);
     }
+
 
 
 
