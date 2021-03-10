@@ -9,7 +9,7 @@ public interface IReclamationService {
 
     public Boolean Create(Reclamation reclamation,Long userId);
     public void Delete(int id);
-    public void treat(int id, String treatement);
+    public boolean treat(int id, String treatement);
     public Reclamation getOne(int id);
     public List<Reclamation> findAll();
     public List<Reclamation> findNotTreated();

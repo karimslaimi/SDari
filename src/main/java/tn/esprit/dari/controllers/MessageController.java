@@ -1,11 +1,15 @@
 package tn.esprit.dari.controllers;
 
 
+import org.alicebot.ab.Bot;
+import org.alicebot.ab.Chat;
+import org.alicebot.ab.configuration.BotConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.entities.Message;
+import tn.esprit.dari.service.ChatBot;
 import tn.esprit.dari.service.IMessageService;
 
 @RestController
@@ -34,6 +38,18 @@ public class MessageController {
     @GetMapping("getUsers/{id}")
     public ResponseEntity<?> getUsers(@PathVariable int id){
         return new ResponseEntity<>(messageService.getUsers(id),HttpStatus.OK);
+    }
+
+    @PostMapping("chatbot")
+    public ResponseEntity<?> chatBot(@RequestBody String input){
+
+
+        ChatBot chatBot=new ChatBot();
+
+        Chat chatSession = new Chat(chatBot.alice());
+        String answer = chatSession.multisentenceRespond(input);
+        return new ResponseEntity<>(answer,HttpStatus.OK);
+
     }
 
 }

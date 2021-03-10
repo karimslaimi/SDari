@@ -14,8 +14,6 @@ public class PropController {
 
     @Autowired
     private PropertyService propS;
-
-
   //liste des prop
     @GetMapping("/properties")
     public List<Property> All() {
@@ -33,15 +31,12 @@ public class PropController {
     @GetMapping("/propget/{id}")
     public Property getprop(@PathVariable("id") int id) {
         return propS.getprop(id);
-
     }
 //supp
-
     @DeleteMapping("/propsupp/{id}")
     public void deleteProperty(@PathVariable("id") int id) {
         propS.deleteProperty(id);
     }
-
 //update
     @PostMapping("/propmodif")
     @ResponseBody

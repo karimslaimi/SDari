@@ -10,7 +10,7 @@ import java.util.List;
 public class Subscription implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_sub;
     private String title;
     private float price;
@@ -35,6 +35,21 @@ public class Subscription implements Serializable {
 
     }
 
+    public Subscription(int id_sub, String title, float price, String description, List<Subscribe> subscribes) {
+        this.id_sub = id_sub;
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.subscribes = subscribes;
+    }
+
+    public List<Subscribe> getSubscribes() {
+        return subscribes;
+    }
+
+    public void setSubscribes(List<Subscribe> subscribes) {
+        this.subscribes = subscribes;
+    }
 
     public int getId_sub() {
         return id_sub;
@@ -69,11 +84,4 @@ public class Subscription implements Serializable {
     }
 
 
-    public List<Subscribe> getSubscribes() {
-        return subscribes;
-    }
-
-    public void setSubscribes(List<Subscribe> subscribes) {
-        this.subscribes = subscribes;
-    }
 }

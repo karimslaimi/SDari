@@ -16,7 +16,7 @@ public interface ReclamationRepository extends JpaRepository<Reclamation,Integer
     public List<Reclamation> findNotTreated();
 
     @Query("select  r from Reclamation r where r.user.utilisateurId=:id")
-    public List<Reclamation> findMyReclams(@Param("id")int id);
+    public List<Reclamation> findMyReclams(@Param("id")long id);
 
     @Query("select r from Reclamation r where r.title like %:filter% ")
     public List<Reclamation> findByFilter(@Param("filter") String filter);

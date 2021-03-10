@@ -10,6 +10,7 @@ import tn.esprit.dari.service.IReclamationService;
 import tn.esprit.dari.service.ReclamationService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("reclamation")
@@ -43,18 +44,20 @@ public class ReclamationController {
         //u have to check the way you are calling this method becayse the id is in the path and the treat
         //is in the body of the request don't make a mistake in this one
 
-        reclamationService.treat(id,treat);
+        if(reclamationService.treat(id,treat))
         return new ResponseEntity<>("treated", HttpStatus.OK);
 
+        else
+            return new ResponseEntity<>("error occured", HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/{id]")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getOne(@PathVariable int id){
         Reclamation reclam=reclamationService.getOne(id);
         if(reclam!=null){
             return new ResponseEntity<>(reclam,HttpStatus.OK);
         }
-        return new ResponseEntity<>("not found",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("not found",HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/all")
@@ -70,9 +73,10 @@ public class ReclamationController {
     }
 
 
-    @GetMapping("/myReclam")
-    public ResponseEntity<?> MyReclam(int id){
-        return  new ResponseEntity<>(reclamationService.findMyReclam(id),HttpStatus.OK);
+    @GetMapping("/myReclam/{id}")
+    public ResponseEntity<?> MyReclam(@PathVariable int id){
+        List<Reclamation> reclams=reclamationService.findMyReclam(id);
+        return  new ResponseEntity<>(reclams,HttpStatus.OK);
     }
 
     @GetMapping("/search")
