@@ -1,6 +1,7 @@
 package tn.esprit.dari.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tn.esprit.dari.entities.Delivery;
 import tn.esprit.dari.entities.DeliveryMan;
 import tn.esprit.dari.entities.DeliveryState;
@@ -8,7 +9,7 @@ import tn.esprit.dari.repositories.DeliveryManRepository;
 import tn.esprit.dari.repositories.DeliveryRepository;
 
 import java.util.List;
-
+@Service
 public class DeliveryManService implements IDeliveryManService {
     @Autowired
     private DeliveryManRepository dms;
