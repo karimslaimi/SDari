@@ -13,7 +13,8 @@ public class ChatRoom {
     @ManyToOne
     @JoinColumn(name="second")
     private Utilisateur second;
-    @OneToMany(mappedBy = "ChatRoom")
+
+    @OneToMany(mappedBy = "chatRoom")
     private List<Message> messageList;
 
 

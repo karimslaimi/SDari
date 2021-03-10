@@ -17,7 +17,7 @@ public class Message implements Serializable{
         private LocalDateTime dateTime;
 
         @ManyToOne
-        @JoinColumn(name="chatroom")
+        @JoinColumn(name="chatid")
         private ChatRoom chatRoom;
 
 
@@ -55,5 +55,11 @@ public class Message implements Serializable{
             this.dateTime = dateTime;
         }
 
-
+    public ChatRoom getChatRoom() {
+        return chatRoom;
     }
+
+    public void setChatRoom(ChatRoom chatRoom) {
+        this.chatRoom = chatRoom;
+    }
+}
