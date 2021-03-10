@@ -55,5 +55,11 @@ public class Message implements Serializable{
             this.dateTime = dateTime;
         }
 
-
+    public ChatRoom getChatRoom() {
+        return chatRoom;
     }
+
+    public void setChatRoom(ChatRoom chatRoom) {
+        this.chatRoom = chatRoom;
+    }
+}

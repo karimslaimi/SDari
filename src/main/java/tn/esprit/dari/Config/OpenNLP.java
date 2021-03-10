@@ -1,29 +1,16 @@
 package tn.esprit.dari.Config;
 
 
-import java.io.*;
-import java.util.Properties;
-
 import edu.stanford.nlp.ling.CoreAnnotations;
-import edu.stanford.nlp.neural.rnn.RNNCoreAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.neural.rnn.RNNCoreAnnotations;
 import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.util.CoreMap;
-import opennlp.tools.doccat.*;
-import opennlp.tools.ml.AbstractTrainer;
-import opennlp.tools.ml.naivebayes.NaiveBayesTrainer;
-import opennlp.tools.tokenize.SimpleTokenizer;
-import opennlp.tools.tokenize.TokenizerME;
-import opennlp.tools.tokenize.TokenizerModel;
-import opennlp.tools.util.InputStreamFactory;
-import opennlp.tools.util.MarkableFileInputStreamFactory;
-import opennlp.tools.util.ObjectStream;
-import opennlp.tools.util.PlainTextByLineStream;
-import opennlp.tools.util.TrainingParameters;
-import opennlp.tools.util.model.ModelUtil;
 import tn.esprit.dari.entities.Priority;
+
+import java.util.Properties;
 
 //please don't touch it XD
 public class OpenNLP {
