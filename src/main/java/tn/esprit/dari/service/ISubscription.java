@@ -18,6 +18,8 @@ public  interface ISubscription {
     void DeleteSub(int id );
     Subscribe AddSubToo(int idS, Long idC , Date dateD, Date dateF);
 
+    List <Subscribe> GetSubs();
+
 
 
 }

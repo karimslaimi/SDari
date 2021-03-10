@@ -95,6 +95,17 @@ public class SubscriptionImpl implements ISubscription {
         return subscribeRepository.save(s);
     }
 
+    @Override
+    public List<Subscribe> GetSubs() {
+        List<Subscribe> subscribe = (List<Subscribe>) subscribeRepository.findAll();
+        for(Subscribe sub  : subscribe ){
+            System.out.println("List of subscribes    : " + sub);
+
+        }
+        return subscribe;
+
+    }
+
     @Transactional
     public void insertWithQuery(Subscribe sub) {
         entityManager.createNativeQuery("INSERT INTO Subscribe (dated,datef,utilisateur_id,id_sub) VALUES (?,?,?,?)")

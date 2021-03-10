@@ -67,5 +67,11 @@ public class SubscriptionController {
     }
 
 
+    @GetMapping("/GetAllS")
+    public ResponseEntity<?> getAllSubsribes(){
+        return new ResponseEntity<>(subscription.GetSubs(),  HttpStatus.OK);
+
+
+    }
 
 }
