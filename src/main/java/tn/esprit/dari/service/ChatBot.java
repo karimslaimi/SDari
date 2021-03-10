@@ -5,14 +5,21 @@ import org.alicebot.ab.configuration.BotConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-@Service
-public class ChatBot {
-    @Bean // default scope is singleton
-    public Bot alice() {
-        return new Bot(BotConfiguration.builder()
-                .name("alice")
-                .path("src/main/resources")
-                .build()
-        );
+ public class ChatBot {
+    private static Bot bot;
+
+    public ChatBot() {
+        if(bot==null){
+            bot = new Bot(BotConfiguration.builder()
+                    .name("RealEstate").name("alice")
+                    .path("src/main/resources")
+                    .build());
+        }
+
+    }
+
+     public Bot alice() {
+        return bot;
+
     }
 }
