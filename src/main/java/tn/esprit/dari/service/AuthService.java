@@ -2,6 +2,7 @@ package tn.esprit.dari.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import tn.esprit.dari.entities.*;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 import tn.esprit.dari.repositories.VerificationTokenRepository;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
@@ -39,8 +41,9 @@ public class AuthService {
     }
     @Transactional
     public void signUpAgent( RegisterRequest registerRequest){
+
         Agent user = new Agent();
-        //user.setUsername(registerRequest.getUsername());
+        user.setUsername(registerRequest.getUsername());
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
         user.setEmail(registerRequest.getEmail());

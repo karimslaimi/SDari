@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 public class Customer extends Utilisateur implements Serializable {
 
-    String username;
+
 
     @OneToMany(mappedBy = "customer")
     private List<Subscribe> subscribes ;

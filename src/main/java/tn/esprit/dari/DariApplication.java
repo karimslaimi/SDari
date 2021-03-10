@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 //import sun.tools.jar.CommandLine;
@@ -18,7 +19,7 @@ import tn.esprit.dari.repositories.CustomerRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 
 @SpringBootApplication
-
+@EnableJpaRepositories
 public class DariApplication {
 
     @Autowired

@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface UtilisateurRepository extends CrudRepository<Utilisateur,Long> {
 
-
+    public Utilisateur getUtilisateurByUsername(String username);
 }

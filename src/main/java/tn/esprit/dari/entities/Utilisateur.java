@@ -32,7 +32,9 @@ public  class Utilisateur implements Serializable {
     private String password;
     private String picture;
     private String phone;
+    @Enumerated(EnumType.STRING)
     private Region Region;
+    private String username;
     @Email
     @NotEmpty(message = "Email is required")
     private String email;
@@ -40,6 +42,8 @@ public  class Utilisateur implements Serializable {
     private boolean enabled;
     @Enumerated(EnumType.STRING)
     private AuthenticationProvider authenticationProvider;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
 
