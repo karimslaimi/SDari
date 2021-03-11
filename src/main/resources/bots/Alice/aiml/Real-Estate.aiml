@@ -9,9 +9,7 @@
 <!-- as adopted by the ALICE A.I. Foundation.  -->
 <!-- Last modified 10/5/2011 -->
 <!-- -->
-
-
-<category><pattern>CAN _looking _ villa</pattern>
+<category><pattern>CAN _looking for _ villa</pattern>
 <template>You can use our platform to find good villas  </template>
 </category>
 <category><pattern>Can _ looking _ house</pattern>
