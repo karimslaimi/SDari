@@ -21,7 +21,7 @@ public class PropertyService implements IProperty {
 
     @Override
     public void updateProperty(Property prop) {
-        Property p= proprep.findById(prop.getId_prop()).get();
+        Property p= proprep.findById(prop.getId_prop()).orElse(null);
         p.setImage(prop.getImage());
         p.setLoyer(prop.getLoyer());
         p.setNbrooms(prop.getNbrooms());

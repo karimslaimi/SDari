@@ -21,7 +21,7 @@ public class PropController {
     }
 
  // ajout
-    @PostMapping("/AddProp")
+    @PostMapping("/addprop")
     public void newProperty(@RequestBody Property newProperty)
     {
         propS.addProperty(newProperty);

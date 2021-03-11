@@ -24,7 +24,7 @@ public class FunitureController {
     }
 
     // ajout
-    @PostMapping("/Addfur")
+    @PostMapping("/addfur")
     public void newFurniture(@RequestBody Furniture newFurniture)
     {
         furS.addFurniture(newFurniture);
