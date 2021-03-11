@@ -8,11 +8,9 @@ import java.util.List;
 
 public interface IDeliveryManService {
     void addDM(DeliveryMan dm);
-    void deleteDM(DeliveryMan dm);
+    void deleteDM(Long id);
     List<DeliveryMan> listDM();
     void changeDeliveryState(int id, DeliveryState state);
     List<Delivery> deliveriesPerDM(Long id);
-
-
 
 }

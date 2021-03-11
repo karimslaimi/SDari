@@ -1,5 +1,6 @@
 package tn.esprit.dari.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ public class Customer extends Utilisateur implements Serializable {
 
     String username;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customers")
     private List<Subscribe> subscribes ;
 
@@ -36,6 +38,13 @@ public class Customer extends Utilisateur implements Serializable {
 
     @OneToMany(mappedBy="customer" )
     List<Property> props;
+
+
+    @OneToMany(mappedBy="custo" )
+    List<Orders> ords;
+
+
+
 
     public String getUsername() {
         return username;

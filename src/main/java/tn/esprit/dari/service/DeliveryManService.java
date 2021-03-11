@@ -22,8 +22,8 @@ public class DeliveryManService implements IDeliveryManService {
     }
 
     @Override
-    public void deleteDM(DeliveryMan dm) {
-dms.delete(dm);
+    public void deleteDM(Long id) {
+dms.delete(dms.getOne(id));
     }
 
     @Override
