@@ -20,7 +20,7 @@ public class MessageController {
     private IMessageService messageService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> Create(@RequestBody Message message, @RequestBody Long by, @RequestBody Long to){
+    public ResponseEntity<?> Create(@RequestParam String message, @RequestParam Long by, @RequestParam Long to){
 
         if(messageService.AddMessage(message,by,to)){
             return new ResponseEntity<>("sent", HttpStatus.OK);
@@ -31,7 +31,7 @@ public class MessageController {
     }
 
     @GetMapping("/getmessages")
-    public ResponseEntity<?> GetMessage(@RequestBody int by,@RequestBody int to){
+    public ResponseEntity<?> GetMessage(@RequestParam int by,@RequestParam int to){
         return new ResponseEntity<>(messageService.GetMessage(by,to),HttpStatus.OK);
     }
 

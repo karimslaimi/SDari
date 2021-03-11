@@ -57,12 +57,12 @@ public class DariApplication {
         return secondaryTemplateResolver;
     }
 
-
+ /*
      @Bean
     public CommandLineRunner init() {
 
         return (args -> {
-        /*    Customer user=new Customer();
+           Customer user=new Customer();
             user.setEmail("user1@user.com");
             user.setEnabled(true);
             user.setFirstName("user1");
@@ -103,10 +103,12 @@ public class DariApplication {
             sub.setSubscription(su);
             sub.setCustomers(cu);
 
-            subscription.insertWithQuery(sub);*/
+            subscription.insertWithQuery(sub);
 
 
 
 
         });}
+
+ */
 }
