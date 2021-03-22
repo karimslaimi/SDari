@@ -63,4 +63,9 @@ public class MessageService implements IMessageService {
         //for the moment i don't have a solution for it cause it needs tests will test it later when i have enough data to test on
         return messageRepository.getUsers((long)id);
     }
+
+    @Override
+    public ChatRoom getChatRoom(long idf, long ids) {
+        return null;
+    }
 }

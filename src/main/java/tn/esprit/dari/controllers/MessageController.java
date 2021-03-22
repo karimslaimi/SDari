@@ -7,10 +7,14 @@ import org.alicebot.ab.configuration.BotConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.entities.Message;
 import tn.esprit.dari.service.ChatBot;
 import tn.esprit.dari.service.IMessageService;
+import tn.esprit.dari.service.MessageService;
 
 @RestController
 @RequestMapping("message")
@@ -50,6 +54,15 @@ public class MessageController {
         String answer = chatSession.multisentenceRespond(input);
         return new ResponseEntity<>(answer,HttpStatus.OK);
 
+    }
+
+
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
+
+    @MessageMapping("/chat")
+    public void processMessage(@Payload Message chatMessage,long sender,long receiver) {
+       messageService.AddMessage(chatMessage.getContent(),sender,receiver);
     }
 
 }
