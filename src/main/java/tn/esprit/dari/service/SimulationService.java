@@ -11,28 +11,38 @@ public class SimulationService implements ISimulation{
 
         double m ;
         double sup;
+        long dur = duree * 12 ;
 
-        double pui = Math.pow( (1+taux_period),(duree * 12)) ;
-        sup = (montantCredit * taux_period) *  pui ;
-        double inf = Math.pow((1+taux_period), ((duree * 12) - 1));
-        m = sup / inf ;
+      //  double pui = Math.pow( (1+taux_period),dur) ;
+        sup = (montantCredit * taux_period) / 12 ;
+        double inf2 = ( 1 - Math.pow((1+(taux_period/12)),-dur));
+       // double inf = Math.pow((1+taux_period), (dur - 1));
+        m = sup / inf2 ;
         return m;
     }
 
     @Override
-    public double CalculMensualiteAA(double montantCredit, float taux_period, long duree, int assurance) {
+    public double MontantAssurance(double taux, double montantCredit) {
+        double Assurance =( taux * montantCredit)/ 12 ;
+        return Assurance;
+    }
 
-        double montant_assurance = (assurance * montantCredit) / 12 ;
-        double ma = CalculMensualiteSA(montantCredit, taux_period, duree) + montant_assurance ;
+    @Override
+    public double CalculMensualiteAA(double montantCredit, float taux_period, long duree, float assurance) {
+
+
+
+        double ma = CalculMensualiteSA(montantCredit, taux_period, duree) + MontantAssurance(taux_period,montantCredit) ;
         return ma;
     }
 
     @Override
-    public double CreditTotal(double montantCredit, long duree ,float taux_period, double assurance, double frais) {
+    public double CreditTotal(double montantCredit, long duree ,float interet, double assurance, double frais) {
 
-        double montant_interet =(( CalculMensualiteSA(montantCredit,taux_period,duree) * (duree * 12 ) ) - montantCredit ) ;
-        double montant_assurance = (assurance * montantCredit) / 12 ;
-        double total = CalculMensualiteSA(montantCredit,taux_period,duree) + montant_interet + montant_assurance + frais ;
+        double taux = (montantCredit* interet) / 12 ;
+        //double montant_interet =(( CalculMensualiteSA(montantCredit,taux_period,duree) * (duree * 12 ) ) - montantCredit ) ;
+      //  double montant_assurance = (assurance * montantCredit) / 12 ;
+        double total = montantCredit + taux + MontantAssurance(assurance,montantCredit)+ frais ;
         return total;
     }
 }
