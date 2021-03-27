@@ -2,6 +2,7 @@ package tn.esprit.dari.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +18,11 @@ public class Orders implements Serializable {
     @JoinColumn(name = "id")
     private Customer custo;
 
+    @OneToOne
+    private Furniture fur;
+
+    @OneToMany(mappedBy = "ord")
+    private List<LigneCommande> lc;
 
 
     public Orders() {

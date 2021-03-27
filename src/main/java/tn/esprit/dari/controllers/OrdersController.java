@@ -4,6 +4,7 @@ package tn.esprit.dari.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.entities.Orders;
+import tn.esprit.dari.service.IOrdersService;
 import tn.esprit.dari.service.OrdersService;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class OrdersController {
 
 
     @Autowired
-    private OrdersService ordS;
+    private IOrdersService ordS;
     //liste des ordres
     @GetMapping("/allorders")
     public List<Orders> All() {

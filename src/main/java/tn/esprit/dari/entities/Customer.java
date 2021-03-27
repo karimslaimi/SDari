@@ -1,10 +1,7 @@
 package tn.esprit.dari.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import tn.esprit.dari.entities.Utilisateur;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,7 +40,8 @@ public class Customer extends Utilisateur implements Serializable {
     @OneToMany(mappedBy="custo" )
     List<Orders> ords;
 
-
+    @OneToOne
+    private Panier panier;
 
 
     public String getUsername() {
