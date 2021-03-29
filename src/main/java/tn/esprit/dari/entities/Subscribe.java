@@ -28,11 +28,29 @@ public class Subscribe implements Serializable {
     private Date DateD;
     private Date DateF ;
 
+    private boolean paid ;
+
+    public Subscribe(int id, Subscription subscription, Customer customers, Date dateD, Date dateF, Boolean paid) {
+        this.id = id;
+        this.subscription = subscription;
+        this.customers = customers;
+        DateD = dateD;
+        DateF = dateF;
+        this.paid = paid;
+    }
+
+    public Subscribe() {
+
+    }
 
 
+    public Boolean getPaid() {
+        return paid;
+    }
 
-
-
+    public void setPaid(Boolean paid) {
+        this.paid = paid;
+    }
 
     public Subscription getSubscription() {
         return subscription;

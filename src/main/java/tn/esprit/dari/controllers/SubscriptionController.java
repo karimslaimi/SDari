@@ -2,17 +2,21 @@ package tn.esprit.dari.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.entities.Subscribe;
 import tn.esprit.dari.entities.Subscription;
 import tn.esprit.dari.service.ISubscription;
+import tn.esprit.dari.service.SubscriptionImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
-@Controller
+@RestController
 @RequestMapping("/Subscription")
 public class SubscriptionController {
 
@@ -73,5 +77,37 @@ public class SubscriptionController {
 
 
     }
+
+
+    @GetMapping("/End/{idS}")
+    public Subscribe End(@PathVariable int idS){
+        return subscription.EndAbo(idS);
+    }
+
+
+    //--------------------------------paiement--------------------------------------//
+
+    // Reading the value from the application.properties file
+    @Value("${STRIPE_PUBLIC_KEY}")
+    private String stripePublicKey;
+/*
+    @RequestMapping("/")
+    public String home(Model model) {
+        model.addAttribute("amount", 50 * 100); // In cents
+        model.addAttribute("stripePublicKey", stripePublicKey);
+        return "index";
+    }*/
+
+    @Autowired
+    private SubscriptionImpl stripeService;
+
+    @RequestMapping(value = "/charge", method = RequestMethod.POST)
+    public String chargeCard(HttpServletRequest request) throws Exception {
+        String token = request.getParameter("stripeToken");
+        Double amount = Double.parseDouble(request.getParameter("amount"));
+        stripeService.chargeNewCard(token, amount);
+        return "result";
+    }
+
 
 }
