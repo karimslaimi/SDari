@@ -17,6 +17,7 @@ public  interface ISubscription {
     Subscription Modify(Subscription S);
     void DeleteSub(int id );
     Subscribe AddSubToo(int idS, Long idC , Date dateD, Date dateF);
+    Subscribe EndAbo(int idS);
 
     List <Subscribe> GetSubs();
 
