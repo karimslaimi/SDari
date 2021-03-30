@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
     public ChatBot() {
         if(bot==null){
             bot = new Bot(BotConfiguration.builder()
-                    .name("standard")//.name("RealEstate")//.name("alice") //alice folder have a lot of aiml file so my QA won't be considered so i will use real estate folder less files
+                    //.name("standard")//
+                    //.name("RealEstate")
+                      .name("alice") //alice folder have a lot of aiml file so my QA won't be considered so i will use real estate folder less files
                     .path("src/main/resources")
                     .build());
         }

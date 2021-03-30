@@ -14,6 +14,41 @@
 <category><pattern>_ looking _ villa</pattern>
 <template>You can use our platform to find good villas  </template>
 </category>
+
+
+<category>
+<pattern>villa</pattern>
+<template>You can use our platform to find good villas using this link http://localhost:8081/search </template>
+</category>
+<category>
+<pattern>house</pattern>
+<template>You can use our platform to find good villas using this link http://localhost:8081/search </template>
+</category>
+<category>
+<pattern>apartment</pattern>
+<template>You can use our platform to find good villas using this link http://localhost:8081/search </template>
+</category>
+
+
+<category>
+<pattern>#villa#</pattern>
+<template><srai>villa</srai>
+</category>
+
+<category>
+<pattern>#house#</pattern>
+<template><srai>house</srai>
+</category>
+
+<category>
+<pattern>#apartment#</pattern>
+<template><srai>apartment</srai></template>
+</category>
+
+
+
+
+
 <category><pattern>_ looking _ house</pattern>
 <template> You can use our platform to find good houses </template>
 </category>
