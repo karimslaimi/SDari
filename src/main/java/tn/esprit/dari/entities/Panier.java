@@ -18,13 +18,9 @@ import javax.persistence.OneToOne;
 public class Panier implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="idPanier")
     private int idPanier;
-    @Column(name="dateMajPanier", nullable=false, length=100)
     private Date dateMajPanier;
-    @Column(name="sommeTotale", nullable=false, length=100)
     private double sommeTotale;
-    @Column(name="etatPanier", nullable=false, length=100)
     private String etatPanier;
     @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="panier")
 

@@ -25,10 +25,4 @@ public class Detail_Panier implements Serializable{
     @ManyToOne
     private Furniture furs;
 
-
-
-
-
-
-
 }
