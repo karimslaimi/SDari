@@ -23,15 +23,13 @@ public class MessageService implements IMessageService {
     private ChatRoomRepository chatRoomRepository;
 
     @Override
-    public Boolean AddMessage(Message message, Long by, Long to) {
+    public Boolean AddMessage(String content, Long by, Long to) {
 
         Utilisateur sentTo=userRepository.findById((long)to).orElse(null);
         Utilisateur sentBy=userRepository.findById((long)by).orElse(null);
-
         if(sentBy==null || sentTo==null){
             return false;
         }
-
         ChatRoom chatRoom=messageRepository.getChatRoom(by,to);
         if(chatRoom==null){
             chatRoom=new ChatRoom();
@@ -40,15 +38,17 @@ public class MessageService implements IMessageService {
             chatRoom=chatRoomRepository.save(chatRoom);
 
         }
+        Message message=new Message();
 
-            message.setChatRoom(chatRoom);
-            message.setDateTime(LocalDateTime.now());
-            messageRepository.save(message);
+        message.setContent(content);
+        message.setChatRoom(chatRoom);
+        message.setDateTime(LocalDateTime.now());
+        message.setSender(by.intValue());
+        messageRepository.save(message);
 
         return true;
 
     }
-
     @Override
     public List<Message> GetMessage(int sentBy, int sentTo) {
 
@@ -62,5 +62,10 @@ public class MessageService implements IMessageService {
         //this method must return the list of users that the current user contacted this may be tricky
         //for the moment i don't have a solution for it cause it needs tests will test it later when i have enough data to test on
         return messageRepository.getUsers((long)id);
+    }
+
+    @Override
+    public ChatRoom getChatRoom(long idf, long ids) {
+        return null;
     }
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.rmi.CORBA.Util;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,15 +25,15 @@ public class Notification implements Serializable {
     private String body;
 
     @ManyToOne
-    @JoinColumn(name = "idCustomer")
-    private Customer customer;
+    @JoinColumn(name = "idUser")
+    private Utilisateur user;
 
-    public Customer getCustomer() {
-        return customer;
+    public Utilisateur getUser() {
+        return user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUser(Utilisateur user) {
+        this.user = user;
     }
 
     public int getNotificationId() {

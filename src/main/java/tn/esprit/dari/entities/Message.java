@@ -15,6 +15,7 @@ public class Message implements Serializable{
         private  int id;
         private String content;
         private LocalDateTime dateTime;
+        private int sender;
 
         @ManyToOne
         @JoinColumn(name="chatid")
@@ -61,5 +62,13 @@ public class Message implements Serializable{
 
     public void setChatRoom(ChatRoom chatRoom) {
         this.chatRoom = chatRoom;
+    }
+
+    public int getSender() {
+        return sender;
+    }
+
+    public void setSender(int sender) {
+        this.sender = sender;
     }
 }

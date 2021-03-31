@@ -29,7 +29,7 @@ public class DocController {
 
     @GetMapping("/")
     public String get(Model model) {
-        List<javax.print.Doc> docs = docStorageService.getFiles();
+        List<Doc> docs = docStorageService.getFiles();
         model.addAttribute("docs", docs);
         return "doc";
     }

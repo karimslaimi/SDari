@@ -2,6 +2,7 @@ package tn.esprit.dari.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 @Entity
 public class Furniture  implements Serializable {
@@ -9,14 +10,21 @@ public class Furniture  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_fur;
-   private int nb;
+   private int nb; 
    private int price;
    private String dimentions;
    private String description;
    private String picture;
+
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "idcust")
     private Customer cust;
+
+    @OneToMany(mappedBy = "furs")
+    private List<Detail_Panier> dpan;
+
+    @OneToOne(mappedBy = "fur")
+    private LigneCommande lc;
 
 
     public Furniture() {
