@@ -39,8 +39,18 @@ public class OrdersController {
     public void deleteOrder(@PathVariable("id") int id) {
         ordS.deleteOrder(id);
     }
+ //commander
+ @PostMapping("/commander")
+ public void commander(@RequestBody Orders newOrder)
+ {
+     ordS.commander(newOrder);
+ }
 
-
+ //listedescommandesuser
+ @GetMapping("/usercomm/{id}")
+ public List<Orders> getordu(@PathVariable("id") Long id) {
+     return ordS.listecommandesuser(id);
+ }
 
 
 }

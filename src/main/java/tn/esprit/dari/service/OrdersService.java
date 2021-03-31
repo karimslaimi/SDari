@@ -3,6 +3,7 @@ package tn.esprit.dari.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.dari.entities.Customer;
+import tn.esprit.dari.entities.Detail_Panier;
 import tn.esprit.dari.entities.Furniture;
 import tn.esprit.dari.entities.Orders;
 import tn.esprit.dari.repositories.CustomerRepository;
@@ -44,17 +45,23 @@ public class OrdersService implements IOrdersService{
     }
 
     @Override
-    public void commander(Long idCustomer, int idFur) {
-        Customer customer= custrep.findById(idCustomer).orElse(null);
-        Furniture furniture= furrep.findById(idFur).orElse(null);
+    public void commander(Orders ords) {
+        Customer customer= custrep.findById(ords.getIdc()).orElse(null);
+        Furniture furniture= furrep.findById(ords.getIdf()).orElse(null);
+        ords.setCusto(customer);
+        ords.setFur(furniture);
+        List<Detail_Panier> dp=customer.getPanier().getDetail_paniers();
 
-
+        ordrep.save(ords);
 
     }
 
+    @Override
+    public List<Orders> listecommandesuser(Long idc) {
+        Customer c=custrep.findById(idc).orElse(null);
+        return c.getOrds();
 
-
-
+    }
 
 
 }

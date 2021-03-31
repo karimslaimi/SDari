@@ -46,4 +46,12 @@ public class PropController {
         propS.updateProperty(prop);
     }
 
+ //listedespropduuser
+ @GetMapping("/userprops/{id}")
+ public List<Property> userproperties(@PathVariable("id") long id) {
+     return propS.userproperties(id);
+ }
+
+
+
 }

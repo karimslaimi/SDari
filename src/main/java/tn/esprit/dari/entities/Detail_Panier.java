@@ -25,7 +25,10 @@ public class Detail_Panier implements Serializable{
     @ManyToOne
     private Furniture furs;
 
-
+    @Transient
+    private int idf;
+    @Transient
+    private int idp;
     public Detail_Panier() {
     }
 
@@ -36,6 +39,22 @@ public class Detail_Panier implements Serializable{
         this.quantite = quantite;
         this.panier = panier;
         this.furs = furs;
+    }
+
+    public int getIdf() {
+        return idf;
+    }
+
+    public void setIdf(int idf) {
+        this.idf = idf;
+    }
+
+    public int getIdp() {
+        return idp;
+    }
+
+    public void setIdp(int idp) {
+        this.idp = idp;
     }
 
     public Integer getIdDetPanier() {

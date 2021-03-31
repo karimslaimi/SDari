@@ -9,8 +9,6 @@ import java.util.Objects;
 
 @Entity
 public class Property implements Serializable {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_prop;
@@ -24,13 +22,11 @@ public class Property implements Serializable {
     private float loyer;
     private float prix;
     private Status status;
-
    @ManyToOne
    @JoinColumn(name = "id")
    private Customer customer;
 
- /* @ManyToMany(mappedBy = "properties")
-  List<Customer> customers;*/
+
 
 
 

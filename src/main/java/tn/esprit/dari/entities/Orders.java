@@ -14,7 +14,9 @@ public class Orders implements Serializable {
     private int id_o;
     private Date datecommande;
     private float total_price;
-
+    @Transient
+    private Long idc;
+    @Transient int idf;
     @ManyToOne
     @JoinColumn(name = "id")
     private Customer custo;
@@ -22,9 +24,8 @@ public class Orders implements Serializable {
     @OneToOne
     private Furniture fur;
 
-    @OneToMany(mappedBy = "idorder")
+    @OneToMany(mappedBy = "ord")
     private List<LigneCommande> lc;
-
 
     public Orders() {
     }
@@ -36,6 +37,22 @@ public class Orders implements Serializable {
         this.custo = custo;
         this.fur = fur;
         this.lc = lc;
+    }
+
+    public Long getIdc() {
+        return idc;
+    }
+
+    public void setIdc(Long idc) {
+        this.idc = idc;
+    }
+
+    public int getIdf() {
+        return idf;
+    }
+
+    public void setIdf(int idf) {
+        this.idf = idf;
     }
 
     public int getId_o() {

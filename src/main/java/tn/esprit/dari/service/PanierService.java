@@ -13,7 +13,9 @@ public class PanierService implements IPanierService{
     @Autowired
     private PanierService panser ;
 
+    public void ajouteraupanier(int idf, Long idc) {
 
+    }
 
 
 }

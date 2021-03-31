@@ -13,12 +13,12 @@ public class Furniture  implements Serializable {
    private int price;
    private String description;
    private String picture;
-   private boolean selected;
 
 
 
     @Enumerated
    private FurnitureType furt;
+
     @ManyToOne
     @JoinColumn(name = "idcust")
     private Customer cust;
@@ -38,7 +38,6 @@ public class Furniture  implements Serializable {
         this.price = price;
         this.description = description;
         this.picture = picture;
-        this.selected = selected;
         this.furt = furt;
         this.cust = cust;
         this.dpan = dpan;
@@ -78,13 +77,7 @@ public class Furniture  implements Serializable {
         this.picture = picture;
     }
 
-    public boolean isSelected() {
-        return selected;
-    }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
 
     public FurnitureType getFurt() {
         return furt;
@@ -118,31 +111,5 @@ public class Furniture  implements Serializable {
         this.lc = lc;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Furniture furniture = (Furniture) o;
-        return id_fur == furniture.id_fur && price == furniture.price && selected == furniture.selected && Objects.equals(description, furniture.description) && Objects.equals(picture, furniture.picture) && furt == furniture.furt && Objects.equals(cust, furniture.cust) && Objects.equals(dpan, furniture.dpan) && Objects.equals(lc, furniture.lc);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id_fur, price, description, picture, selected, furt, cust, dpan, lc);
-    }
-
-    @Override
-    public String toString() {
-        return "Furniture{" +
-                "id_fur=" + id_fur +
-                ", price=" + price +
-                ", description='" + description + '\'' +
-                ", picture='" + picture + '\'' +
-                ", selected=" + selected +
-                ", furt=" + furt +
-                ", cust=" + cust +
-                ", dpan=" + dpan +
-                ", lc=" + lc +
-                '}';
-    }
 }

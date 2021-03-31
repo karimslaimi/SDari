@@ -77,4 +77,36 @@ public class Customer extends Utilisateur implements Serializable {
     public void setCustomerAppointments(List<Appointment> customerAppointments) {
         this.customerAppointments = customerAppointments;
     }
+
+    public List<Furniture> getFurs() {
+        return furs;
+    }
+
+    public void setFurs(List<Furniture> furs) {
+        this.furs = furs;
+    }
+
+    public List<Property> getProps() {
+        return props;
+    }
+
+    public void setProps(List<Property> props) {
+        this.props = props;
+    }
+
+    public List<Orders> getOrds() {
+        return ords;
+    }
+
+    public void setOrds(List<Orders> ords) {
+        this.ords = ords;
+    }
+
+    public Panier getPanier() {
+        return panier;
+    }
+
+    public void setPanier(Panier panier) {
+        this.panier = panier;
+    }
 }

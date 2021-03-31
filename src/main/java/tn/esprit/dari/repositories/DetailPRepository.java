@@ -2,17 +2,10 @@ package tn.esprit.dari.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import tn.esprit.dari.entities.Property;
-
-import java.util.List;
-
+import tn.esprit.dari.entities.Detail_Panier;
 
 @Repository
-public interface PropertyRepository extends JpaRepository<Property,Integer > {
 
-
-
-
-
+public interface DetailPRepository extends JpaRepository<Detail_Panier,Integer > {
 
 }
