@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IPanierService {
 
-    public Panier haveAPanier(int user);
-    public void ajouterPanier(Panier pan);
-   // public List<Detail_Panier> rechercherDetailPanierUser(int idPan);
+    //public Panier haveAPanier(int user);
+    //public void ajouterPanier(Panier pan);
+    //public List<Detail_Panier> rechercherDetailPanierUser(int idPan);
 }

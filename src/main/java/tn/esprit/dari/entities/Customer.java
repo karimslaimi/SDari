@@ -1,12 +1,9 @@
 package tn.esprit.dari.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
 
 @Entity
 @DiscriminatorValue("C")
@@ -22,11 +19,9 @@ public class Customer extends Utilisateur implements Serializable {
     @JoinTable(name = "Favorites", joinColumns = @JoinColumn(name = "utilisateurId")
             , inverseJoinColumns = @JoinColumn(name = "id_prop"))
     List<Property> favorites;
-
-
-
     @OneToMany(mappedBy = "owner")
     List<Appointment> ownerAppointments;
+
     @OneToMany(mappedBy = "customer")
     List<Appointment> customerAppointments;
 
@@ -35,7 +30,6 @@ public class Customer extends Utilisateur implements Serializable {
 
     @OneToMany(mappedBy="customer" )
     List<Property> props;
-
 
     @OneToMany(mappedBy="custo" )
     List<Orders> ords;

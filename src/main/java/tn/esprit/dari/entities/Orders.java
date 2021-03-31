@@ -2,6 +2,7 @@ package tn.esprit.dari.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,7 +12,7 @@ public class Orders implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_o;
-    private int nb_o;
+    private Date datecommande;
     private float total_price;
 
     @ManyToOne
@@ -21,18 +22,20 @@ public class Orders implements Serializable {
     @OneToOne
     private Furniture fur;
 
-    @OneToMany(mappedBy = "ord")
+    @OneToMany(mappedBy = "idorder")
     private List<LigneCommande> lc;
 
 
     public Orders() {
     }
 
-
-    public Orders(int id_o, int nb_o, float total_price) {
+    public Orders(int id_o, Date datecommande, float total_price, Customer custo, Furniture fur, List<LigneCommande> lc) {
         this.id_o = id_o;
-        this.nb_o = nb_o;
+        this.datecommande = datecommande;
         this.total_price = total_price;
+        this.custo = custo;
+        this.fur = fur;
+        this.lc = lc;
     }
 
     public int getId_o() {
@@ -43,12 +46,12 @@ public class Orders implements Serializable {
         this.id_o = id_o;
     }
 
-    public int getNb_o() {
-        return nb_o;
+    public Date getDatecommande() {
+        return datecommande;
     }
 
-    public void setNb_o(int nb_o) {
-        this.nb_o = nb_o;
+    public void setDatecommande(Date datecommande) {
+        this.datecommande = datecommande;
     }
 
     public float getTotal_price() {
@@ -59,15 +62,28 @@ public class Orders implements Serializable {
         this.total_price = total_price;
     }
 
+    public Customer getCusto() {
+        return custo;
+    }
 
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "id_o=" + id_o +
-                ", nb_o=" + nb_o +
-                ", total_price=" + total_price +
-                ", custo=" + custo +
-                '}';
+    public void setCusto(Customer custo) {
+        this.custo = custo;
+    }
+
+    public Furniture getFur() {
+        return fur;
+    }
+
+    public void setFur(Furniture fur) {
+        this.fur = fur;
+    }
+
+    public List<LigneCommande> getLc() {
+        return lc;
+    }
+
+    public void setLc(List<LigneCommande> lc) {
+        this.lc = lc;
     }
 
     @Override
@@ -75,11 +91,23 @@ public class Orders implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Orders orders = (Orders) o;
-        return id_o == orders.id_o && nb_o == orders.nb_o && Float.compare(orders.total_price, total_price) == 0 && custo.equals(orders.custo);
+        return id_o == orders.id_o && Float.compare(orders.total_price, total_price) == 0 && Objects.equals(datecommande, orders.datecommande) && Objects.equals(custo, orders.custo) && Objects.equals(fur, orders.fur) && Objects.equals(lc, orders.lc);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_o, nb_o, total_price, custo);
+        return Objects.hash(id_o, datecommande, total_price, custo, fur, lc);
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "id_o=" + id_o +
+                ", datecommande=" + datecommande +
+                ", total_price=" + total_price +
+                ", custo=" + custo +
+                ", fur=" + fur +
+                ", lc=" + lc +
+                '}';
     }
 }

@@ -10,12 +10,15 @@ public class Furniture  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_fur;
-   private int nb; 
    private int price;
-   private String dimentions;
    private String description;
    private String picture;
+   private boolean selected;
 
+
+
+    @Enumerated
+   private FurnitureType furt;
     @ManyToOne
     @JoinColumn(name = "idcust")
     private Customer cust;
@@ -30,14 +33,18 @@ public class Furniture  implements Serializable {
     public Furniture() {
     }
 
-    public Furniture(int id_fur, int nb, int price, String dimentions, String description, String picture) {
+    public Furniture(int id_fur, int price, String description, String picture, boolean selected, FurnitureType furt, Customer cust, List<Detail_Panier> dpan, LigneCommande lc) {
         this.id_fur = id_fur;
-        this.nb = nb;
         this.price = price;
-        this.dimentions = dimentions;
         this.description = description;
         this.picture = picture;
+        this.selected = selected;
+        this.furt = furt;
+        this.cust = cust;
+        this.dpan = dpan;
+        this.lc = lc;
     }
+
 
     public int getId_fur() {
         return id_fur;
@@ -47,28 +54,12 @@ public class Furniture  implements Serializable {
         this.id_fur = id_fur;
     }
 
-    public int getNb() {
-        return nb;
-    }
-
-    public void setNb(int nb) {
-        this.nb = nb;
-    }
-
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public String getDimentions() {
-        return dimentions;
-    }
-
-    public void setDimentions(String dimentions) {
-        this.dimentions = dimentions;
     }
 
     public String getDescription() {
@@ -87,16 +78,44 @@ public class Furniture  implements Serializable {
         this.picture = picture;
     }
 
-    @Override
-    public String toString() {
-        return "Furniture{" +
-                "id_fur=" + id_fur +
-                ", nb=" + nb +
-                ", price=" + price +
-                ", dimentions='" + dimentions + '\'' +
-                ", description='" + description + '\'' +
-                ", picture='" + picture + '\'' +
-                '}';
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public FurnitureType getFurt() {
+        return furt;
+    }
+
+    public void setFurt(FurnitureType furt) {
+        this.furt = furt;
+    }
+
+    public Customer getCust() {
+        return cust;
+    }
+
+    public void setCust(Customer cust) {
+        this.cust = cust;
+    }
+
+    public List<Detail_Panier> getDpan() {
+        return dpan;
+    }
+
+    public void setDpan(List<Detail_Panier> dpan) {
+        this.dpan = dpan;
+    }
+
+    public LigneCommande getLc() {
+        return lc;
+    }
+
+    public void setLc(LigneCommande lc) {
+        this.lc = lc;
     }
 
     @Override
@@ -104,11 +123,26 @@ public class Furniture  implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Furniture furniture = (Furniture) o;
-        return id_fur == furniture.id_fur && nb == furniture.nb && price == furniture.price && dimentions.equals(furniture.dimentions) && description.equals(furniture.description) && picture.equals(furniture.picture);
+        return id_fur == furniture.id_fur && price == furniture.price && selected == furniture.selected && Objects.equals(description, furniture.description) && Objects.equals(picture, furniture.picture) && furt == furniture.furt && Objects.equals(cust, furniture.cust) && Objects.equals(dpan, furniture.dpan) && Objects.equals(lc, furniture.lc);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_fur, nb, price, dimentions, description, picture);
+        return Objects.hash(id_fur, price, description, picture, selected, furt, cust, dpan, lc);
+    }
+
+    @Override
+    public String toString() {
+        return "Furniture{" +
+                "id_fur=" + id_fur +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", picture='" + picture + '\'' +
+                ", selected=" + selected +
+                ", furt=" + furt +
+                ", cust=" + cust +
+                ", dpan=" + dpan +
+                ", lc=" + lc +
+                '}';
     }
 }

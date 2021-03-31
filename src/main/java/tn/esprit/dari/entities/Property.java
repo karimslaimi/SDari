@@ -14,6 +14,7 @@ public class Property implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_prop;
+    @Enumerated
     private PropertyType type;
     private int nbrooms;
     private float surface;
