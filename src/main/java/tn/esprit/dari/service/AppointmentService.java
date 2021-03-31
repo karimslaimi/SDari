@@ -36,15 +36,16 @@ public class AppointmentService implements IAppointmentService {
     }
 
     @Override
-    public void acceptAppointment(int id, String date,int appType) throws ParseException {
+    public void acceptAppointment(int id, String date,int appType,String address) throws ParseException {
 
         Appointment appointment= ar.getOne(id);
+        appointment.setAddress(address);
         appointment.setAppointmentDate(new SimpleDateFormat("dd/MM/yyyy").parse(date));
         appointment.setState(State.ACCEPTED);
         if (appType==1)
         appointment.setAppointmentType(AppointmentType.FACE_TO_FACE);
         else
-            appointment.setAppointmentType(AppointmentType.FACE_TO_FACE);
+            appointment.setAppointmentType(AppointmentType.ONLINE);
 
         ar.save(appointment);
         //notification control

@@ -51,7 +51,7 @@ public  class Utilisateur implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Reclamation> reclamations;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications;
 

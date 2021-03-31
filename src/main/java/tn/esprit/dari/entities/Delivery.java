@@ -1,5 +1,7 @@
 package tn.esprit.dari.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.annotation.Generated;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,7 +21,7 @@ public class Delivery implements Serializable {
     private DeliveryState deliveryState;
     private double latitude;
     private double longitude;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "deliveryman_id")
     private DeliveryMan deliveryMan;
