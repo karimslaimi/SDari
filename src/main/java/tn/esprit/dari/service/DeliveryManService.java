@@ -32,9 +32,20 @@ dms.delete(dms.getOne(id));
     }
 
     @Override
-    public void changeDeliveryState(int id, DeliveryState state) {
-        Delivery delivery=ds.getOne(id);
-        delivery.setDeliveryState(state);
+    public void changeDeliveryState(int id, int state) {
+        Delivery delivery=ds.findById(id).orElse(null);
+       if (state==0)
+           delivery.setDeliveryState(DeliveryState.NOT_PICKED);
+       else if (state==1)
+        delivery.setDeliveryState(DeliveryState.PICKED);
+       else if (state==2)
+            delivery.setDeliveryState(DeliveryState.DELIVERING);
+       else if (state==3)
+            delivery.setDeliveryState(DeliveryState.DELIVERED);
+       else if (state==4)
+           delivery.setDeliveryState(DeliveryState.NOT_DELIVERED);
+
+
         ds.save(delivery);
     }
 

@@ -9,5 +9,6 @@ public interface IDeliveryService {
     void createDelivery(Delivery delivery);
     void cancelDelivery(int id);
     Delivery deliveryById(int id);
+    void updateLocation(int id,double latitude,double longitude);
 
 }

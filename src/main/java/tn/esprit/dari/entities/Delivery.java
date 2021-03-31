@@ -13,10 +13,12 @@ public class Delivery implements Serializable {
     private int deliveryId;
 
     private String destination;
-
+    @Temporal(TemporalType.DATE)
     private Date date;
     @Enumerated(EnumType.STRING)
     private DeliveryState deliveryState;
+    private double latitude;
+    private double longitude;
 
     @ManyToOne
     @JoinColumn(name = "deliveryman_id")
@@ -24,6 +26,16 @@ public class Delivery implements Serializable {
 
     @Transient
     private Long deliverymanId;
+    @Transient
+    private String dateJson;
+
+    public String getDateJson() {
+        return dateJson;
+    }
+
+    public void setDateJson(String dateJson) {
+        this.dateJson = dateJson;
+    }
 
     public Long getDeliverymanId() {
         return deliverymanId;
@@ -71,5 +83,21 @@ public class Delivery implements Serializable {
 
     public void setDeliveryMan(DeliveryMan deliveryMan) {
         this.deliveryMan = deliveryMan;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }
