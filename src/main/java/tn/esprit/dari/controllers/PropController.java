@@ -48,7 +48,7 @@ public class PropController {
 
  //listedespropduuser
  @GetMapping("/userprops/{id}")
- public List<Property> userproperties(@PathVariable("id") long id) {
+ public List<Property> userprops(@PathVariable("id") long id) {
      return propS.userproperties(id);
  }
 

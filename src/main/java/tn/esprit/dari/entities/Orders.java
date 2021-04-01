@@ -1,5 +1,7 @@
 package tn.esprit.dari.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,10 +15,11 @@ public class Orders implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_o;
     private Date datecommande;
-    private float total_price;
+
     @Transient
     private Long idc;
     @Transient int idf;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id")
     private Customer custo;
@@ -30,10 +33,9 @@ public class Orders implements Serializable {
     public Orders() {
     }
 
-    public Orders(int id_o, Date datecommande, float total_price, Customer custo, Furniture fur, List<LigneCommande> lc) {
+    public Orders(int id_o, Date datecommande,  Customer custo, Furniture fur, List<LigneCommande> lc) {
         this.id_o = id_o;
         this.datecommande = datecommande;
-        this.total_price = total_price;
         this.custo = custo;
         this.fur = fur;
         this.lc = lc;
@@ -71,13 +73,7 @@ public class Orders implements Serializable {
         this.datecommande = datecommande;
     }
 
-    public float getTotal_price() {
-        return total_price;
-    }
 
-    public void setTotal_price(float total_price) {
-        this.total_price = total_price;
-    }
 
     public Customer getCusto() {
         return custo;
@@ -103,28 +99,5 @@ public class Orders implements Serializable {
         this.lc = lc;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Orders orders = (Orders) o;
-        return id_o == orders.id_o && Float.compare(orders.total_price, total_price) == 0 && Objects.equals(datecommande, orders.datecommande) && Objects.equals(custo, orders.custo) && Objects.equals(fur, orders.fur) && Objects.equals(lc, orders.lc);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id_o, datecommande, total_price, custo, fur, lc);
-    }
-
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "id_o=" + id_o +
-                ", datecommande=" + datecommande +
-                ", total_price=" + total_price +
-                ", custo=" + custo +
-                ", fur=" + fur +
-                ", lc=" + lc +
-                '}';
-    }
 }

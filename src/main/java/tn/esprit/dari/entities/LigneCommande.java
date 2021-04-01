@@ -1,5 +1,7 @@
 package tn.esprit.dari.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -14,9 +16,10 @@ public class LigneCommande implements Serializable {
     private int quantite;
     private double prix;
 
-
+@JsonIgnore
     @OneToOne
     private Furniture fur;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="idorder")
     private Orders ord;

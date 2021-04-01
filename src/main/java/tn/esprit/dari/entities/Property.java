@@ -1,6 +1,7 @@
 package tn.esprit.dari.entities;
 
 import ch.qos.logback.core.net.server.Client;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class Property implements Serializable {
     private float loyer;
     private float prix;
     private Status status;
+    @JsonIgnore
    @ManyToOne
    @JoinColumn(name = "id")
    private Customer customer;
