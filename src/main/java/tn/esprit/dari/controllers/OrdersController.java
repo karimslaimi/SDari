@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.entities.Orders;
 import tn.esprit.dari.service.IOrdersService;
-import tn.esprit.dari.service.OrdersService;
 import tn.esprit.dari.service.SubscriptionImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -74,15 +73,6 @@ public class OrdersController {
         stripeService.chargeNewCard(token, amount);
         return "result";
     }
-
-
-
-
-
-
-
-
-
 
 
 }

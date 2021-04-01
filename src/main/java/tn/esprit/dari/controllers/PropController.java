@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.entities.Property;
 import tn.esprit.dari.service.IProperty;
-import tn.esprit.dari.service.PropertyService;
 
 import java.util.List;
 
