@@ -9,4 +9,5 @@ import java.util.List;
 public interface INotificationService {
     void Notify(Utilisateur user, Date date,String title,String body);
     List<Notification> userNotifications(Long id);
+
 }

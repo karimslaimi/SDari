@@ -13,6 +13,8 @@ import tn.esprit.dari.service.DeliveryService;
 import tn.esprit.dari.service.IDeliveryManService;
 import tn.esprit.dari.service.IDeliveryService;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RestController
@@ -28,10 +30,19 @@ public class DeliveryController {
 
     @PostMapping("/add")
     @ResponseBody
-    public ResponseEntity<String> addDelivery(@RequestBody Delivery delivery){
-
+    public ResponseEntity<String> addDelivery(@RequestBody Delivery delivery) throws ParseException {
+        delivery.setDeliveryState(DeliveryState.NOT_PICKED);
+        delivery.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(delivery.getDateJson()));
         deliveryService.createDelivery(delivery);
         return new ResponseEntity<>("delivery added", HttpStatus.OK);
+
+    }
+    @PostMapping("/locate/{id}")
+    @ResponseBody
+    public ResponseEntity<String> updateDeliveryLocation(@PathVariable int id,@RequestParam double latitude,@RequestParam double longitude) {
+
+        deliveryService.updateLocation(id,latitude,longitude);
+        return new ResponseEntity<>("location updated!", HttpStatus.OK);
 
     }
     @PostMapping("/createdm")
@@ -50,23 +61,22 @@ public class DeliveryController {
         return new ResponseEntity<>("delivery man deleted", HttpStatus.OK);
 
     }
-    @PostMapping("/cancel/{id}")
+
+    @PostMapping("/deliverystate/{id}")
     @ResponseBody
+    public ResponseEntity<String> changeDeliveryState(@PathVariable int id, @RequestParam int deliveryState){
+         deliveryManService.changeDeliveryState(id,deliveryState);
+        return new ResponseEntity<>("delivery state updated", HttpStatus.OK);
+    }
+
+
+    //get requests
+    @GetMapping("/cancel/{id}")
     public ResponseEntity<String> cancelDelivery(@PathVariable int id){
 
         deliveryService.cancelDelivery(id);
         return new ResponseEntity<>("delivery canceled", HttpStatus.OK);
     }
-    @PostMapping("/deliverystate/{id}")
-    @ResponseBody
-    public ResponseEntity<String> cancelDelivery(@PathVariable int id, @RequestParam DeliveryState deliveryState){
-        deliveryManService.changeDeliveryState(id,deliveryState);
-        return new ResponseEntity<>("delivery canceled", HttpStatus.OK);
-    }
-
-
-    //get requests
-
     @GetMapping("/")
     public List<Delivery> deliveries(){
 
