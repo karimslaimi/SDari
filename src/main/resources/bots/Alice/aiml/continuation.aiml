@@ -11,32 +11,6 @@
 <!-- -->
 
 
-<category><pattern>CAN _looking for _ villa</pattern>
-<template>You can use our platform to find good villas  </template>
-</category>
-<category><pattern>Can _ looking _ house</pattern>
-<template> You can use our platform to find good houses </template>
-</category>
-<category><pattern> _ rent _</pattern>
-<template>You can use our platform to find and rent the property you like</template>
-</category>
-<category><pattern> _ buy _</pattern>
-<template>You can use our platform to find and buy the property you like</template>
-</category>
-<category><pattern>_ help _ find _ house</pattern>
-<template> You can use our platform to find good houses check this link "localhost:8081/buy" if you want to buy a house or if you want to rent use this link "localhost:8081/rent"
-</template>
-</category>
-<category><pattern>_ help _ choose_</pattern>
-<template> Our platform offer you the ability to get in touch with a real estate agent(broker) who can guide you
-</template>
-</category>
-
-
-<category><pattern>_ loan _</pattern>
-<template> Our platform will help you simulate loan repayment
-</template>
-</category>
 <category><pattern>CONTINUATION *</pattern>
 <template>Blank template</template>
 </category>

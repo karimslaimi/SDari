@@ -15,22 +15,31 @@ public class Customer extends Utilisateur implements Serializable {
     @OneToMany(mappedBy = "customers")
     private List<Subscribe> subscribes ;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "Favorites", joinColumns = @JoinColumn(name = "utilisateurId")
             , inverseJoinColumns = @JoinColumn(name = "id_prop"))
     List<Property> favorites;
+
+
+    @JsonIgnore
     @OneToMany(mappedBy = "owner")
     List<Appointment> ownerAppointments;
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "customer")
     List<Appointment> customerAppointments;
 
+    @JsonIgnore
     @OneToMany(mappedBy="cust" )
     List<Furniture> furs;
 
+    @JsonIgnore
     @OneToMany(mappedBy="customer" )
     List<Property> props;
 
+    @JsonIgnore
     @OneToMany(mappedBy="custo" )
     List<Orders> ords;
 

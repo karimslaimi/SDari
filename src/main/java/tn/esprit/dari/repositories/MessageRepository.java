@@ -21,7 +21,7 @@ public interface MessageRepository extends JpaRepository<Message,Integer> {
             " and (c.second.utilisateurId=u.utilisateurId or c.first.utilisateurId=u.utilisateurId)")
     public List<Utilisateur> getUsers(@Param("id")Long id);
 
-    @Query("select c.messageList from ChatRoom c where (c.first.utilisateurId=:sentBy and c.second.utilisateurId=:sentTo) or " +
+    @Query("select c.messageList  from ChatRoom c where (c.first.utilisateurId=:sentBy and c.second.utilisateurId=:sentTo) or " +
             "(c.second.utilisateurId=:sentBy and c.first.utilisateurId=:sentTo)")
     public List<Message> getMessages(@Param("sentBy")Long sentBy, @Param("sentTo") Long sentTo);
 

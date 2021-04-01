@@ -1,5 +1,6 @@
 package tn.esprit.dari.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,6 @@ import java.util.List;
 public class Agent extends Utilisateur implements Serializable {
 
 @OneToMany(mappedBy = "agent")
+@JsonIgnore
     private List<Appointment> appointments;
 }

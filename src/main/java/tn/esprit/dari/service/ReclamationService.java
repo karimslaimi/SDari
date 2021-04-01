@@ -1,10 +1,12 @@
 package tn.esprit.dari.service;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import tn.esprit.dari.Config.OpenNLP;
+import tn.esprit.dari.entities.NotificationEmail;
 import tn.esprit.dari.entities.Priority;
 import tn.esprit.dari.entities.Reclamation;
 import tn.esprit.dari.entities.Utilisateur;
@@ -14,7 +16,9 @@ import tn.esprit.dari.repositories.UtilisateurRepository;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReclamationService implements IReclamationService {
@@ -23,7 +27,8 @@ public class ReclamationService implements IReclamationService {
     private ReclamationRepository reclamationRepository;
     @Autowired
     private UtilisateurRepository userRepo;
-
+    @Autowired
+    private MailService ms;
 
 
 
@@ -61,6 +66,11 @@ public class ReclamationService implements IReclamationService {
             reclamation.setTreatement(treatement);
             reclamation.setState(true);
             reclamationRepository.save(reclamation);
+
+            NotificationEmail notificationEmail=new NotificationEmail("Claim Treated",reclamation.getUser().getEmail(),treatement);
+
+            ms.sendEmail(notificationEmail);
+
             return true;
         }else{
             return false;
@@ -74,31 +84,62 @@ public class ReclamationService implements IReclamationService {
 
     @Override
     public List<Reclamation> findAll() {
-        return reclamationRepository.findAll(Sort.by(Sort.Direction.DESC, "dateTime"));
+        return reclamationRepository.findAll(Sort.by(Sort.Direction.ASC, "priority"));
     }
 
     @Override
     public List<Reclamation> findNotTreated() {
-        return reclamationRepository.findNotTreated();
+        return reclamationRepository.findNotTreated().stream().sorted(Comparator.comparing(Reclamation::getPriority)).collect(Collectors.toList());
     }
 
     @Override
     public List<Reclamation> findMyReclam(int id) {
-        return reclamationRepository.findMyReclams((long)id);
+        return reclamationRepository.findMyReclams((long)id).stream().sorted(Comparator.comparing(Reclamation::getDateTime)).collect(Collectors.toList());
     }
 
     @Override
     public List<Reclamation> filter(String filter) {
-        return reclamationRepository.findByFilter(filter);
+        return reclamationRepository.findByFilter(filter).stream().sorted(Comparator.comparing(Reclamation::getPriority)).collect(Collectors.toList());
     }
 
     @Override
     public List<Reclamation> findBetweenDate(LocalDateTime start, LocalDateTime end) {
-        return reclamationRepository.findBetweenDate(start,end);
+        return reclamationRepository.findBetweenDate(start,end).stream().sorted(Comparator.comparing(Reclamation::getPriority)).collect(Collectors.toList());
     }
 
     @Override
     public List<Reclamation> findByType(String type) {
-        return reclamationRepository.findByType(type);
+        return reclamationRepository.findByType(type).stream().sorted(Comparator.comparing(Reclamation::getPriority)).collect(Collectors.toList());
+    }
+
+
+
+    public List<Reclamation> searchMultiCriteria(String filter, String type, boolean mine, LocalDateTime start, LocalDateTime end,boolean treated,int id ){
+        List<Reclamation> reclamations;
+        if(mine){
+            reclamations=findMyReclam(id);
+        }else{
+
+            reclamations =findAll();
+        }
+
+        if(!filter.isEmpty()){
+            reclamations=reclamations.stream().filter(x->x.getTitle().toLowerCase().contains(filter.toLowerCase())).collect(Collectors.toList());
+        }
+        if(!type.isEmpty()){
+            reclamations=reclamations.stream().filter(x->x.getType().toLowerCase().contains(type.toLowerCase())).collect(Collectors.toList());
+        }
+
+        if(start!=null && end!=null){
+            reclamations=reclamations.stream().filter(x->x.getDateTime().isAfter(start) && x.getDateTime().isBefore(end) ).collect(Collectors.toList());
+        }
+        if(treated){
+            reclamations=reclamations.stream().filter(Reclamation::getState).collect(Collectors.toList());
+        }
+
+        return reclamations;
+
+
+
     }
 }
