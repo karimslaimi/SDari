@@ -64,8 +64,5 @@ public class MessageService implements IMessageService {
         return messageRepository.getUsers((long)id);
     }
 
-    @Override
-    public ChatRoom getChatRoom(long idf, long ids) {
-        return null;
-    }
+
 }

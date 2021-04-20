@@ -116,6 +116,7 @@ public class ReclamationService implements IReclamationService {
 
     public List<Reclamation> searchMultiCriteria(String filter, String type, boolean mine, LocalDateTime start, LocalDateTime end,boolean treated,int id ){
         List<Reclamation> reclamations;
+
         if(mine){
             reclamations=findMyReclam(id);
         }else{
