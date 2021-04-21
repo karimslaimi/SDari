@@ -28,11 +28,11 @@ public class DocStorageService {
         }
         return null;
     }
-    public Optional<javax.print.Doc> getFile(Integer fileId) {
+    public Optional<Doc> getFile(Integer fileId) {
         return docRepository.findById(fileId);
     }
-
-    public List<javax.print.Doc> getFiles(){
+    public List<Doc> getFiles(){
         return docRepository.findAll();
     }
+
 }

@@ -8,6 +8,7 @@ import tn.esprit.dari.entities.Contract_Rent;
 import tn.esprit.dari.entities.Rent;
 import tn.esprit.dari.repositories.PropertyRepository;
 import tn.esprit.dari.repositories.RentRepository;
+import tn.esprit.dari.service.RentService;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -19,6 +20,8 @@ public class RentController {
 
     @Autowired
     private RentRepository rr;
+    @Autowired
+    private RentService rs;
 
     @GetMapping("/get")
     public List<Rent> All() {
@@ -40,5 +43,8 @@ public class RentController {
     public void deleteRent(@PathVariable int id) {
         rr.deleteById(id);
     }
+
+    @GetMapping("/Estimate")
+    public float  est(){return rs.estimationForMeter();}
 
 }

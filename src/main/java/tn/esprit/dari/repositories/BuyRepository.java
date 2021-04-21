@@ -17,5 +17,4 @@ public interface BuyRepository extends JpaRepository<Buy,Integer> {
     List<Buy> findByNbroomsAndPrice(int nbr,float price);
     @Query("select b from Buy b where b.price>=:lower and b.price<=:higher")
     List<Buy> findBetweenPrice(@Param("lower")float p1,@Param("higher") float p2);
-
 }

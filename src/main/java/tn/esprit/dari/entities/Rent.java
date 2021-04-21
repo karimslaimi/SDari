@@ -1,5 +1,7 @@
 package tn.esprit.dari.entities;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;

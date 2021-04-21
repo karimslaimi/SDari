@@ -8,6 +8,7 @@ import tn.esprit.dari.entities.Buy;
 import tn.esprit.dari.entities.Property;
 import tn.esprit.dari.repositories.BuyRepository;
 import tn.esprit.dari.repositories.DocRepository;
+import tn.esprit.dari.service.BuyService;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class BuyController {
     @Autowired
     private BuyRepository br;
     @Autowired
-    private DocRepository dr;
+    private BuyService bs;
 
     @GetMapping("/get")
     public List<Buy> All() {
@@ -31,15 +32,19 @@ public class BuyController {
         br.save(newBuy);
     }
 
-    @GetMapping("/buy/{id}")
+    @GetMapping("/getOne/{id}")
     public Buy getBuy(@PathVariable int id) {
-        return br.getOne(id);
+        return br.findById(id).get();
     }
 
-    @DeleteMapping("/buy/{id}")
+    @DeleteMapping("/Delete/{id}")
     public void deleteBuy(@PathVariable int id) {
         br.deleteById(id);
     }
+
+    @GetMapping("/Estimate")
+    public float  est(){return bs.EstimationForMeter();}
+
 
 
 

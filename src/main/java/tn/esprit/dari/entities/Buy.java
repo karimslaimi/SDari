@@ -8,8 +8,6 @@ import java.util.Objects;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Buy extends Property implements Serializable {
 
-
-
     private float price;
     @ManyToOne
     @JoinColumn

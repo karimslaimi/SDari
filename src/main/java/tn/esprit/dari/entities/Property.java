@@ -23,6 +23,10 @@ public class Property implements Serializable {
     private float loyer;
     private float prix;
     private Status status;
+    private String adress;
+    private String state;
+    private String city;
+    private int zipCode;
 
    @ManyToOne
    @JoinColumn(name = "id")
@@ -36,7 +40,11 @@ public class Property implements Serializable {
     public Property() {
     }
 
-    public Property(int id_prop, PropertyType type, int nbrooms, float surface, float superficie, String image, String video, float loyer, float prix, Status status, Customer customer) {
+    public Property(String adress,String state, String city, int zipCode,int id_prop, PropertyType type, int nbrooms, float surface, float superficie, String image, String video, float loyer, float prix, Status status, Customer customer) {
+        this.adress=adress;
+        this.state=state;
+        this.city=city;
+        this.zipCode=zipCode;
         this.id_prop = id_prop;
         this.type = type;
         this.nbrooms = nbrooms;
@@ -48,6 +56,30 @@ public class Property implements Serializable {
         this.prix = prix;
         this.status = status;
         this.customer = customer;
+    }
+
+    public String getAdress() { return adress;}
+
+    public void setAdress(String adress) { this.adress = adress;}
+
+    public String getState() {return state;}
+
+    public void setState(String state) {this.state = state;}
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
     public Status getStatus() {
@@ -151,6 +183,10 @@ public class Property implements Serializable {
                 ", loyer=" + loyer +
                 ", prix=" + prix +
                 ", status=" + status +
+                ", adress='" + adress + '\'' +
+                ", state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                ", zipCode=" + zipCode +
                 ", customer=" + customer +
                 '}';
     }
