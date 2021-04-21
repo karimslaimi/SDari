@@ -2,7 +2,9 @@ package tn.esprit.dari.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.dari.entities.Customer;
 import tn.esprit.dari.entities.Property;
+import tn.esprit.dari.repositories.CustomerRepository;
 import tn.esprit.dari.repositories.PropertyRepository;
 import javax.el.PropertyNotFoundException;
 import java.util.List;
@@ -13,6 +15,8 @@ public class PropertyService implements IProperty {
 
     @Autowired
    private PropertyRepository proprep ;
+    @Autowired
+    private CustomerRepository custrep ;
 
     @Override
     public void addProperty(Property prop) {
@@ -51,7 +55,13 @@ public class PropertyService implements IProperty {
         return proprep.findById(id).orElseThrow(() -> new PropertyNotFoundException(String.valueOf(id)));
     }
 
+    @Override
+    public List<Property> userproperties(Long id) {
+        Customer cs=custrep.findById(id).orElse(null);
+        return cs.getProps();
 
+
+    }
 
 
 }

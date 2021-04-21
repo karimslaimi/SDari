@@ -31,10 +31,10 @@ public class AppointmentController {
 
     @PostMapping("/accept/{id}")
     @ResponseBody
-    public ResponseEntity<String> acceptAppointment(@PathVariable("id") int id,@RequestParam String date,@RequestParam int apptype){
+    public ResponseEntity<String> acceptAppointment(@PathVariable("id") int id,@RequestParam String date,@RequestParam String address,@RequestParam int apptype){
 
         try {
-            app_service.acceptAppointment(id,date,apptype);
+            app_service.acceptAppointment(id,date,apptype,address);
         } catch (ParseException e) {
             e.printStackTrace();
         }

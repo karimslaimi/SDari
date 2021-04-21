@@ -26,8 +26,6 @@ public class FurnitureService implements IFurnitureService{
         f.setPicture(fur.getPicture());
         f.setPrice(fur.getPrice());
         f.setDescription(fur.getDescription());
-        f.setDimentions(fur.getDimentions());
-        f.setNb(fur.getNb());
         furrep.save(fur);
     }
 

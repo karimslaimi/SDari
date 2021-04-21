@@ -11,5 +11,5 @@ public interface IMessageService {
     public Boolean AddMessage(String message, Long by, Long to);
     public List<Message> GetMessage(int sentBy, int sentTo);
     public List<Utilisateur> getUsers(int id);
-    public ChatRoom getChatRoom(long idf,long ids);
+
 }

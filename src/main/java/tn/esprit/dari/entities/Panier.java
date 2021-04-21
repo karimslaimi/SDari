@@ -5,6 +5,8 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 
 import javax.persistence.CascadeType;
@@ -23,12 +25,28 @@ public class Panier implements Serializable {
     private double sommeTotale;
     private String etatPanier;
     @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="panier")
-
+     private List<Detail_Panier> detail_paniers;
     @OneToOne
     private Customer cust;
 
+    public Panier() {
+    }
 
+    public List<Detail_Panier> getDetail_paniers() {
+        return detail_paniers;
+    }
 
+    public void setDetail_paniers(List<Detail_Panier> detail_paniers) {
+        this.detail_paniers = detail_paniers;
+    }
+
+    public Panier(int idPanier, Date dateMajPanier, double sommeTotale, String etatPanier, Customer cust) {
+        this.idPanier = idPanier;
+        this.dateMajPanier = dateMajPanier;
+        this.sommeTotale = sommeTotale;
+        this.etatPanier = etatPanier;
+        this.cust = cust;
+    }
 
     public int getIdPanier() {
         return idPanier;
@@ -68,5 +86,30 @@ public class Panier implements Serializable {
 
     public void setCust(Customer cust) {
         this.cust = cust;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Panier panier = (Panier) o;
+        return idPanier == panier.idPanier && Double.compare(panier.sommeTotale, sommeTotale) == 0 && Objects.equals(dateMajPanier, panier.dateMajPanier) && Objects.equals(etatPanier, panier.etatPanier) && Objects.equals(cust, panier.cust);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idPanier, dateMajPanier, sommeTotale, etatPanier, cust);
+    }
+
+    @Override
+    public String toString() {
+        return "Panier{" +
+                "idPanier=" + idPanier +
+                ", dateMajPanier=" + dateMajPanier +
+                ", sommeTotale=" + sommeTotale +
+                ", etatPanier='" + etatPanier + '\'' +
+                ", cust=" + cust +
+                '}';
     }
 }

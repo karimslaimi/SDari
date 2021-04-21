@@ -1,7 +1,10 @@
 package tn.esprit.dari.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,9 +14,12 @@ public class Orders implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_o;
-    private int nb_o;
-    private float total_price;
+    private Date datecommande;
 
+    @Transient
+    private Long idc;
+    @Transient int idf;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id")
     private Customer custo;
@@ -24,15 +30,31 @@ public class Orders implements Serializable {
     @OneToMany(mappedBy = "ord")
     private List<LigneCommande> lc;
 
-
     public Orders() {
     }
 
-
-    public Orders(int id_o, int nb_o, float total_price) {
+    public Orders(int id_o, Date datecommande,  Customer custo, Furniture fur, List<LigneCommande> lc) {
         this.id_o = id_o;
-        this.nb_o = nb_o;
-        this.total_price = total_price;
+        this.datecommande = datecommande;
+        this.custo = custo;
+        this.fur = fur;
+        this.lc = lc;
+    }
+
+    public Long getIdc() {
+        return idc;
+    }
+
+    public void setIdc(Long idc) {
+        this.idc = idc;
+    }
+
+    public int getIdf() {
+        return idf;
+    }
+
+    public void setIdf(int idf) {
+        this.idf = idf;
     }
 
     public int getId_o() {
@@ -43,43 +65,39 @@ public class Orders implements Serializable {
         this.id_o = id_o;
     }
 
-    public int getNb_o() {
-        return nb_o;
+    public Date getDatecommande() {
+        return datecommande;
     }
 
-    public void setNb_o(int nb_o) {
-        this.nb_o = nb_o;
-    }
-
-    public float getTotal_price() {
-        return total_price;
-    }
-
-    public void setTotal_price(float total_price) {
-        this.total_price = total_price;
+    public void setDatecommande(Date datecommande) {
+        this.datecommande = datecommande;
     }
 
 
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "id_o=" + id_o +
-                ", nb_o=" + nb_o +
-                ", total_price=" + total_price +
-                ", custo=" + custo +
-                '}';
+
+    public Customer getCusto() {
+        return custo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Orders orders = (Orders) o;
-        return id_o == orders.id_o && nb_o == orders.nb_o && Float.compare(orders.total_price, total_price) == 0 && custo.equals(orders.custo);
+    public void setCusto(Customer custo) {
+        this.custo = custo;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id_o, nb_o, total_price, custo);
+    public Furniture getFur() {
+        return fur;
     }
+
+    public void setFur(Furniture fur) {
+        this.fur = fur;
+    }
+
+    public List<LigneCommande> getLc() {
+        return lc;
+    }
+
+    public void setLc(List<LigneCommande> lc) {
+        this.lc = lc;
+    }
+
+
 }

@@ -47,4 +47,14 @@ public class DeliveryService implements IDeliveryService {
     public Delivery deliveryById(int id) {
         return dr.getOne(id);
     }
+
+    @Override
+    public void updateLocation(int id, double latitude, double longitude) {
+
+        Delivery delivery=dr.getOne(id);
+        delivery.setLatitude(latitude);
+        delivery.setLongitude(longitude);
+        dr.save(delivery);
+        //possible notification control for later
+    }
 }

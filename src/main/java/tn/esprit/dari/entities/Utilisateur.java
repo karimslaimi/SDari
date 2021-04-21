@@ -1,5 +1,6 @@
 package tn.esprit.dari.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,15 +45,20 @@ public  class Utilisateur implements Serializable {
 
 
     @OneToMany(mappedBy ="first")
+    @JsonBackReference
     private List<ChatRoom> sent;
+
     @OneToMany(mappedBy = "second")
+    @JsonBackReference
     private List<ChatRoom> received;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<Reclamation> reclamations;
 
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<Reclamation> reclamations;
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private List<Notification> notifications;
 
 }

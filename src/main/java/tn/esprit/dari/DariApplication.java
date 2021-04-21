@@ -57,7 +57,7 @@ public class DariApplication {
         return secondaryTemplateResolver;
     }
 
- /*
+/*
      @Bean
     public CommandLineRunner init() {
 
@@ -83,14 +83,14 @@ public class DariApplication {
             user1.setPicture("whatever.jpg");
             user1.setRegion(Region.Bizerte);
             customerRepository.save(user1);
-*/
+
 /*
             Subscription su = new Subscription();
             su.setTitle("normal");
             su.setPrice(200);
             su.setDescription("ich fick dish mann");
             subsRepo.save(su);
-
+ });*/
 
 
             /*Subscribe sub = new Subscribe();
@@ -111,4 +111,6 @@ public class DariApplication {
         });}
 
  */
-}
+
+
+     }

@@ -9,8 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.dari.entities.ChatMessage;
 import tn.esprit.dari.entities.Message;
 import tn.esprit.dari.service.ChatBot;
 import tn.esprit.dari.service.IMessageService;
@@ -56,13 +59,16 @@ public class MessageController {
 
     }
 
-
-    @Autowired
-    private SimpMessagingTemplate messagingTemplate;
-
-    @MessageMapping("/chat")
-    public void processMessage(@Payload Message chatMessage,long sender,long receiver) {
-       messageService.AddMessage(chatMessage.getContent(),sender,receiver);
+    @MessageMapping("/chat.register")
+    @SendTo("/topic/public")
+    public ChatMessage register(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        return chatMessage;
     }
 
+    @MessageMapping("/chat.send")
+    @SendTo("/topic/public")
+    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+        return chatMessage;
+    }
 }
