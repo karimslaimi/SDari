@@ -9,14 +9,34 @@ import java.util.Objects;
 public class Buy extends Property implements Serializable {
 
     private float price;
+
     @ManyToOne
     @JoinColumn
     private Utilisateur user;
+
     public Buy() {
     }
 
-    public Buy( float price) {
+    public Buy(String adress,String state, String city, String zipCode, int nbrooms, float surface, float superficie, String image, String video, float loyer, float prix,  float price) {
+        super.setAdress(adress);
+        super.setState(state);
+        super.setCity(city);
+        super.setZipCode(zipCode);
+        super.setNbrooms(nbrooms);
+        super.setSurface(surface);
+        super.setSuperficie(superficie);
+        super.setImage(image);
+        super.setVideo(video);
+        super.setLoyer(loyer);
+        super.setPrix(prix);
+        this.price=price;
+    }
 
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -26,16 +46,6 @@ public class Buy extends Property implements Serializable {
 
     public void setUser(Utilisateur user) {
         this.user = user;
-    }
-
-
-    public float getPrice() {
-        return price;
-    }
-
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     @Override

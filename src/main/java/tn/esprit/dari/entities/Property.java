@@ -14,6 +14,7 @@ public class Property implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_prop;
+
     private PropertyType type;
     private int nbrooms;
     private float surface;
@@ -26,7 +27,7 @@ public class Property implements Serializable {
     private String adress;
     private String state;
     private String city;
-    private int zipCode;
+    private String zipCode;
 
    @ManyToOne
    @JoinColumn(name = "id")
@@ -40,7 +41,7 @@ public class Property implements Serializable {
     public Property() {
     }
 
-    public Property(String adress,String state, String city, int zipCode,int id_prop, PropertyType type, int nbrooms, float surface, float superficie, String image, String video, float loyer, float prix, Status status, Customer customer) {
+    public Property(String adress,String state, String city, String zipCode,int id_prop, PropertyType type, int nbrooms, float surface, float superficie, String image, String video, float loyer, float prix, Status status, Customer customer) {
         this.adress=adress;
         this.state=state;
         this.city=city;
@@ -58,46 +59,6 @@ public class Property implements Serializable {
         this.customer = customer;
     }
 
-    public String getAdress() { return adress;}
-
-    public void setAdress(String adress) { this.adress = adress;}
-
-    public String getState() {return state;}
-
-    public void setState(String state) {this.state = state;}
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public int getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public PropertyType getType() {
-        return type;
-    }
-
-    public void setType(PropertyType type) {
-        this.type = type;
-    }
-
     public int getId_prop() {
         return id_prop;
     }
@@ -106,12 +67,12 @@ public class Property implements Serializable {
         this.id_prop = id_prop;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public PropertyType getType() {
+        return type;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setType(PropertyType type) {
+        this.type = type;
     }
 
     public int getNbrooms() {
@@ -168,6 +129,54 @@ public class Property implements Serializable {
 
     public void setPrix(float prix) {
         this.prix = prix;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override

@@ -18,7 +18,7 @@ public class Rent extends Property implements Serializable {
     public Rent() {
     }
 
-    public Rent(int id_rent,  float pricePerDay, float pricePerMonth) {
+    public Rent( float pricePerDay, float pricePerMonth) {
 
         this.pricePerDay = pricePerDay;
         this.pricePerMonth = pricePerMonth;
