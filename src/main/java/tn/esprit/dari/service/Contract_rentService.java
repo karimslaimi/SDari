@@ -31,7 +31,7 @@ public class Contract_rentService implements IContract_rent {
         List<Contract_Rent> lst = crr.findAll();
 
         for(int i=0;i<lst.size();i++){
-            if ((lst.get(i).getId_Client()==u.getUtilisateurId()) && (lst.get(i).getId_Rent()==p.getId_prop())){
+            if ((lst.get(i).getId_user()==u.getUtilisateurId()) && (lst.get(i).getId_property()==p.getId_prop())){
                 cr= lst.get(i);
             }
         }
@@ -46,7 +46,7 @@ public class Contract_rentService implements IContract_rent {
         List<Contract_Rent> lst = crr.findAll();
         int before = lst.size();
         for(int i=0;i<lst.size();i++){
-            if ((lst.get(i).getId_Client()==u.getUtilisateurId()) && (lst.get(i).getId_Rent()==p.getId_prop())){
+            if ((lst.get(i).getId_user()==u.getUtilisateurId()) && (lst.get(i).getId_property()==p.getId_prop())){
                 crr.deleteById(id_property);
             }
         }

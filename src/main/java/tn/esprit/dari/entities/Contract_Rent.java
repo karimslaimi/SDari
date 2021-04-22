@@ -12,9 +12,9 @@ import java.util.Objects;
 public class Contract_Rent implements Serializable {
 
     @Id
-    private int id_Rent;
+    private int id_property;
     @Id
-    private int id_Client;
+    private int id_user;
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date dateDebut;
     @DateTimeFormat(pattern = "dd/mm/yyyy")
@@ -24,9 +24,9 @@ public class Contract_Rent implements Serializable {
     public Contract_Rent() {
     }
 
-    public Contract_Rent(int id_Rent, int id_Client, Date dateDebut, Date dateFin, String details, boolean rented) {
-        this.id_Rent = id_Rent;
-        this.id_Client = id_Client;
+    public Contract_Rent(int id_property, int id_user, Date dateDebut, Date dateFin, String details, boolean rented) {
+        this.id_property = id_property;
+        this.id_user = id_user;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.details = details;
@@ -41,20 +41,20 @@ public class Contract_Rent implements Serializable {
         this.rented = rented;
     }
 
-    public int getId_Rent() {
-        return id_Rent;
+    public int getId_property() {
+        return id_property;
     }
 
-    public void setId_Rent(int id_Rent) {
-        this.id_Rent = id_Rent;
+    public void setId_property(int id_property) {
+        this.id_property = id_property;
     }
 
-    public int getId_Client() {
-        return id_Client;
+    public int getId_user() {
+        return id_user;
     }
 
-    public void setId_Client(int id_Client) {
-        this.id_Client = id_Client;
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
     }
 
     public Date getDateDebut() {
@@ -86,19 +86,19 @@ public class Contract_Rent implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contract_Rent that = (Contract_Rent) o;
-        return id_Rent == that.id_Rent && id_Client == that.id_Client && Objects.equals(dateDebut, that.dateDebut) && Objects.equals(dateFin, that.dateFin) && Objects.equals(details, that.details);
+        return Objects.equals(dateDebut, that.dateDebut) && Objects.equals(dateFin, that.dateFin) && Objects.equals(details, that.details);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_Rent, id_Client, dateDebut, dateFin, details);
+        return Objects.hash(dateDebut, dateFin, details);
     }
 
     @Override
     public String toString() {
         return "Contract_Rent{" +
-                "id_Rent=" + id_Rent +
-                ", id_Client=" + id_Client +
+                "id_Rent=" + id_property +
+                ", id_Client=" + id_user +
                 ", dateDebut=" + dateDebut +
                 ", dateFin=" + dateFin +
                 ", details='" + details + '\'' +

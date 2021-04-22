@@ -31,7 +31,7 @@ public class Contract_buyService implements IContract_buy{
         List<Contract_Buy> lst = cbr.findAll();
 
         for(int i=0;i<lst.size();i++){
-            if ((lst.get(i).getId_Client()==u.getUtilisateurId()) && (lst.get(i).getId_Buy()==p.getId_prop())){
+            if ((lst.get(i).getId_user()==u.getUtilisateurId()) && (lst.get(i).getId_property()==p.getId_prop())){
                 cb= lst.get(i);
             }
         }
@@ -47,7 +47,7 @@ public class Contract_buyService implements IContract_buy{
         List<Contract_Buy> lst = cbr.findAll();
         int before = lst.size();
         for(int i=0;i<lst.size();i++){
-            if ((lst.get(i).getId_Client()==u.getUtilisateurId()) && (lst.get(i).getId_Buy()==p.getId_prop())){
+            if ((lst.get(i).getId_user()==u.getUtilisateurId()) && (lst.get(i).getId_property()==p.getId_prop())){
                 cbr.deleteById(id_property);
             }
         }

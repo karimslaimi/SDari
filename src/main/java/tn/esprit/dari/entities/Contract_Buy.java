@@ -12,9 +12,9 @@ import java.util.Objects;
 public class Contract_Buy implements Serializable {
 
     @Id
-    private int id_Client;
+    private int id_user;
     @Id
-    private int id_Buy;
+    private int id_property;
     private String details;
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date date;
@@ -22,27 +22,27 @@ public class Contract_Buy implements Serializable {
     public Contract_Buy() {
     }
 
-    public Contract_Buy(int id_Client, int id_Buy, String details, Date date) {
-        this.id_Client = id_Client;
-        this.id_Buy = id_Buy;
+    public Contract_Buy(int id_user, int id_property, String details, Date date) {
+        this.id_user = id_user;
+        this.id_property = id_property;
         this.details = details;
         this.date = date;
     }
 
-    public int getId_Client() {
-        return id_Client;
+    public int getId_user() {
+        return id_user;
     }
 
-    public void setId_Client(int id_Client) {
-        this.id_Client = id_Client;
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
     }
 
-    public int getId_Buy() {
-        return id_Buy;
+    public int getId_property() {
+        return id_property;
     }
 
-    public void setId_Buy(int id_Buy) {
-        this.id_Buy = id_Buy;
+    public void setId_property(int id_property) {
+        this.id_property = id_property;
     }
 
     public String getDetails() {
@@ -66,19 +66,19 @@ public class Contract_Buy implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contract_Buy that = (Contract_Buy) o;
-        return id_Client == that.id_Client && id_Buy == that.id_Buy && Objects.equals(details, that.details) && Objects.equals(date, that.date);
+        return Objects.equals(details, that.details) && Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_Client, id_Buy, details, date);
+        return Objects.hash( details, date);
     }
 
     @Override
     public String toString() {
         return "Contract_Buy{" +
-                "id_Client=" + id_Client +
-                ", id_Buy=" + id_Buy +
+                "id_Client=" + id_user +
+                ", id_Buy=" + id_property +
                 ", details='" + details + '\'' +
                 ", date=" + date +
                 '}';
