@@ -25,13 +25,11 @@ public class Contract_rentService implements IContract_rent {
     public Contract_Rent findByDid(long id_user, int id_property) {
 
         Contract_Rent cr=new Contract_Rent();
-        Utilisateur u=ur.findById((long)id_user).orElse(null);
-        Property p=pr.findById(id_property).orElse(null);
 
         List<Contract_Rent> lst = crr.findAll();
 
         for(int i=0;i<lst.size();i++){
-            if ((lst.get(i).getId_user()==u.getUtilisateurId()) && (lst.get(i).getId_property()==p.getId_prop())){
+            if ((lst.get(i).getId_user()==id_user) && (lst.get(i).getId_property()==id_property)){
                 cr= lst.get(i);
             }
         }
@@ -40,13 +38,11 @@ public class Contract_rentService implements IContract_rent {
     }
     @Override
     public boolean deleteByDid(long id_user, int id_property) {
-        Utilisateur u=ur.findById((long)id_user).orElse(null);
-        Property p=pr.findById(id_property).orElse(null);
 
         List<Contract_Rent> lst = crr.findAll();
         int before = lst.size();
         for(int i=0;i<lst.size();i++){
-            if ((lst.get(i).getId_user()==u.getUtilisateurId()) && (lst.get(i).getId_property()==p.getId_prop())){
+            if ((lst.get(i).getId_user()==id_user) && (lst.get(i).getId_property()==id_property)){
                 crr.deleteById(id_property);
             }
         }

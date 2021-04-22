@@ -27,10 +27,10 @@ public class Contract_BuyController {
         cbr.save(newBuy);
     }
 
-    @GetMapping("/getOne/{id}")
+    @GetMapping("/getOne/{id_user}/{id_property}")
     public Contract_Buy getBuy(@PathVariable long id_user,@PathVariable int id_property) { return cbs.findByDid(id_user,id_property); }
 
-    @DeleteMapping("/Delete/{id}")
+    @DeleteMapping("/Delete/{id_user}/{id_property}")
     public void deleteBuy(@PathVariable long id_user,@PathVariable int id_property) { cbs.deleteByDid(id_user,id_property); }
 
 }

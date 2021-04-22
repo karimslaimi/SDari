@@ -5,14 +5,14 @@ import java.util.Objects;
 //Contract Buy Id ( cle composé)
 public class CBId implements Serializable {
 
-    private int id_Client;
-    private int id_Buy;
+    private int id_user;
+    private int id_property;
 
     public CBId(){}
 
-    public CBId(int id_Client, int id_Buy) {
-        this.id_Client = id_Client;
-        this.id_Buy = id_Buy;
+    public CBId(int id_user, int id_property) {
+        this.id_user = id_user;
+        this.id_property = id_property;
     }
 
     @Override
@@ -20,11 +20,11 @@ public class CBId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CBId cbId = (CBId) o;
-        return id_Client == cbId.id_Client && id_Buy == cbId.id_Buy;
+        return id_user == cbId.id_user && id_property == cbId.id_property;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_Client, id_Buy);
+        return Objects.hash(id_user, id_property);
     }
 }
