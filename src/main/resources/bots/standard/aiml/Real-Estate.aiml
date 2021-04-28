@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+<!-- -->
+<!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+<!-- This program is open source code released under -->
+<!-- the terms of the GNU General Public License     -->
+<!-- as published by the Free Software Foundation.   -->
+<!-- Complies with AIML 1.0 Tag Set Specification -->
+<!-- as adopted by the ALICE A.I. Foundation.  -->
+<!-- Last modified 10/5/2011 -->
+<!-- -->
+
+
+<category><pattern>_ looking _ villa</pattern>
+<template>You can use our platform to find good villas  </template>
+</category>
+
+
+<category>
+<pattern>villa</pattern>
+<template>You can use our platform to find good villas using this link http://localhost:8081/search </template>
+</category>
+<category>
+<pattern>house</pattern>
+<template>You can use our platform to find good villas using this link http://localhost:8081/search </template>
+</category>
+<category>
+<pattern>apartment</pattern>
+<template>You can use our platform to find good villas using this link http://localhost:8081/search </template>
+</category>
+
+
+<category>
+<pattern>#villa#</pattern>
+<template><srai>villa</srai>
+</category>
+
+<category>
+<pattern>#house#</pattern>
+<template><srai>house</srai>
+</category>
+
+<category>
+<pattern>#apartment#</pattern>
+<template><srai>apartment</srai></template>
+</category>
+
+
+
+
+
+<category><pattern>_ looking _ house</pattern>
+<template> You can use our platform to find good houses </template>
+</category>
+<category><pattern> _ rent _</pattern>
+<template>You can use our platform to find and rent the property you like</template>
+</category>
+<category><pattern> _ buy _</pattern>
+<template>You can use our platform to find and buy the property you like</template>
+</category>
+<category><pattern>_ looking _ property</pattern>
+<template> You can use our platform to find good houses check this link "localhost:8081/buy" if you want to buy a house or if you want to rent use this link "localhost:8081/rent"
+</template>
+</category>
+<category><pattern>_ choose _</pattern>
+<template> Our platform offer you the ability to get in touch with a real estate agent(broker) who can guide you
+</template>
+</category>
+
+
+<category><pattern>_ loan _</pattern>
+<template> Our platform will help you simulate loan repayment
+</template>
+</category>
+
+</aiml>

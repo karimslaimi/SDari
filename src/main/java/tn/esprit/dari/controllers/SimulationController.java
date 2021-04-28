@@ -21,8 +21,12 @@ public class SimulationController {
 
     }
 
+    @GetMapping("/assurance/{taux}/{montant}")
+    public double Assurance(@PathVariable double taux ,@PathVariable double montant){
+        return ( simulation.MontantAssurance(taux, montant));
+    }
     @GetMapping("/mensualiteAA/{montantCredit}/{taux_period}/{duree}/{assurance}")
-    public double MensualiteAA(@PathVariable double montantCredit,@PathVariable float taux_period,@PathVariable long duree, @PathVariable int assurance){
+    public double MensualiteAA(@PathVariable double montantCredit,@PathVariable float taux_period,@PathVariable long duree, @PathVariable float assurance){
         return (simulation.CalculMensualiteAA(montantCredit , taux_period , duree ,assurance));
 
     }

@@ -26,7 +26,6 @@ public class UtilisateurService implements IUtilisateurService {
         return  user.get();
     }
 
-
     @Override
     public List<Utilisateur> getallUsers() {
         return (List<Utilisateur>) utilisateurRepository.findAll();
@@ -55,6 +54,10 @@ public class UtilisateurService implements IUtilisateurService {
     }
     public void deleteAgent(Long id){
         utilisateurRepository.deleteById(id);
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        return null;
     }
 
     public void updateResetPasswordToken(String token, String email) throws DariException  {

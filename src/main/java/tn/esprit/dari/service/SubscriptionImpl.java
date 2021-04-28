@@ -1,6 +1,9 @@
 package tn.esprit.dari.service;
 
+import com.stripe.Stripe;
+import com.stripe.model.Charge;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tn.esprit.dari.repositories.SubscriptionRepository;
 import tn.esprit.dari.entities.Subscription;
@@ -13,9 +16,7 @@ import tn.esprit.dari.repositories.SubscribeRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -92,8 +93,30 @@ public class SubscriptionImpl implements ISubscription {
         s.setCustomers(cu);
         Subscription su = SubRep.findById(idS).get();
         s.setSubscription(su);
+        s.setPaid(true);
         return subscribeRepository.save(s);
     }
+
+    @Override
+    public Subscribe EndAbo(int idS) {
+        Subscribe subsc = subscribeRepository.findById(idS).orElse(null);
+        if(subsc.getDateF().compareTo(new Date())<0){
+            subsc.setPaid(false);
+        }
+        return subsc ;
+    }
+
+    @Override
+    public List<Subscribe> GetSubs() {
+        List<Subscribe> subscribe = (List<Subscribe>) subscribeRepository.findAll();
+        for(Subscribe sub  : subscribe ){
+            System.out.println("List of subscribes    : " + sub);
+
+        }
+        return subscribe;
+
+    }
+
 
     @Transactional
     public void insertWithQuery(Subscribe sub) {
@@ -103,5 +126,26 @@ public class SubscriptionImpl implements ISubscription {
                 .setParameter(3, sub.getCustomers().getUtilisateurId())
                 .setParameter(4,sub.getSubscription().getId_sub())
                 .executeUpdate();
+    }
+
+
+    //-----------------------------paiement-----------------------------------//
+
+
+    @Value("${STRIPE_SECRET_KEY}")
+    private String API_SECRET_KEY;
+
+    @Autowired
+    public void SubscriptionRepository() {
+        Stripe.apiKey = API_SECRET_KEY;
+    }
+
+    public Charge chargeNewCard(String token, double amount) throws Exception {
+        Map<String, Object> chargeParams = new HashMap<>();
+        chargeParams.put("amount", (int)(amount * 100));
+        chargeParams.put("currency", "USD");
+        chargeParams.put("source", token);
+        Charge charge = Charge.create(chargeParams);
+        return charge;
     }
 }

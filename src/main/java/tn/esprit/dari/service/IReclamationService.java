@@ -17,4 +17,5 @@ public interface IReclamationService {
     public List<Reclamation> filter(String filter);
     public List<Reclamation> findBetweenDate(LocalDateTime start,LocalDateTime end);
     public List<Reclamation> findByType(String type);
+    public List<Reclamation> searchMultiCriteria(String filter, String type, boolean mine, LocalDateTime start, LocalDateTime end,boolean treated,int id );
 }

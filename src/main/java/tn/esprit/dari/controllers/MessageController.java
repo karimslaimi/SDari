@@ -7,10 +7,17 @@ import org.alicebot.ab.configuration.BotConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.dari.entities.ChatMessage;
 import tn.esprit.dari.entities.Message;
 import tn.esprit.dari.service.ChatBot;
 import tn.esprit.dari.service.IMessageService;
+import tn.esprit.dari.service.MessageService;
 
 @RestController
 @RequestMapping("message")
@@ -20,7 +27,7 @@ public class MessageController {
     private IMessageService messageService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> Create(@RequestBody Message message, @RequestBody Long by, @RequestBody Long to){
+    public ResponseEntity<?> Create(@RequestParam String message, @RequestParam Long by, @RequestParam Long to){
 
         if(messageService.AddMessage(message,by,to)){
             return new ResponseEntity<>("sent", HttpStatus.OK);
@@ -31,7 +38,7 @@ public class MessageController {
     }
 
     @GetMapping("/getmessages")
-    public ResponseEntity<?> GetMessage(@RequestBody int by,@RequestBody int to){
+    public ResponseEntity<?> GetMessage(@RequestParam int by,@RequestParam int to){
         return new ResponseEntity<>(messageService.GetMessage(by,to),HttpStatus.OK);
     }
 
@@ -52,4 +59,16 @@ public class MessageController {
 
     }
 
+    @MessageMapping("/chat.register")
+    @SendTo("/topic/public")
+    public ChatMessage register(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        return chatMessage;
+    }
+
+    @MessageMapping("/chat.send")
+    @SendTo("/topic/public")
+    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+        return chatMessage;
+    }
 }

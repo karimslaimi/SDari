@@ -9,6 +9,13 @@
 <!-- as adopted by the ALICE A.I. Foundation.  -->
 <!-- Last modified 10/5/2011 -->
 <!-- -->
+
+
+
+<category><pattern>_ loan _</pattern>
+<template> Our platform will help you simulate loan repayment
+</template>
+</category>
 <category><pattern>69 F *</pattern>
 <template><srai>I am 69 years old</srai> <srai>I am female</srai> <srai>I am in <star/></srai></template>
 </category>

@@ -12,6 +12,8 @@
  
 <!-- GET CLIENT PREDICATES:  -->
 
+
+
 <category><pattern>MY PROFILE</pattern>
 <template><srai>GET PREDICATES</srai></template>
 </category>

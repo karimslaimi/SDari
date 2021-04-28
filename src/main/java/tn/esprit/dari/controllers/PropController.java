@@ -3,7 +3,7 @@ package tn.esprit.dari.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.entities.Property;
-import tn.esprit.dari.service.PropertyService;
+import tn.esprit.dari.service.IProperty;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class PropController {
 
     @Autowired
-    private PropertyService propS;
+    private IProperty propS;
   //liste des prop
     @GetMapping("/properties")
     public List<Property> All() {
@@ -21,7 +21,7 @@ public class PropController {
     }
 
  // ajout
-    @PostMapping("/AddProp")
+    @PostMapping("/addprop")
     public void newProperty(@RequestBody Property newProperty)
     {
         propS.addProperty(newProperty);
@@ -44,5 +44,13 @@ public class PropController {
     {
         propS.updateProperty(prop);
     }
+
+ //listedespropduuser
+ @GetMapping("/userprops/{id}")
+ public List<Property> userprops(@PathVariable("id") long id) {
+     return propS.userproperties(id);
+ }
+
+
 
 }

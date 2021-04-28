@@ -10,7 +10,7 @@ public interface IDeliveryManService {
     void addDM(DeliveryMan dm);
     void deleteDM(Long id);
     List<DeliveryMan> listDM();
-    void changeDeliveryState(int id, DeliveryState state);
+    void changeDeliveryState(int id, int state);
     List<Delivery> deliveriesPerDM(Long id);
 
 }

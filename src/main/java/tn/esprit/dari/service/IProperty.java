@@ -11,6 +11,7 @@ public interface IProperty {
    public void deleteProperty(int id);
    public List<Property> Allproperties();
    public Property getprop(int id);
+   public  List<Property> userproperties(Long id);
 
 
 

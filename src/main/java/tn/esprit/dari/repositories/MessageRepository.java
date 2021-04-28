@@ -16,12 +16,12 @@ public interface MessageRepository extends JpaRepository<Message,Integer> {
 
 
     //get all the user that doesn't have my id , get the chatrooms where i m participating
-     @Query("select u from Utilisateur u, ChatRoom c where u.utilisateurId<>:id and (c.first.utilisateurId=:id or c.second.utilisateurId=:id)" +
-             //join the user and the chat room
-             " and (c.second.utilisateurId=u.utilisateurId or c.first.utilisateurId=u.utilisateurId)")
+    @Query("select u from Utilisateur u, ChatRoom c where u.utilisateurId<>:id and (c.first.utilisateurId=:id or c.second.utilisateurId=:id)" +
+            //join the user and the chat room
+            " and (c.second.utilisateurId=u.utilisateurId or c.first.utilisateurId=u.utilisateurId)")
     public List<Utilisateur> getUsers(@Param("id")Long id);
 
-    @Query("select c.messageList from ChatRoom c where (c.first.utilisateurId=:sentBy and c.second.utilisateurId=:sentTo) or " +
+    @Query("select c.messageList  from ChatRoom c where (c.first.utilisateurId=:sentBy and c.second.utilisateurId=:sentTo) or " +
             "(c.second.utilisateurId=:sentBy and c.first.utilisateurId=:sentTo)")
     public List<Message> getMessages(@Param("sentBy")Long sentBy, @Param("sentTo") Long sentTo);
 

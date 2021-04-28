@@ -1,6 +1,8 @@
 package tn.esprit.dari.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -15,6 +17,7 @@ public class Subscription implements Serializable {
     private String title;
     private float price;
     private String description ;
+
 
 
     @OneToMany(mappedBy = "subscription")
@@ -43,6 +46,7 @@ public class Subscription implements Serializable {
         this.subscribes = subscribes;
     }
 
+    @JsonIgnore
     public List<Subscribe> getSubscribes() {
         return subscribes;
     }

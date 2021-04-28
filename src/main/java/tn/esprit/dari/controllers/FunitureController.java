@@ -4,9 +4,8 @@ package tn.esprit.dari.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.entities.Furniture;
-import tn.esprit.dari.entities.Property;
-import tn.esprit.dari.service.FurnitureService;
-import tn.esprit.dari.service.PropertyService;
+
+import tn.esprit.dari.service.IFurnitureService;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class FunitureController {
 
 
     @Autowired
-    private FurnitureService furS;
+    private IFurnitureService furS;
     //liste des fur
     @GetMapping("/furniturs")
     public List<Furniture> All() {
@@ -24,7 +23,7 @@ public class FunitureController {
     }
 
     // ajout
-    @PostMapping("/Addfur")
+    @PostMapping("/addfur")
     public void newFurniture(@RequestBody Furniture newFurniture)
     {
         furS.addFurniture(newFurniture);

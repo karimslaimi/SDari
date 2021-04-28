@@ -2,6 +2,7 @@ package tn.esprit.dari.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 @Entity
 public class Furniture  implements Serializable {
@@ -9,26 +10,40 @@ public class Furniture  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_fur;
-   private int nb;
    private int price;
-   private String dimentions;
    private String description;
    private String picture;
 
+
+
+    @Enumerated
+   private FurnitureType furt;
+
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "idcust")
     private Customer cust;
+
+    @OneToMany(mappedBy = "furs")
+    private List<Detail_Panier> dpan;
+
+    @OneToOne(mappedBy = "fur")
+    private LigneCommande lc;
+
+
     public Furniture() {
     }
 
-    public Furniture(int id_fur, int nb, int price, String dimentions, String description, String picture) {
+    public Furniture(int id_fur, int price, String description, String picture, boolean selected, FurnitureType furt, Customer cust, List<Detail_Panier> dpan, LigneCommande lc) {
         this.id_fur = id_fur;
-        this.nb = nb;
         this.price = price;
-        this.dimentions = dimentions;
         this.description = description;
         this.picture = picture;
+        this.furt = furt;
+        this.cust = cust;
+        this.dpan = dpan;
+        this.lc = lc;
     }
+
 
     public int getId_fur() {
         return id_fur;
@@ -38,28 +53,12 @@ public class Furniture  implements Serializable {
         this.id_fur = id_fur;
     }
 
-    public int getNb() {
-        return nb;
-    }
-
-    public void setNb(int nb) {
-        this.nb = nb;
-    }
-
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public String getDimentions() {
-        return dimentions;
-    }
-
-    public void setDimentions(String dimentions) {
-        this.dimentions = dimentions;
     }
 
     public String getDescription() {
@@ -78,28 +77,39 @@ public class Furniture  implements Serializable {
         this.picture = picture;
     }
 
-    @Override
-    public String toString() {
-        return "Furniture{" +
-                "id_fur=" + id_fur +
-                ", nb=" + nb +
-                ", price=" + price +
-                ", dimentions='" + dimentions + '\'' +
-                ", description='" + description + '\'' +
-                ", picture='" + picture + '\'' +
-                '}';
+
+
+    public FurnitureType getFurt() {
+        return furt;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Furniture furniture = (Furniture) o;
-        return id_fur == furniture.id_fur && nb == furniture.nb && price == furniture.price && dimentions.equals(furniture.dimentions) && description.equals(furniture.description) && picture.equals(furniture.picture);
+    public void setFurt(FurnitureType furt) {
+        this.furt = furt;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id_fur, nb, price, dimentions, description, picture);
+    public Customer getCust() {
+        return cust;
     }
+
+    public void setCust(Customer cust) {
+        this.cust = cust;
+    }
+
+    public List<Detail_Panier> getDpan() {
+        return dpan;
+    }
+
+    public void setDpan(List<Detail_Panier> dpan) {
+        this.dpan = dpan;
+    }
+
+    public LigneCommande getLc() {
+        return lc;
+    }
+
+    public void setLc(LigneCommande lc) {
+        this.lc = lc;
+    }
+
+
 }

@@ -1,6 +1,10 @@
 package tn.esprit.dari.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -15,8 +19,17 @@ public class Message implements Serializable{
         private  int id;
         private String content;
         private LocalDateTime dateTime;
+        private int sender;
 
-        @ManyToOne
+
+
+        //if you want to get the chat room for every message and the users who participate in this chatroom
+    //remove the comment in jsonManagedReference
+    //with json ignore u will get only the message content, date and sender id
+
+         @JsonIgnore
+        //@JsonManagedReference
+         @ManyToOne
         @JoinColumn(name="chatid")
         private ChatRoom chatRoom;
 
@@ -61,5 +74,13 @@ public class Message implements Serializable{
 
     public void setChatRoom(ChatRoom chatRoom) {
         this.chatRoom = chatRoom;
+    }
+
+    public int getSender() {
+        return sender;
+    }
+
+    public void setSender(int sender) {
+        this.sender = sender;
     }
 }

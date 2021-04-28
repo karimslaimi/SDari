@@ -18,6 +18,7 @@ import tn.esprit.dari.repositories.CustomerRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 import tn.esprit.dari.service.CustomerService;
 import tn.esprit.dari.service.IUtilisateurService;
+import tn.esprit.dari.service.NotificationService;
 import tn.esprit.dari.service.UtilisateurService;
 
 import java.security.Principal;
@@ -37,7 +38,7 @@ public class UserController {
     UtilisateurRepository utilisateurRepository;
     @Autowired
     CustomerService customerService;
-   
+
     String role1="";
     @GetMapping("/getAllCustomers")
     public List<Customer> getAllCustomers(){
@@ -112,6 +113,15 @@ public class UserController {
     public ResponseEntity<String> loginFailure(){
         return new ResponseEntity<>("Bad Credentials", HttpStatus.BAD_REQUEST);
     }
+
+    @GetMapping("/notifs/{user-id}")
+    public List<Notification> myNotifs(@PathVariable("user-id") Long id)
+    {
+        return notificationService.userNotifications(id);
+
+    }
+
+
 
 
 }
