@@ -32,12 +32,12 @@
 
 <category>
 <pattern>#villa#</pattern>
-<template><srai>villa</srai>
+<template><srai>villa</srai></template>
 </category>
 
 <category>
 <pattern>#house#</pattern>
-<template><srai>house</srai>
+<template><srai>house</srai></template>
 </category>
 
 <category>

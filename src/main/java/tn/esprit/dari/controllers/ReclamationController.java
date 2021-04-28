@@ -95,7 +95,8 @@ public class ReclamationController {
         LocalDateTime e = LocalDateTime.parse(end, formatter);
 
 
-        return new ResponseEntity<>(reclamationService.findBetweenDate(s,e),HttpStatus.OK);
+        List<Reclamation> reclamations=reclamationService.findBetweenDate(s,e);
+        return new ResponseEntity<>(reclamations,HttpStatus.OK);
     }
 
     @GetMapping("/type")
