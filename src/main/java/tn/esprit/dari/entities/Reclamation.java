@@ -27,7 +27,7 @@ public class Reclamation implements Serializable {
     private String treatement;
     private Boolean state;//by default false when it will be treated it will be true
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Priority priority;
 
     @JsonIgnore
