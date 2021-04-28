@@ -1,12 +1,14 @@
 package tn.esprit.dari.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tn.esprit.dari.entities.Buy;
 import tn.esprit.dari.entities.Rent;
 import tn.esprit.dari.repositories.BuyRepository;
 
 import java.util.List;
 
+@Service
 public class BuyService implements IBuy {
 
     @Autowired

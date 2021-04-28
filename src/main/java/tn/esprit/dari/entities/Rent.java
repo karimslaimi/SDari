@@ -1,5 +1,7 @@
 package tn.esprit.dari.entities;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,7 +18,7 @@ public class Rent extends Property implements Serializable {
     public Rent() {
     }
 
-    public Rent(int id_rent,  float pricePerDay, float pricePerMonth) {
+    public Rent( float pricePerDay, float pricePerMonth) {
 
         this.pricePerDay = pricePerDay;
         this.pricePerMonth = pricePerMonth;

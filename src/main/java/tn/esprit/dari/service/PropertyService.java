@@ -26,11 +26,8 @@ public class PropertyService implements IProperty {
     @Override
     public void updateProperty(Property prop) {
         Property p= proprep.findById(prop.getId_prop()).orElse(null);
-        p.setImage(prop.getImage());
         p.setLoyer(prop.getLoyer());
         p.setNbrooms(prop.getNbrooms());
-        p.setVideo(prop.getVideo());
-        p.setSuperficie(prop.getSuperficie());
         p.setSurface(prop.getSurface());
         p.setType(prop.getType());
         proprep.save(prop);

@@ -1,5 +1,5 @@
 package tn.esprit.dari.entities;
 
 public enum Region {
-    Bizerte
+    Bizerte,Gafsa,Tunis,Ben_Arous
 }

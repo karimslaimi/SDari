@@ -5,14 +5,14 @@ import java.util.Objects;
 //Contract rent id ( clé composé)
 public class CRId implements Serializable {
 
-    private int id_Client;
-    private int id_Rent;
+    private int id_user;
+    private int id_property;
 
     public CRId(){}
 
-    public CRId(int id_Client, int id_Rent) {
-        this.id_Client = id_Client;
-        this.id_Rent = id_Rent;
+    public CRId(int id_user, int id_property) {
+        this.id_user = id_user;
+        this.id_property = id_property;
     }
 
     @Override
@@ -20,11 +20,11 @@ public class CRId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CRId crId = (CRId) o;
-        return id_Client == crId.id_Client && id_Rent == crId.id_Rent;
+        return id_user == crId.id_user && id_property == crId.id_property;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_Client, id_Rent);
+        return Objects.hash(id_user, id_property);
     }
 }

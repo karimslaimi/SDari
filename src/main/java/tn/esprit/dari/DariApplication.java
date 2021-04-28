@@ -14,6 +14,7 @@ import tn.esprit.dari.repositories.CustomerRepository;
 import tn.esprit.dari.repositories.SubscribeRepository;
 import tn.esprit.dari.repositories.SubscriptionRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
+import tn.esprit.dari.service.Contract_buyService;
 import tn.esprit.dari.service.SubscriptionImpl;
 
 import javax.persistence.EntityManager;
@@ -37,6 +38,8 @@ public class DariApplication {
     private SubscriptionRepository subsRepo;
      @Autowired
      private SubscriptionImpl subscription;
+     @Autowired
+     private Contract_buyService cbs;
 
 
     public static void main(String[] args) {
