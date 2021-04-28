@@ -59,6 +59,7 @@ public class DariApplication {
     }
 
 
+
      @Bean
     public CommandLineRunner init() {
 

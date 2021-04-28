@@ -1,5 +1,5 @@
 package tn.esprit.dari.entities;
 
 public enum AuthenticationProvider {
-    LOCAL,FACEBOOK
+    LOCAL,FACEBOOK,GOOGLE,EXTERNAL
 }

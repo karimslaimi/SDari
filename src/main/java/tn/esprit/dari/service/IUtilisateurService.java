@@ -14,6 +14,6 @@ public interface IUtilisateurService {
     public List<Agent> getAllAgents();
     void deleteModerateur(Admin admin);
     void addModerateur(Admin admin);
-    public void updateAgent(Agent agent);
+   // public void updateAgent(Agent agent);
     void deleteCustomer(Customer customer);
 }

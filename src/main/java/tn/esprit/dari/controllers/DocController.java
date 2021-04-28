@@ -27,12 +27,12 @@ public class DocController {
     @Autowired
     private DocStorageService docStorageService;
 
-    @GetMapping("/")
+   /* @GetMapping("/")
     public String get(Model model) {
         List<Doc> docs = docStorageService.getFiles();
         model.addAttribute("docs", docs);
         return "doc";
-    }
+    }*/
 
     @PostMapping("/uploadFiles")
     public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {

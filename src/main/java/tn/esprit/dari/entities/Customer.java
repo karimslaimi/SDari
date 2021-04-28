@@ -3,14 +3,18 @@ package tn.esprit.dari.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import tn.esprit.dari.entities.Utilisateur;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity
+@Data
+@ToString
 @DiscriminatorValue("C")
 public class Customer extends Utilisateur implements Serializable {
 
@@ -20,8 +24,8 @@ public class Customer extends Utilisateur implements Serializable {
     private List<Subscribe> subscribes ;
 
     @ManyToMany
-    @JoinTable(name = "Favorites", joinColumns = @JoinColumn(name = "utilisateurId")
-            , inverseJoinColumns = @JoinColumn(name = "id_prop"))
+    @JoinTable(name = "Favorites", joinColumns = @JoinColumn(name = "Customer_id")
+            , inverseJoinColumns = @JoinColumn(name = "prop_id"))
     List<Property> favorites;
 
 
@@ -37,13 +41,7 @@ public class Customer extends Utilisateur implements Serializable {
     @OneToMany(mappedBy="customer" )
     List<Property> props;
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public List<Subscribe> getSubscribes() {
         return subscribes;
@@ -76,4 +74,6 @@ public class Customer extends Utilisateur implements Serializable {
     public void setCustomerAppointments(List<Appointment> customerAppointments) {
         this.customerAppointments = customerAppointments;
     }
+
+
 }

@@ -11,7 +11,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -21,8 +24,12 @@ import java.util.List;
 @DiscriminatorColumn(name = "U_type")
 public  class Utilisateur implements Serializable {
 
+    public Utilisateur(Long utilisateurId) {
+        this.utilisateurId = utilisateurId;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long utilisateurId;
 
     @NotBlank(message = "LastName is required")
@@ -43,9 +50,18 @@ public  class Utilisateur implements Serializable {
     private boolean enabled;
     @Enumerated(EnumType.STRING)
     private AuthenticationProvider authenticationProvider;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "utilisateur_id",referencedColumnName = "utilisateurId")
+      //      , inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "roleId"))
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "utilisateur_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles = new ArrayList<>();
 
 
 
@@ -61,5 +77,27 @@ public  class Utilisateur implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications;
 
-
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "utilisateurId=" + utilisateurId +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", password='" + password + '\'' +
+                ", picture='" + picture + '\'' +
+                ", phone='" + phone + '\'' +
+                ", Region=" + Region +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", created=" + created +
+                ", enabled=" + enabled +
+                ", authenticationProvider=" + authenticationProvider +
+                ", resetPasswordToken='" + resetPasswordToken + '\'' +
+                ", roles=" + roles +
+                ", sent=" + sent +
+                ", received=" + received +
+                ", reclamations=" + reclamations +
+                ", notifications=" + notifications +
+                '}';
+    }
 }

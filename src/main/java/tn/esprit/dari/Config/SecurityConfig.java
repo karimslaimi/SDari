@@ -4,14 +4,22 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import tn.esprit.dari.oauth.CustomOAuth2Service;
+import tn.esprit.dari.oauth.OAuth2LoginSucsessHandler;
+import tn.esprit.dari.oauth.UtilisateurOauth;
 
 import javax.sql.DataSource;
 
@@ -26,99 +34,117 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    //this method will do the authentication if you don't to waste time looking for how to do it
-
-    /*@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-	 auth.jdbcAuthentication()
-                .dataSource(dataSource)//inject data dource object with autowired (@Autowired private DataSource dataSource ;) it will have access to data source(data base)
-                .usersByUsernameQuery("select username as principal , password as credentials , active from users where username=?")//get user by username and password u can change it for email
-                .authoritiesByUsernameQuery("select username as principal, role as role from users where username=? ")//select the role in our case u can just fetch the discr col it will do the work
-                .rolePrefix("ROLE_")//this is a prefix for role (if the user discr is C then the role will be ROLE_C you can configure it as u like
-                .passwordEncoder(bcpe)//this one is for password encryption  the bcpe will be defined as follow (PasswordEncoder bcpe=passwordEncoder() ; ) ;}
-
-                //you can change it if you have something else but this is the most used method
-                */
-
-
-
-
     @Autowired
     private DataSource dataSource;
-
-  /*  @Autowired
-    protected void configureAuth(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery("select username, password,enabled from utilisateur where username=? ")
-                .authoritiesByUsernameQuery("select username , role  from utilisateur where username=? ")
-
-        ;
-
-
-
-
-        /*
-            //with this code you can handle the requests its simple i will explain every line
-        http.formLogin().loginPage("/login").successHandler(authenticationSuccessHandler) ;//saying that it s form login you have to change it because we don't work with dorm login
-        http.authorizeRequests().antMatchers("/admin/*").hasAnyRole("ADMIN") ;//the antmachter will match an url and give access to the specified user role anyrole means multiple role
-        http.authorizeRequests().antMatchers("/user/*").hasAnyRole("CLIENT","ADMIN") ;// the user url may be accessed by client and admin
-        http.authorizeRequests().antMatchers("/client/*").hasRole("CLIENT") ;//this one only client can access to this one
-        //http.authorizeRequests().antMatchers("/Reclamation/ajouter").hasRole("CLIENT") ;
-        http.exceptionHandling().accessDeniedPage("/403") ;//if the user isn't allowed it will be redirected to the url 403 you can change it to return only a response
-        http.logout()  //to configure the logout
-        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))//any url with /logout it will logout the user
-        .logoutSuccessUrl("/login")//after logout the user will be redirected to /login
-        .invalidateHttpSession(true)//the session will be closed
-        .deleteCookies("JSESSIONID");//the cookies too
-
-	*/
-      /*  auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery("select username  , password  , enabled from utilisateur where username=?")
-
-                ;*/
 
  @Bean
  public UserDetailsService userDetailsService(){
      return new UserDetailsServiceImpl();
  }
+
  @Bean
  public DaoAuthenticationProvider authenticationProvider(){
      DaoAuthenticationProvider authenticationProvider= new DaoAuthenticationProvider();
      authenticationProvider.setUserDetailsService(userDetailsService());
      authenticationProvider.setPasswordEncoder(passwordEncoder());
+
      return authenticationProvider;
  }
 
-    @Override
+   /* @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
+    }*/
+    private OAuth2LoginSucsessHandler oAuth2LoginSucsessHandler;
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/Auth/signupCustomer","/UserCrud/getAllCustomers","/UserCrud/getAllUsers","/forgotpssd/reset_password","/Auth/signup","/forgotpssd/**","/forgotpssd/reset_password","/UserCrud/customerDelete/**","/Auth/signupAgent","/Customer/**","/Auth/**","/forgot_passwordp","/reset_password/**");
     }
 
-    /*@Override
+    @Override
         protected void configure(HttpSecurity http) throws Exception {
            http.csrf().disable()
                    .authorizeRequests()
-                   .antMatchers("/oauth2/**").permitAll()
-                   .antMatchers("/UserCrud/**").authenticated()
-                   .anyRequest().permitAll()
-                   .and().oauth2Login()
-                   .loginPage("/login")
-                   .userInfoEndpoint().userService(userService)
+                   .antMatchers("/","/login","/oauth/**","/forgot_password").permitAll()
+                // .antMatchers("/UserCrud/**").hasAuthority("CUSTOMER")
+                   .antMatchers("/UserCrud/**").permitAll()
+
+                   .anyRequest().authenticated()
                    .and()
-                   .and().logout().permitAll();
+                   .formLogin()
+                         .permitAll()
+                   .failureUrl("/UserCrud/loginFailure")
+                   .failureForwardUrl("/UserCrud/loginFailure")
+                   .successForwardUrl("/UserCrud/getLocalLoggedInUser")
+
+                   .and()
+                   .rememberMe()
+                   //.tokenValiditySeconds(3 * 24 * 60 * 60 )
+                   .tokenRepository(persistentTokenRepository())
+                         .and()
+                         .oauth2Login()
+                     //    .loginPage("/login")
+                   //.defaultSuccessUrl("/getLoggedInUser")
+                   .userInfoEndpoint().userService(utilisateurOauth)
+                   .and()
+                   .successHandler(oAuth2LoginSucsessHandler)
 
 
-        }*/
-    @Override
+                   .and().logout().permitAll()
+                   ;
+
+
+
+        }
+     //   @Autowired
+       // PersistentTokenRepository persistentTokenRepository;
+    @Autowired
+    CustomOAuth2Service utilisateurOauth;
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+        return tokenRepository;
+    }
+ /* @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/UserCrud/**").hasRole("ADMIN").anyRequest().authenticated()
+                .antMatchers("/login","/oauth/**").permitAll()
+                .antMatchers("/Customer/getLoggedInUser").hasAuthority("USER")
+                .anyRequest().authenticated()
+
                 .and()
-                .formLogin().permitAll()
-                .and().logout().permitAll();
+
+                .formLogin()
+                .loginPage("/login")
+
+                .permitAll()
+                .and().logout().permitAll()
+                .and()
+                .rememberMe()
+                .tokenValiditySeconds(3 * 24 * 60 * 60 )
+                .tokenRepository(persistentTokenRepository())
+                .and()
+                .oauth2Login().loginPage("/login")
+                .userInfoEndpoint().userService(utilisateurOauth);
 
     }
+*/
+
+/*@Override
+   protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeRequests()
+                .anyRequest()
+                .permitAll()
+                .and()
+                .formLogin().permitAll()
+                .loginPage("/login")
+
+    ;
+
+    }*/
+
 }

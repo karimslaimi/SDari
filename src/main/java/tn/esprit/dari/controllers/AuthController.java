@@ -1,17 +1,20 @@
 package tn.esprit.dari.controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.dto.RegisterRequest;
+import tn.esprit.dari.entities.Customer;
 import tn.esprit.dari.entities.Utilisateur;
 import tn.esprit.dari.service.AuthService;
+import tn.esprit.dari.service.CustomerService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/User/auth")
+@RequestMapping("/Auth")
 @AllArgsConstructor
 public class AuthController {
 
@@ -19,7 +22,6 @@ public class AuthController {
 
 
     @PostMapping("/signup")
-
     public ResponseEntity<String> signUp(@RequestBody RegisterRequest registerRequest){
         authService.signUp(registerRequest);
 
@@ -27,7 +29,6 @@ public class AuthController {
 
     }
     @PostMapping("/signupAgent")
-
     public ResponseEntity<String> signUpAgent(@RequestBody RegisterRequest registerRequest){
         authService.signUpAgent(registerRequest);
 
@@ -35,15 +36,7 @@ public class AuthController {
 
     }
 
-    List<String> list;
-    @GetMapping("/hello")
-    public List<String> hello(){
-        list.add("test");
-        return list;
-    }
-
     @PostMapping("/signupCustomer")
-    @ResponseBody
     public ResponseEntity<String> signUpCustomer(@RequestBody RegisterRequest registerRequest){
         authService.signUpCustomer(registerRequest);
 
@@ -53,7 +46,9 @@ public class AuthController {
     @GetMapping("accountVerification/{token}")
     public ResponseEntity<String> verifyAccount(@PathVariable("token") String token){
         authService.verifyAccount(token);
+
         return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
 
     }
+
 }

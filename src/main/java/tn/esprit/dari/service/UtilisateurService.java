@@ -1,7 +1,9 @@
 package tn.esprit.dari.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import tn.esprit.dari.Exceptions.DariException;
 import tn.esprit.dari.entities.*;
 import tn.esprit.dari.repositories.AgentRepository;
 import tn.esprit.dari.repositories.CustomerRepository;
@@ -27,22 +29,14 @@ public class UtilisateurService implements IUtilisateurService {
 
     @Override
     public List<Utilisateur> getallUsers() {
-        return null;
+        return (List<Utilisateur>) utilisateurRepository.findAll();
     }
 
     @Override
     public List<Agent> getAllAgents() {
         return agentRepository.findAll();
     }
-    @Override
-    public void updateAgent(Agent agent) {
-        Agent a= agentRepository.findById(agent.getUtilisateurId()).get();
-        a.setPicture(agent.getPicture());
-        a.setFirstName(agent.getFirstName());
-        a.setLastName(agent.getLastName());
 
-        agentRepository.save(a);
-    }
 
 
 
@@ -59,5 +53,30 @@ public class UtilisateurService implements IUtilisateurService {
     public void deleteCustomer(Customer customer){
         utilisateurRepository.delete(customer);
     }
+    public void deleteAgent(Long id){
+        utilisateurRepository.deleteById(id);
+    }
+
+    public void updateResetPasswordToken(String token, String email) throws DariException  {
+        Utilisateur utilisateur = utilisateurRepository.getUtilisateurByEmail(email);
+        if (utilisateur != null) {
+            utilisateur.setResetPasswordToken(token);
+            utilisateurRepository.save(utilisateur);
+        } else {
+            throw new DariException("Could not find any customer with the email " + email);
+        }
+    }
+    public Utilisateur getByResetPasswordToken(String token) {
+        return utilisateurRepository.getUtilisateurByResetPasswordToken(token);
+    }
+    public void updatePassword(Utilisateur utilisateur, String newPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        utilisateur.setPassword(encodedPassword);
+
+        utilisateur.setResetPasswordToken(null);
+        utilisateurRepository.save(utilisateur);
+    }
+
 
 }
