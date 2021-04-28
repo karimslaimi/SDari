@@ -58,21 +58,6 @@ public class Property implements Serializable {
         this.customer = customer;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public PropertyType getType() {
-        return type;
-    }
-
-    public void setType(PropertyType type) {
-        this.type = type;
-    }
 
     public int getId_prop() {
         return id_prop;

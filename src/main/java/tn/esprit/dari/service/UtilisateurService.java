@@ -52,13 +52,14 @@ public class UtilisateurService implements IUtilisateurService {
     public void deleteCustomer(Customer customer){
         utilisateurRepository.delete(customer);
     }
-    public void deleteAgent(Long id){
+    public void deleteAgent(Long id) {
         utilisateurRepository.deleteById(id);
-
-    @Override
-    public List<Customer> getAllCustomers() {
-        return null;
     }
+
+    public List<Customer> getAllCustomers() {
+            return customerRepository.findAll();
+        }
+
 
     public void updateResetPasswordToken(String token, String email) throws DariException  {
         Utilisateur utilisateur = utilisateurRepository.getUtilisateurByEmail(email);

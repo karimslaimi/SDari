@@ -38,6 +38,8 @@ public class UserController {
     UtilisateurRepository utilisateurRepository;
     @Autowired
     CustomerService customerService;
+    @Autowired
+     NotificationService notificationService;
 
     String role1="";
     @GetMapping("/getAllCustomers")

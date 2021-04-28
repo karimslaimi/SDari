@@ -56,13 +56,7 @@ public class Customer extends Utilisateur implements Serializable {
     private Panier panier;
 
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public List<Subscribe> getSubscribes() {
         return subscribes;

@@ -63,58 +63,6 @@ public class DariApplication {
 
 
 
-/*
-     @Bean
-    public CommandLineRunner init() {
 
-        return (args -> {
-        /*    Customer user=new Customer();
-            user.setEmail("user1@user.com");
-            user.setEnabled(true);
-            user.setFirstName("user1");
-            user.setLastName("user11");
-            user.setPassword("user1");
-            user.setPhone("51887898");
-            user.setPicture("whatever.jpg");
-            user.setRegion(Region.Bizerte);
-            customerRepository.save(user);
-
-            Customer user1=new Customer();
-            user1.setEmail("user2@user.com");
-            user1.setEnabled(true);
-            user1.setFirstName("user2");
-            user1.setLastName("user22");
-            user1.setPassword("user2");
-            user1.setPhone("51887898");
-            user1.setPicture("whatever.jpg");
-            user1.setRegion(Region.Bizerte);
-            customerRepository.save(user1);
-*/
-/*
-            Subscription su = new Subscription();
-            su.setTitle("normal");
-            su.setPrice(200);
-            su.setDescription("ich fick dish mann");
-            subsRepo.save(su);
-
-
-
-            /*Subscribe sub = new Subscribe();
-            sub.setDateD(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            sub.setDateF(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-
-            Subscription su=subsRepo.findById(1).get();
-            Customer cu=customerRepository.findById((long)1).get();
-
-            sub.setSubscription(su);
-            sub.setCustomers(cu);
-
-            subscription.insertWithQuery(sub);*/
-
-
-
-
-        });}
-}
 
      }
