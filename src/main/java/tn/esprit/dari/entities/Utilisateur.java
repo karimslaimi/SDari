@@ -1,6 +1,5 @@
 package tn.esprit.dari.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,9 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -40,7 +37,7 @@ public  class Utilisateur implements Serializable {
     private String password;
     private String picture;
     private String phone;
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Region Region;
     private String username;
     @Email
@@ -64,22 +61,22 @@ public  class Utilisateur implements Serializable {
     private List<Role> roles = new ArrayList<>();
 
 
-
+    @JsonIgnore
     @OneToMany(mappedBy ="first")
-    @JsonBackReference
+  // @JsonBackReference(value = "sent")
     private List<ChatRoom> sent;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "second")
-    @JsonBackReference
+    //@JsonBackReference(value = "received")
     private List<ChatRoom> received;
 
 
     @OneToMany(mappedBy = "user")
-    @JsonBackReference
+   // @JsonBackReference(value = "reclam")
     private List<Reclamation> reclamations;
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    @JsonBackReference
+   //@JsonBackReference(value = "notif")
     private List<Notification> notifications;
 
     @Override
@@ -91,7 +88,7 @@ public  class Utilisateur implements Serializable {
                 ", password='" + password + '\'' +
                 ", picture='" + picture + '\'' +
                 ", phone='" + phone + '\'' +
-                ", Region=" + Region +
+
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", created=" + created +

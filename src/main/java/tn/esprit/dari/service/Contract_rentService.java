@@ -10,6 +10,7 @@ import tn.esprit.dari.repositories.Contract_rentRepository;
 import tn.esprit.dari.repositories.PropertyRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,7 +23,7 @@ public class Contract_rentService implements IContract_rent {
     private Contract_rentRepository crr;
 
     @Override
-    public Contract_Rent findByDid(long id_user, int id_property) {
+    public Contract_Rent findByDid(int id_user, int id_property) {
 
         Contract_Rent cr=new Contract_Rent();
 
@@ -30,6 +31,7 @@ public class Contract_rentService implements IContract_rent {
 
         for(int i=0;i<lst.size();i++){
             if ((lst.get(i).getId_user()==id_user) && (lst.get(i).getId_property()==id_property)){
+                System.out.println(lst.get(i));
                 cr= lst.get(i);
             }
         }
@@ -37,7 +39,7 @@ public class Contract_rentService implements IContract_rent {
         return cr;
     }
     @Override
-    public boolean deleteByDid(long id_user, int id_property) {
+    public boolean deleteByDid(int id_user, int id_property) {
 
         List<Contract_Rent> lst = crr.findAll();
         int before = lst.size();
@@ -53,5 +55,16 @@ public class Contract_rentService implements IContract_rent {
         {
             return false;
         }
+    }
+    @Override
+    public void updateContractRent(Contract_Rent cr) {
+        Contract_Rent f= this.findByDid(cr.getId_user(),cr.getId_property());
+        f.setId_user(cr.getId_user());
+        f.setId_property(cr.getId_property());
+        f.setDateDebut(cr.getDateDebut());
+        f.setDateFin(cr.getDateFin());
+        f.setDetails(cr.getDetails());
+        f.setRented(true);
+        crr.save(cr);
     }
 }

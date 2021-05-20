@@ -21,15 +21,33 @@ public class Delivery implements Serializable {
     private DeliveryState deliveryState;
     private double latitude;
     private double longitude;
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "deliveryman_id")
     private DeliveryMan deliveryMan;
-
+    @OneToOne
+    private Orders order;
     @Transient
     private Long deliverymanId;
     @Transient
     private String dateJson;
+    @Transient
+    private int orderId;
+
+    public Orders getOrder() {
+        return order;
+    }
+
+    public void setOrder(Orders order) {
+        this.order = order;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
 
     public String getDateJson() {
         return dateJson;

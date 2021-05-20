@@ -1,8 +1,5 @@
 package tn.esprit.dari.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.List;
 @Entity
@@ -10,16 +7,16 @@ import java.util.List;
 public class ChatRoom {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @JsonManagedReference
+    //@JsonManagedReference(value = "sent")
     @ManyToOne
     @JoinColumn(name="first")
     private Utilisateur first;
-    @JsonManagedReference
+    //@JsonManagedReference(value = "received")
     @ManyToOne
     @JoinColumn(name="second")
     private Utilisateur second;
 
-    @JsonBackReference
+   // @JsonBackReference(value = "mess")
     @OneToMany(mappedBy = "chatRoom")
     private List<Message> messageList;
 

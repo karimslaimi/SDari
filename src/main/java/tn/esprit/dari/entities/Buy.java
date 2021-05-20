@@ -1,22 +1,22 @@
 package tn.esprit.dari.entities;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Buy extends Property implements Serializable {
+
+public class Buy extends Property implements Serializable, Comparable<Buy>{
 
     private float price;
-
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "user_id")
     private Utilisateur user;
-
     public Buy() {
     }
-
     public Buy(String adress,String state, String city, String zipCode, int nbrooms, float surface, float superficie, String image, String video, float loyer, float prix,  float price) {
         super.setAdress(adress);
         super.setState(state);
@@ -31,21 +31,27 @@ public class Buy extends Property implements Serializable {
         super.setPrix(prix);
         this.price=price;
     }
+    public Buy( float price) {
+
+        this.price = price;
+    }
+//
+//    public Utilisateur getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(Utilisateur user) {
+//        this.user = user;
+//    }
+
 
     public float getPrice() {
         return price;
     }
 
+
     public void setPrice(float price) {
         this.price = price;
-    }
-
-    public Utilisateur getUser() {
-        return user;
-    }
-
-    public void setUser(Utilisateur user) {
-        this.user = user;
     }
 
     @Override
@@ -66,5 +72,10 @@ public class Buy extends Property implements Serializable {
         return "Buy{" +
                 ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Buy o) {
+        return (this.getNbrooms()-o.getNbrooms());
     }
 }

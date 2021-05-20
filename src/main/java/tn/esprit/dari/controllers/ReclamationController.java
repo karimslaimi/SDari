@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.dari.entities.Reclamation;
 import tn.esprit.dari.service.IReclamationService;
-import tn.esprit.dari.service.ReclamationService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -81,7 +80,7 @@ public class ReclamationController {
         return  new ResponseEntity<>(reclams,HttpStatus.OK);
     }
 
-    @GetMapping("/filter")
+    @PostMapping("/filter")
     public ResponseEntity<?> FilterReclam(@RequestBody String filter){
 
         return new ResponseEntity<>(reclamationService.filter(filter),HttpStatus.OK);

@@ -9,6 +9,7 @@ import tn.esprit.dari.repositories.AgentRepository;
 import tn.esprit.dari.repositories.CustomerRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,6 +82,13 @@ public class UtilisateurService implements IUtilisateurService {
         utilisateur.setResetPasswordToken(null);
         utilisateurRepository.save(utilisateur);
     }
-
+    @Override
+    public List<Long> findAllUserId() {
+        List<Utilisateur> lst = (List<Utilisateur>) utilisateurRepository.findAll();
+        List<Long> lstuserid = new ArrayList<>();
+        for(int i=0;i<lst.size();i++){ lstuserid.add(lst.get(i).getUtilisateurId());
+        }
+        return lstuserid;
+    }
 
 }

@@ -4,12 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.dari.entities.Appointment;
 import tn.esprit.dari.entities.Delivery;
 import tn.esprit.dari.entities.DeliveryMan;
 import tn.esprit.dari.entities.DeliveryState;
-import tn.esprit.dari.service.AppointmentService;
-import tn.esprit.dari.service.DeliveryService;
 import tn.esprit.dari.service.IDeliveryManService;
 import tn.esprit.dari.service.IDeliveryService;
 
@@ -32,7 +29,7 @@ public class DeliveryController {
     @ResponseBody
     public ResponseEntity<String> addDelivery(@RequestBody Delivery delivery) throws ParseException {
         delivery.setDeliveryState(DeliveryState.NOT_PICKED);
-        delivery.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(delivery.getDateJson()));
+        delivery.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(delivery.getDateJson()));
         deliveryService.createDelivery(delivery);
         return new ResponseEntity<>("delivery added", HttpStatus.OK);
 
@@ -53,7 +50,7 @@ public class DeliveryController {
         return new ResponseEntity<>("delivery man created", HttpStatus.OK);
 
     }
-    @PostMapping("/deletedm")
+    @GetMapping("/deletedm/{id}")
     @ResponseBody
     public ResponseEntity<String> deleteDeliveryMan(@PathVariable Long id){
 
@@ -82,7 +79,11 @@ public class DeliveryController {
 
         return  deliveryService.deliveries();
     }
+    @GetMapping("/deliveriescust/{id}")
+    public List<Delivery> deliveriespercust(@PathVariable Long id){
 
+        return  deliveryService.deliveriesbycust(id);
+    }
     @GetMapping("/{id}")
     public Delivery deliverybyid(@PathVariable int id){
 

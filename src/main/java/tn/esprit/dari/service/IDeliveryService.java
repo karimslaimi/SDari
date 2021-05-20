@@ -10,5 +10,7 @@ public interface IDeliveryService {
     void cancelDelivery(int id);
     Delivery deliveryById(int id);
     void updateLocation(int id,double latitude,double longitude);
+    List<Delivery> deliveriesbycust(Long id);
+
 
 }

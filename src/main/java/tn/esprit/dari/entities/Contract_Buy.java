@@ -15,7 +15,9 @@ public class Contract_Buy implements Serializable {
     private int id_user;
     @Id
     private int id_property;
+
     private String details;
+
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date date;
 

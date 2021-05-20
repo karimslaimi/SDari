@@ -7,12 +7,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import tn.esprit.dari.Config.OpenNLP;
 import tn.esprit.dari.entities.NotificationEmail;
-import tn.esprit.dari.entities.Priority;
 import tn.esprit.dari.entities.Reclamation;
 import tn.esprit.dari.entities.Utilisateur;
 import tn.esprit.dari.repositories.ReclamationRepository;
 import tn.esprit.dari.repositories.UtilisateurRepository;
-
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -84,7 +82,7 @@ public class ReclamationService implements IReclamationService {
 
     @Override
     public List<Reclamation> findAll() {
-        return reclamationRepository.findAll(Sort.by(Sort.Direction.ASC, "priority"));
+        return reclamationRepository.findAll(Sort.by(Sort.Direction.ASC, "priority").and(Sort.by(Sort.Direction.DESC,"dateTime")));
     }
 
     @Override
@@ -135,7 +133,7 @@ public class ReclamationService implements IReclamationService {
             reclamations=reclamations.stream().filter(x->x.getDateTime().isAfter(start) && x.getDateTime().isBefore(end) ).collect(Collectors.toList());
         }
         if(treated){
-            reclamations=reclamations.stream().filter(Reclamation::getState).collect(Collectors.toList());
+            reclamations=reclamations.stream().filter(x->x.getState()==true).collect(Collectors.toList());
         }
 
         return reclamations;

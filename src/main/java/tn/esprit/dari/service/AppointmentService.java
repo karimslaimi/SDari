@@ -2,10 +2,12 @@ package tn.esprit.dari.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.dari.entities.*;
+import tn.esprit.dari.entities.Appointment;
+import tn.esprit.dari.entities.AppointmentType;
+import tn.esprit.dari.entities.Customer;
+import tn.esprit.dari.entities.State;
 import tn.esprit.dari.repositories.AppointmentRepository;
 import tn.esprit.dari.repositories.CustomerRepository;
-import tn.esprit.dari.repositories.NotificationRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +42,7 @@ public class AppointmentService implements IAppointmentService {
 
         Appointment appointment= ar.getOne(id);
         appointment.setAddress(address);
-        appointment.setAppointmentDate(new SimpleDateFormat("dd/MM/yyyy").parse(date));
+        appointment.setAppointmentDate(new SimpleDateFormat("yyyy-MM-dd").parse(date));
         appointment.setState(State.ACCEPTED);
         if (appType==1)
         appointment.setAppointmentType(AppointmentType.FACE_TO_FACE);
@@ -73,12 +75,29 @@ ar.save(appointment1);
     @Override
     public List<Appointment> ownerAppointments(Long id) {
         Customer c=ut.getOne(id);
-        return ar.findAppointmentsByOwner(c);
+        List<Appointment> ls=ar.findAppointmentsByOwner(c);
+       for( Appointment ap : ls)
+       {
+           ap.setOwnerId(ap.getOwner().getUtilisateurId());
+           ap.setCustomerId(ap.getCustomer().getUtilisateurId());
+           if(ap.getAgent()!=null)
+               ap.setAgentId(ap.getAgent().getUtilisateurId());
+       }
+
+        return ls;
     }
 
     @Override
     public List<Appointment> customerAppointments(Long id) {
         Customer c=ut.getOne(id);
-        return ar.findAppointmentsByCustomer(c);
+        List<Appointment> ls=ar.findAppointmentsByCustomer(c);
+        for( Appointment ap : ls)
+        {
+            ap.setOwnerId(ap.getOwner().getUtilisateurId());
+            ap.setCustomerId(ap.getCustomer().getUtilisateurId());
+            if(ap.getAgent()!=null)
+                ap.setAgentId(ap.getAgent().getUtilisateurId());
+        }
+        return ls;
     }
 }

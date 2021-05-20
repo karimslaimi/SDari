@@ -51,7 +51,8 @@ dms.delete(dms.getOne(id));
 
     @Override
     public List<Delivery> deliveriesPerDM(Long id) {
-        return dms.getOne(id).getDeliveryList();
+
+        return ds.deliveriesBydm(id);
     }
 
 

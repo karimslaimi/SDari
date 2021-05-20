@@ -1,20 +1,17 @@
 package tn.esprit.dari.entities;
 
-import ch.qos.logback.core.net.server.Client;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Property implements Serializable {
-
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private int id_prop;
-
     private PropertyType type;
     private int nbrooms;
     private float surface;
@@ -28,23 +25,19 @@ public class Property implements Serializable {
     private String state;
     private String city;
     private String zipCode;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Customer customer;
 
-   @ManyToOne
-   @JoinColumn(name = "id")
-   private Customer customer;
 
-  @ManyToMany(mappedBy = "favorites")
-  List<Customer> customers;
+
 
 
     public Property() {
     }
 
-    public Property(String adress,String state, String city, String zipCode,int id_prop, PropertyType type, int nbrooms, float surface, float superficie, String image, String video, float loyer, float prix, Status status, Customer customer) {
-        this.adress=adress;
-        this.state=state;
-        this.city=city;
-        this.zipCode=zipCode;
+    public Property(int id_prop, PropertyType type, int nbrooms, float surface, float superficie, String image, String video, float loyer, float prix, Status status, Customer customer) {
         this.id_prop = id_prop;
         this.type = type;
         this.nbrooms = nbrooms;

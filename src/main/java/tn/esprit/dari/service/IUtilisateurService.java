@@ -1,8 +1,9 @@
 package tn.esprit.dari.service;
 
-import org.springframework.stereotype.Service;
-import tn.esprit.dari.entities.*;
-import tn.esprit.dari.repositories.UtilisateurRepository;
+import tn.esprit.dari.entities.Admin;
+import tn.esprit.dari.entities.Agent;
+import tn.esprit.dari.entities.Customer;
+import tn.esprit.dari.entities.Utilisateur;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface IUtilisateurService {
     void addModerateur(Admin admin);
    // public void updateAgent(Agent agent);
     void deleteCustomer(Customer customer);
+    List<Long> findAllUserId() ;
+
 }

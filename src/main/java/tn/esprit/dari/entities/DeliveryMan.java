@@ -20,6 +20,7 @@ public class DeliveryMan extends Utilisateur implements Serializable {
  @JsonIgnore
 @OneToMany(mappedBy = "deliveryMan")
  private List<Delivery> deliveryList;
+
  @JsonIgnore
  public List<Delivery> getDeliveryList() {
   return deliveryList;
