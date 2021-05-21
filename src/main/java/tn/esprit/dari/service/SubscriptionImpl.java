@@ -83,7 +83,8 @@ public class SubscriptionImpl implements ISubscription {
     }
 
     @Override
-    public Subscribe AddSubToo(int idS, Long idC, Date dateD, Date dateF) {
+    public Subscribe AddSubToo(int idS, long idC, Date dateD, Date dateF) {
+
 
         Subscribe s = new Subscribe();
         s.setDateD(new Date());

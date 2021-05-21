@@ -6,14 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tn.esprit.dari.entities.*;
-import tn.esprit.dari.repositories.CustomerRepository;
-import tn.esprit.dari.repositories.FurnitureRepository;
-import tn.esprit.dari.repositories.LigneCommandeRepository;
-import tn.esprit.dari.repositories.OrdersRepository;
+import tn.esprit.dari.repositories.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class OrdersService implements IOrdersService{
@@ -26,9 +22,54 @@ public class OrdersService implements IOrdersService{
     private FurnitureRepository furrep ;
    @Autowired
    private LigneCommandeRepository lcrep;
+   @Autowired
+   private IPanierService service;
+   @Autowired
+   private DetailPRepository detailPRepository;
+
+
     @Override
-    public void addOrder(Orders ord) {
+    public void addOrder(int idc)
+    {
+        Orders ord=new Orders();
+        Panier p= service.getUserPanier(idc);
+        List<Furniture> detail_panier=service.detailPanier(p.getIdPanier());
+
+        List<LigneCommande> ligneCommandes=new ArrayList<LigneCommande>();
+
+        for (Furniture f: detail_panier) {
+            LigneCommande ligneCommande=new LigneCommande();
+
+            ligneCommande.setFur(f);
+
+            ligneCommande.setPrix(f.getPrice());
+            ligneCommande.setQuantite(1);
+
+
+            ligneCommandes.add(ligneCommande);
+
+        }
+
+
+        ord.setSomme((float) ligneCommandes.stream().mapToDouble(LigneCommande::getPrix).sum());
+
+        ord.setCusto(custrep.getOne((long)idc));
+        ord.setDatecommande(new Date());
+
         ordrep.save(ord);
+
+        for(LigneCommande lc:ligneCommandes){
+            lc.setOrd(ord);
+            lcrep.save(lc);
+        }
+
+
+
+
+
+
+       detailPRepository.deleteAll(detailPRepository.getByPanier(p.getIdPanier()));
+
     }
 
     @Override
@@ -37,8 +78,8 @@ public class OrdersService implements IOrdersService{
     }
 
     @Override
-    public List<Orders> AllOrders() {
-        List<Orders> ords = (List<Orders>) ordrep.findAll();
+    public List<Orders> AllOrders(int idc) {
+        List<Orders> ords = (List<Orders>) ordrep.myOrders((long)idc);
         return ords;
 
     }
@@ -50,11 +91,11 @@ public class OrdersService implements IOrdersService{
 
     @Override
     public void commander(Orders ords) {
-        Customer customer= custrep.findById(ords.getIdc()).orElse(null);
+      /*  Customer customer= custrep.findById(ords.getIdc()).orElse(null);
         ords.setCusto(customer);
         Orders orders=ordrep.save(ords);
 
-        List<Detail_Panier> dp=customer.getPanier().getDetail_paniers();
+        List<Detail_Panier> dp=customer.getPanier();
         for (Detail_Panier d:dp)
         {
             LigneCommande lc=new LigneCommande();
@@ -63,7 +104,8 @@ public class OrdersService implements IOrdersService{
             lc.setPrix(d.getFurs().getPrice());
             lc.setQuantite(1);
             lcrep.save(lc);
-        }
+        }*/
+
 
     }
 
@@ -72,6 +114,13 @@ public class OrdersService implements IOrdersService{
         Customer c=custrep.findById(idc).orElse(null);
         return c.getOrds();
 
+    }
+
+    @Override
+    public List<Furniture> ordFurn(int id) {
+        return  ordrep.OrdFurn(id);
+
+        //return lc.stream().map((s)->s.getFur()).collect(Collectors.toList());
     }
 
     //-----------------------------paiement-----------------------------------//

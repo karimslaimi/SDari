@@ -1,21 +1,12 @@
 package tn.esprit.dari.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 @Entity
 public class Panier implements Serializable {
     @Id
@@ -24,8 +15,12 @@ public class Panier implements Serializable {
     private Date dateMajPanier;
     private double sommeTotale;
     private String etatPanier;
-    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="panier")
+
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy="panier")
      private List<Detail_Panier> detail_paniers;
+
+
     @OneToOne
     private Customer cust;
 

@@ -49,10 +49,10 @@ public class SubscriptionController {
         return new ResponseEntity<>( " Subscription added. ",  HttpStatus.OK);
 
     }
-    @PostMapping("/addsubscribe")
+    @PostMapping("/addsubscribe/{idC}")
     @ResponseBody
-    public ResponseEntity<?> AddS(@RequestBody Subscribe s){
-        Subscribe su = subscription.AddSubToo(s.getSubscription().getId_sub(),s.getCustomers().getUtilisateurId(),s.getDateD(),s.getDateF());
+    public ResponseEntity<?> AddS(@RequestBody Subscribe s, @PathVariable("idC") long idC){
+        Subscribe su = subscription.AddSubToo(s.getSubscription().getId_sub(),idC ,s.getDateD(),s.getDateF());
         return new ResponseEntity<>("subscribe added too",HttpStatus.OK);
 
     }
@@ -90,13 +90,13 @@ public class SubscriptionController {
     // Reading the value from the application.properties file
     @Value("${STRIPE_PUBLIC_KEY}")
     private String stripePublicKey;
-/*
+
     @RequestMapping("/")
     public String home(Model model) {
         model.addAttribute("amount", 50 * 100); // In cents
         model.addAttribute("stripePublicKey", stripePublicKey);
         return "index";
-    }*/
+    }
 
     @Autowired
     private SubscriptionImpl stripeService;

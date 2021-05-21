@@ -1,5 +1,7 @@
 package tn.esprit.dari.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -15,35 +17,44 @@ public class Furniture  implements Serializable {
    private String picture;
 
 
+   private String title;
 
-    @Enumerated
-   private FurnitureType furt;
-
+   private String type;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "idcust")
     private Customer cust;
 
-    @OneToMany(mappedBy = "furs")
+    @JsonIgnore
+    @OneToMany(mappedBy = "furs", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Detail_Panier> dpan;
 
-    @OneToOne(mappedBy = "fur")
+    @OneToOne(mappedBy = "fur",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private LigneCommande lc;
 
 
     public Furniture() {
     }
 
-    public Furniture(int id_fur, int price, String description, String picture, boolean selected, FurnitureType furt, Customer cust, List<Detail_Panier> dpan, LigneCommande lc) {
+    public Furniture(String title,int id_fur, int price, String description, String picture, boolean selected, String furt, Customer cust, List<Detail_Panier> dpan, LigneCommande lc) {
         this.id_fur = id_fur;
         this.price = price;
         this.description = description;
         this.picture = picture;
-        this.furt = furt;
+        this.type = furt;
         this.cust = cust;
         this.dpan = dpan;
         this.lc = lc;
+        this.title=title;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public int getId_fur() {
         return id_fur;
@@ -77,14 +88,12 @@ public class Furniture  implements Serializable {
         this.picture = picture;
     }
 
-
-
-    public FurnitureType getFurt() {
-        return furt;
+    public String getType() {
+        return type;
     }
 
-    public void setFurt(FurnitureType furt) {
-        this.furt = furt;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Customer getCust() {
@@ -92,6 +101,7 @@ public class Furniture  implements Serializable {
     }
 
     public void setCust(Customer cust) {
+
         this.cust = cust;
     }
 

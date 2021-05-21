@@ -19,6 +19,10 @@ public class Orders implements Serializable {
     @Transient
     private Long idc;
     @Transient int idf;
+
+    private float somme;
+
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id")
@@ -27,7 +31,8 @@ public class Orders implements Serializable {
     @OneToOne
     private Furniture fur;
 
-    @OneToMany(mappedBy = "ord")
+    @OneToMany(mappedBy = "ord" , orphanRemoval = true,
+            cascade = CascadeType.ALL)
     private List<LigneCommande> lc;
 
     public Orders() {
@@ -39,6 +44,14 @@ public class Orders implements Serializable {
         this.custo = custo;
         this.fur = fur;
         this.lc = lc;
+    }
+
+    public float getSomme() {
+        return somme;
+    }
+
+    public void setSomme(float somme) {
+        this.somme = somme;
     }
 
     public Long getIdc() {

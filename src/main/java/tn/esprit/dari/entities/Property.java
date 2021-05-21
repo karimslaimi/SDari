@@ -1,5 +1,6 @@
 package tn.esprit.dari.entities;
 
+import ch.qos.logback.core.net.server.Client;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -7,12 +8,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Property implements Serializable {
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_prop;
-    private PropertyType type;
+    private String title;
+    private String type;
     private int nbrooms;
     private float surface;
     private float superficie;
@@ -25,19 +28,26 @@ public class Property implements Serializable {
     private String state;
     private String city;
     private String zipCode;
+    private String description;
+
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private Customer customer;
+   @ManyToOne
+   @JoinColumn(name = "id")
+   private Customer customer;
 
-
+ /* @ManyToMany(mappedBy = "properties")
+  List<Customer> customers;*/
 
 
 
     public Property() {
     }
 
-    public Property(int id_prop, PropertyType type, int nbrooms, float surface, float superficie, String image, String video, float loyer, float prix, Status status, Customer customer) {
+    public Property(String description,String title,String adress,String state, String city, String zipCode,int id_prop, String type, int nbrooms, float surface, float superficie, String image, String video, float loyer, float prix, Status status, Customer customer) {
+        this.adress=adress;
+        this.state=state;
+        this.city=city;
+        this.zipCode=zipCode;
         this.id_prop = id_prop;
         this.type = type;
         this.nbrooms = nbrooms;
@@ -49,8 +59,65 @@ public class Property implements Serializable {
         this.prix = prix;
         this.status = status;
         this.customer = customer;
+        this.title=title;
+        this.description=description;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAdress() { return adress;}
+
+    public void setAdress(String adress) { this.adress = adress;}
+
+    public String getState() {return state;}
+
+    public void setState(String state) {this.state = state;}
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getId_prop() {
         return id_prop;
@@ -60,12 +127,12 @@ public class Property implements Serializable {
         this.id_prop = id_prop;
     }
 
-    public PropertyType getType() {
-        return type;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setType(PropertyType type) {
-        this.type = type;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public int getNbrooms() {
@@ -122,54 +189,6 @@ public class Property implements Serializable {
 
     public void setPrix(float prix) {
         this.prix = prix;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     @Override

@@ -4,6 +4,7 @@ package tn.esprit.dari.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.dari.entities.Furniture;
 import tn.esprit.dari.entities.Orders;
 import tn.esprit.dari.service.IOrdersService;
 import tn.esprit.dari.service.SubscriptionImpl;
@@ -19,16 +20,22 @@ public class OrdersController {
     @Autowired
     private IOrdersService ordS;
     //liste des ordres
-    @GetMapping("/allorders")
-    public List<Orders> All() {
-        return ordS.AllOrders();
+    @GetMapping("/allorders/{idc}")
+    public List<Orders> All(@PathVariable int idc) {
+        return ordS.AllOrders(idc);
     }
 
+    @GetMapping("/FurnOrd/{id}")
+    public List<Furniture> orderFurn(@PathVariable int id){
+        return  ordS.ordFurn(id);
+    }
+
+
     // commander ajout fi ligne commande
-    @PostMapping("/commander")
-    public void newOrder(@RequestBody Orders newOrder)
+    @PostMapping("/commander/{idc}")
+    public void newOrder(@PathVariable int idc)
     {
-        ordS.commander(newOrder);
+        ordS.addOrder(idc);
     }
 
     //une commande
@@ -47,7 +54,6 @@ public class OrdersController {
  public List<Orders> getordu(@PathVariable("id") Long id) {
      return ordS.listecommandesuser(id);
  }
-
 
 
     //--------------------------------paiement--------------------------------------//

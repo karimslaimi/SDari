@@ -19,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "U_type")
 public  class Utilisateur implements Serializable {
 
     public Utilisateur(Long utilisateurId) {
